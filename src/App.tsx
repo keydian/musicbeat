@@ -10,7 +10,7 @@ import Header from './components/Header';
 
 function App() {
   
-  //TODO: fazer com que n
+  //TODO: fazer com que n apareça o header no login e no register
   
   return (
     <div className="App">

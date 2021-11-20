@@ -2,3 +2,13 @@
     height: 12vh;
     width:100vw;
 }
+
+.Button{
+    margin-top: 6vh !important;
+    color: black !important;
+    border-color: black !important;
+}
+
+.Avatar{
+    margin-left: auto !important;
+}

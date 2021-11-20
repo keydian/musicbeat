@@ -3,7 +3,7 @@
 export interface User {
     username: string,
     email: string,
-    password: string,
+    pwd: string,
     collections: string[]
     jams: string[]
 }

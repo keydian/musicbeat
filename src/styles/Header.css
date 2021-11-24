@@ -4,11 +4,14 @@
 }
 
 .Button{
-    margin-top: 6vh !important;
+    margin-top: 3vh !important;
     color: black !important;
     border-color: black !important;
+    width: 16vw !important;
+    height: 2vw !important;       
 }
 
 .Avatar{
-    margin-left: auto !important;
+    width: 60px !important;
+    height: 60px !important;
 }

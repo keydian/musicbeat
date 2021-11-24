@@ -6,13 +6,13 @@ function Header(){
 
     const logoFolder = process.env.PUBLIC_URL+"/logos/";
     return(
-        <div style={{justifyContent:"space-between"}} className="Header">
+        <div className="Header" style={{display:'inline'}}>
+            <div style={{justifyContent:"space-evenly", display:"flex"}}>
             <img 
             src={logoFolder+'Musicbeat-logos_transparent.png'}
-            style={{maxWidth:'100%', maxHeight:'100%', float:"left", marginLeft:'1vw'}}
+            style={{maxWidth:'5%', maxHeight:'5%', float:"left", marginTop:"0.5vw"}}
             >
             </img>
-            <div style={{display:'inline'}}>
                 <Button size="large" variant="outlined" className="Button">
                     Search
                 </Button>
@@ -28,11 +28,9 @@ function Header(){
                 <Button variant="outlined" size="large" className="Button">
                     FAQ
                 </Button>
-                
+                <Avatar className="Avatar" sx={{marginTop:"1vw"}}/>
             </div>
-            <Avatar className="Avatar">
-
-            </Avatar>
+            
         </div>
     );
 }

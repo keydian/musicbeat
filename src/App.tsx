@@ -7,11 +7,26 @@ import Homepage from './components/Homepage';
 import Login from './components/Login';
 import Register from './components/Register';
 import StartPage from './components/StartPage';
+import jwtDecode from "jwt-decode";
 import Header from './components/Header';
+import { useEffect } from 'react';
+import { FullProps } from './redux/redux';
+import { Token } from './types/types';
 
-function App() {
+function App(Props : FullProps) {
   
   //TODO: fazer com que n apareça o header no login e no register
+  useEffect( () => {
+    let token = localStorage.getItem("token");
+    if (!Props.isLogged && token) {
+      let decodedTkn = jwtDecode<Token>(token);
+      Props.login({
+        isLogged: true,
+        username: decodedTkn.username,
+        token: token,
+      });
+    }
+  }, [])
   
   return (
     <div className="App">

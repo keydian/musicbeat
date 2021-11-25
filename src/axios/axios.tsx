@@ -1,0 +1,49 @@
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import store, { logout, reset_token } from "../redux/redux";
+const url = "https://ipm2122appwesteurope55310.azurewebsites.net";
+
+axios.interceptors.request.use(
+    function (config: AxiosRequestConfig) {
+      let token = store.getState().token;
+      if (token) {
+        config.headers = {
+            "Authorization" : token
+        }
+      } 
+      return config;
+    },
+    function (err) {
+      return Promise.reject(err);
+    }
+  );
+
+  axios.interceptors.response.use(
+    function (config: AxiosResponse) {
+      if (
+        store.getState().token !== "" &&
+        !config.config.url?.includes("logout")
+      ) {
+        store.dispatch(reset_token(config.headers["Authorization"]));
+        localStorage.setItem("token", config.headers["Authorization"]);
+      }
+      return config;
+    },
+    function (err) {
+      if (err.response.status === 401) {
+        localStorage.removeItem("token");
+        store.dispatch(logout());
+      }
+      return Promise.reject(err);
+    }
+  );
+
+  /*
+  Example request
+  export async function register(user: Registration) {
+  try {
+    return await axios.post(url.concat("user"), user);
+  } catch (err) {
+    throw err.response;
+  }
+}
+  */

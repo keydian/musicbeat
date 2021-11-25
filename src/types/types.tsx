@@ -1,4 +1,8 @@
 //REVIEW AND ALTER THIS AS NECESSARY
+export interface LoginCreds {
+    username: string,
+    pwd: string
+}
 
 export interface User {
     username: string,

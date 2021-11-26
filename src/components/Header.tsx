@@ -1,9 +1,11 @@
 import '../styles/Header.css'
 import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
+import { useNavigate } from "react-router";
 
 function Header(){
 
+    let navigate = useNavigate();
     const logoFolder = process.env.PUBLIC_URL+"/logos/";
     return(
         <div className="Header" style={{display:'inline'}}>
@@ -11,6 +13,9 @@ function Header(){
             <img 
             src={logoFolder+'Musicbeat-logos_transparent.png'}
             style={{maxWidth:'5%', maxHeight:'5%', float:"left", marginTop:"0.5vw"}}
+            onClick={() =>{
+                navigate('../')
+            }}
             >
             </img>
                 <Button size="large" variant="outlined" className="Button">

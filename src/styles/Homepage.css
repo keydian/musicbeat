@@ -1,3 +1,15 @@
 .Homepage{
     
 }
+
+.HeaderText1{
+    margin-top: 25vh !important;
+}
+
+.HomepageButton{
+    margin-top: 3vh !important;
+    color: black !important;
+    background-color: rgba(209, 189, 255, 0.247) !important;
+    width: 10vw !important;
+    height: 3vw !important;    
+}

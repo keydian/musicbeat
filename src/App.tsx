@@ -2,6 +2,7 @@ import './App.css';
 import {
   Routes,
   Route,
+  useLocation
 } from "react-router-dom";
 import Homepage from './components/Homepage';
 import Login from './components/Login';
@@ -28,11 +29,15 @@ function App(Props : FullProps) {
       });
     }
   }, [])
+
+  let location = useLocation();
   
   return (
     <div className="App">
       <main>
-        <Header/>
+        {location.pathname !== '/login' && location.pathname !== '/register' && 
+          <Header/>
+        }
         <Routes>
           <Route path="/" element={<Homepage/>}/>
           <Route path="/login" element={<Login/>}/>

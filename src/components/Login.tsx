@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginCreds } from "../types/types";
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import '../styles/Login.css'
 import { Button } from "@mui/material";
 
 function Login() {
@@ -38,10 +39,7 @@ function Login() {
     }
 
     return (
-        <div>
-            <p onClick={() => { navigate("/") }}>NAV HOME</p>
-            <p onClick={() => { navigate("/register") }}>NAV REGISTER</p>
-
+        <div className="LoginForm">
             <Box
                 component="form"
                 noValidate
@@ -69,6 +67,7 @@ function Login() {
                 <br />
                 <Button
                     variant="contained"
+                    className="LoginButton"
                     onClick={() => { console.log(login) }}
                 > Login
                 </Button>

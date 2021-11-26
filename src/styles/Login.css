@@ -1,0 +1,9 @@
+.LoginButton{
+    margin-top: 2vh !important;
+    color: black !important;
+    background-color:  rgba(209, 189, 255, 0.247) !important;
+}
+
+.LoginForm{
+    margin-top: 25vh !important;
+}

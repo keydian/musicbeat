@@ -1,3 +1,24 @@
+.RegisterFormWrapper {
+    display: flex;
+}
+
 .RegisterForm {
-    
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-right: 10vh;
+}
+
+.RegisterFormHelper {
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: 10vh;
+}
+
+.RegisterInput {
+    margin-bottom: 2vh !important;
+}
+
+.RegisterButton {
+    color: black !important;
+    background-color:  rgba(209, 189, 255, 0.247) !important;
 }

@@ -8,7 +8,7 @@ import { RegisterCreds } from "../types/types";
 import { registerUser } from "../axios/axios";
 
 function Register() {
-    const [register, setRegister] = useState<RegisterCreds>({ username: "", email: "", pwd: "", confirmPwd:"" });
+    const [register, setRegister] = useState<RegisterCreds>({ username: "", email: "", pwd: "", confirmPwd: "" });
     const [error, setError] = useState<boolean>(false)
     let navigate = useNavigate();
 
@@ -22,10 +22,10 @@ function Register() {
     }
 
     const validateCreds = () => {
-        if(register.username === null || register.username.trim() === '' ||
-        register.email === null || register.email.trim() === '' ||
-        register.pwd === null || register.pwd.trim() === '' ||
-        register.confirmPwd === null || register.confirmPwd.trim() === '') {
+        if (register.username === null || register.username.trim() === '' ||
+            register.email === null || register.email.trim() === '' ||
+            register.pwd === null || register.pwd.trim() === '' ||
+            register.confirmPwd === null || register.confirmPwd.trim() === '') {
             return false
         }
         return true
@@ -52,7 +52,7 @@ function Register() {
     };
 
     const submitRegister = () => {
-        if(validateCreds()) {
+        if (validateCreds()) {
             registerUser(register).then(
                 (res) => {
                     alert("User registered successfully!")
@@ -60,7 +60,7 @@ function Register() {
                 }
             ).catch(
                 (err) => {
-                    if(err.response) {
+                    if (err.response) {
                         console.log(err.response)
                         alert(err.response.data.message)
                     }
@@ -73,54 +73,60 @@ function Register() {
 
     return (
         <div className="RegisterWrapper">
-            <div className="RegisterForm">
-
-                <TextField
-                    required
-                    error={error}
-                    id="username"
-                    label="Username"
-                    variant="filled"
-                    onChange={(e) => {
-                        changeRegister(e)
-                    }} />
-                <br />
-                <TextField
-                    required
-                    error={error}
-                    id="email"
-                    label="Email"
-                    variant="filled"
-                    onChange={(e) => {
-                        changeRegister(e)
-                    }} />
-                <br />
-                <TextField
-                    required
-                    error={error}
-                    id="pwd"
-                    label="Password"
-                    variant="filled"
-                    onChange={(e) => {
-                        changeRegister(e)
-                    }} />
-                <br />
-                <TextField
-                    required
-                    error={error}
-                    id="confirmPwd"
-                    label="Confirm Password"
-                    variant="filled"
-                    onChange={(e) => {
-                        changeRegister(e)
-                    }} />
-                <br />
-                <Button
-                    variant="contained"
-                    className="RegisterButton"
-                    onClick={() => { submitRegister() }}
-                >Register
-                </Button>
+            <div className="RegisterFormWrapper">
+                <div className="RegisterForm">
+                    <TextField
+                        className="RegisterInput"
+                        required
+                        error={error}
+                        id="username"
+                        label="Username"
+                        variant="filled"
+                        onChange={(e) => {
+                            changeRegister(e)
+                        }} />
+                    <br />
+                    <TextField
+                        className="RegisterInput"
+                        required
+                        error={error}
+                        id="email"
+                        label="Email"
+                        variant="filled"
+                        onChange={(e) => {
+                            changeRegister(e)
+                        }} />
+                    <br />
+                    <TextField
+                        className="RegisterInput"
+                        required
+                        error={error}
+                        id="pwd"
+                        label="Password"
+                        variant="filled"
+                        onChange={(e) => {
+                            changeRegister(e)
+                        }} />
+                    <br />
+                    <TextField
+                        className="RegisterInput"
+                        required
+                        error={error}
+                        id="confirmPwd"
+                        label="Confirm Password"
+                        variant="filled"
+                        onChange={(e) => {
+                            changeRegister(e)
+                        }} />
+                </div>
+                <div className="RegisterFormHelper">
+                    <Button
+                        variant="contained"
+                        className="RegisterButton"
+                        onClick={() => { submitRegister() }}
+                    >Register
+                    </Button>
+                </div>
             </div>
         </div>
     )

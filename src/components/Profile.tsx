@@ -4,22 +4,22 @@ import { useNavigate, useParams } from "react-router";
 import { dispatch_to_props, FullProps, state_to_props } from "../redux/redux";
 import { User } from "../types/types";
 import '../styles/Profile.css'
-import { Avatar } from "@mui/material";
 import { getUser } from "../axios/axios";
 
 
 function Profile(Props: FullProps) {
-    let pathParams = useParams();
+    let username = useParams().username;
     let navigate = useNavigate();
     const avatarFolder = process.env.PUBLIC_URL + "/avatar/";
 
     const [user, setUser] = useState<User>()
 
     useEffect(() => {
-        if (pathParams.username) {
-            getUser(pathParams.username).then(
+        if (username && Props.isLogged) {
+            getUser(username).then(
                 (res) => {
-                    console.log(res.data)
+                    console.log("Profile success")
+                    setUser(res.data)
                 }
             ).catch(
                 (err) => {
@@ -30,7 +30,7 @@ function Profile(Props: FullProps) {
                 }
             )
         }
-    }, [pathParams])
+    }, [Props.isLogged,username])
 
 
     return (
@@ -43,7 +43,7 @@ function Profile(Props: FullProps) {
                 >
                 </img>
                 <div className="UserInfo">
-                    <p>{pathParams.username}</p>
+                    <p>{username}</p>
                     <p>4 Collections | 6 Reviews</p>
                 </div>
                 <div className="OtherInfo">

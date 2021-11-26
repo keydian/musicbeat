@@ -54,6 +54,7 @@ function Login(Props: FullProps) {
                     })
                     localStorage.setItem("token", tkn);
                     console.log("Login succesfull")
+                    navigate("/")
                 }
             ).catch(
                 (err) => {

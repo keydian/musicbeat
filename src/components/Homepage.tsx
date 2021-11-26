@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router";
 import { Typography, Button } from "@mui/material";
 import "../styles/Homepage.css";
+import { dispatch_to_props, FullProps, state_to_props } from "../redux/redux";
+import { connect } from "react-redux";
 
-function Homepage() {
+function Homepage(Props : FullProps) {
     let navigate = useNavigate();
 
     return (
@@ -17,9 +19,12 @@ function Homepage() {
                <Button variant="contained" className="HomepageButton" onClick={()=>navigate('/register')}>
                     Register    
                </Button>
+               <Button onClick={()=>navigate('/profile/u1')}>
+                   Go to U1's Profile
+               </Button>
            </div>
         </div>
     )
 }
 
-export default Homepage
+export default  connect(state_to_props, dispatch_to_props)(Homepage)

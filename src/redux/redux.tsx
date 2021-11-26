@@ -34,7 +34,7 @@ export function reset_token(data: string): Reset_Token_Action {
 //STORE
 const store = createStore(session_reducer)
 store.subscribe(() => {
-    console.log("Store changed", store.getState())
+    console.log("ReduxSub -> Store changed", store.getState())
 })
 export default store
 

@@ -10,7 +10,7 @@ axios.interceptors.request.use(
     let token = store.getState().token;
     if (token) {
       config.headers = {
-        "Authorization": token
+        "authorization": token
       }
     }
     return config;
@@ -26,8 +26,8 @@ axios.interceptors.response.use(
       store.getState().token !== "" &&
       !config.config.url?.includes("logout")
     ) {
-      store.dispatch(reset_token(config.headers["Authorization"]));
-      localStorage.setItem("token", config.headers["Authorization"]);
+      store.dispatch(reset_token(config.headers["authorization"]));
+      localStorage.setItem("token", config.headers["authorization"]);
     }
     return config;
   },
@@ -50,5 +50,5 @@ export async function registerUser(creds: RegisterCreds) {
 }
 
 export async function getUser(username : string) {
-  return await axios.get(url.concat(username))
+  return await axios.get(url.concat(`users/${username}`))
 }

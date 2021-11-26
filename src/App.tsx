@@ -14,10 +14,16 @@ import { useEffect } from 'react';
 import { connect } from "react-redux";
 import { dispatch_to_props, FullProps, state_to_props } from './redux/redux';
 import { Token } from './types/types';
+import { createTheme, ThemeProvider} from "@mui/material";
 
 function App(Props: FullProps) {
 
-  //TODO: fazer com que n apareça o header no login e no register
+  const theme = createTheme({
+    typography:{
+      fontFamily:['Lato'].join()
+    }
+  })
+
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (!Props.isLogged && token) {
@@ -33,6 +39,7 @@ function App(Props: FullProps) {
   let location = useLocation();
 
   return (
+      <ThemeProvider theme={theme}>
     <div className="App">
       <main>
         {location.pathname !== '/login' && location.pathname !== '/register' &&
@@ -45,7 +52,7 @@ function App(Props: FullProps) {
           <Route path="/home" element={<StartPage />} />
         </Routes>
       </main>
-    </div>
+    </div></ThemeProvider>
   );
 }
 

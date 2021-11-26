@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
 .App {
+  font-family: 'Lato';
   text-align: center;
   background-color: rgb(149, 162, 241);
   min-height: 100vh;

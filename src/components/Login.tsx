@@ -39,23 +39,32 @@ function Login(Props : FullProps) {
     };
 
     const submitLogin = () => {
-        loginUser(login).then(
-            (res) => {
-                let decodedTkn = jwtDecode<Token>(res.headers.authorization);
-                let tkn: string = res.headers.authorization;
-                Props.login({
-                    isLogged: true,
-                    username: decodedTkn.username,
-                    token: tkn
-                })
-                localStorage.setItem("token", tkn);
-                console.log("Login succesfull")
-            }
-        ).catch(
-            (err) => {
-                alert(err)
-            }
-        )
+        if( login.username === null || login.username.trim() === '' || 
+        login.pwd === null || login.pwd.trim() === '' ) {
+            setError(true)
+        } else {
+            loginUser(login).then(
+                (res) => {
+                    let decodedTkn = jwtDecode<Token>(res.headers.authorization);
+                    let tkn: string = res.headers.authorization;
+                    Props.login({
+                        isLogged: true,
+                        username: decodedTkn.username,
+                        token: tkn
+                    })
+                    localStorage.setItem("token", tkn);
+                    console.log("Login succesfull")
+                }
+            ).catch(
+                (err) => {
+                    if(err.response) {
+                        console.log(err.response)
+                        alert(err.response.data.message)
+                    }
+                }
+            )
+        }
+        
     }
 
     return (

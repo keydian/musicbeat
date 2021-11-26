@@ -8,6 +8,13 @@ export interface LoginCreds {
     pwd: string
 }
 
+export interface RegisterCreds {
+    username: string,
+    email: string,
+    pwd: string,
+    confirmPwd: string
+}
+
 export interface User {
     username: string,
     email: string,

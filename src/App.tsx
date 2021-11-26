@@ -1,7 +1,7 @@
 import './App.css';
 import {
   Routes,
-  Route
+  Route,
 } from "react-router-dom";
 import Homepage from './components/Homepage';
 import Login from './components/Login';
@@ -10,7 +10,8 @@ import StartPage from './components/StartPage';
 import jwtDecode from "jwt-decode";
 import Header from './components/Header';
 import { useEffect } from 'react';
-import { FullProps } from './redux/redux';
+import {connect} from "react-redux";
+import { dispatch_to_props, FullProps, state_to_props } from './redux/redux';
 import { Token } from './types/types';
 
 function App(Props : FullProps) {
@@ -43,4 +44,4 @@ function App(Props : FullProps) {
   );
 }
 
-export default App;
+export default connect(state_to_props, dispatch_to_props)(App);

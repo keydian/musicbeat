@@ -16,6 +16,7 @@ function Header(){
             onClick={() =>{
                 navigate('../')
             }}
+            alt="musicbeat-logo"
             >
             </img>
                 <Button size="large" variant="outlined" className="Button">

@@ -8,6 +8,7 @@ import { RegisterCreds } from "../types/types";
 import { registerUser } from "../axios/axios";
 
 function Register() {
+    const logoFolder = process.env.PUBLIC_URL + "/logos/";
     const [register, setRegister] = useState<RegisterCreds>({ username: "", email: "", pwd: "", confirmPwd: "" });
     const [error, setError] = useState<boolean>(false)
     let navigate = useNavigate();
@@ -70,9 +71,16 @@ function Register() {
             setError(true)
         }
     }
-
+//style={{ maxWidth: '70%', maxHeight: '70%', marginTop: "30vh", marginBottom:"0" }}
     return (
         <div className="RegisterWrapper">
+            
+            <img
+                src={logoFolder + 'Musicbeat-logos_transparent.png'}
+                alt="musicbeat-logo"
+                className="musicbeatLogoBig"
+            >
+            </img>
             <div className="RegisterFormWrapper">
                 <div className="RegisterForm">
                     <TextField
@@ -126,6 +134,12 @@ function Register() {
                         onClick={() => { submitRegister() }}
                     >Register
                     </Button>
+                    <p>Already have an account?</p>
+                    <p 
+                    style={{color:"blue", textDecoration:"underline", cursor:"pointer"}}
+                    onClick={() => {navigate('/login')}}>
+                        Login
+                        </p>
                 </div>
             </div>
         </div>

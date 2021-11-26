@@ -110,6 +110,7 @@ function Register() {
                         required
                         error={error}
                         id="pwd"
+                        type="password"
                         label="Password"
                         variant="filled"
                         onChange={(e) => {
@@ -121,6 +122,7 @@ function Register() {
                         required
                         error={error}
                         id="confirmPwd"
+                        type="password"
                         label="Confirm Password"
                         variant="filled"
                         onChange={(e) => {

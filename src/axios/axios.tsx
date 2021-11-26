@@ -1,6 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import store, { logout, reset_token } from "../redux/redux";
-const url = "https://ipm2122appwesteurope55310.azurewebsites.net";
+import { LoginCreds } from "../types/types";
+
+//const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
+const url = "http://localhost:8080/rest/"
 
 axios.interceptors.request.use(
     function (config: AxiosRequestConfig) {
@@ -36,6 +39,10 @@ axios.interceptors.request.use(
       return Promise.reject(err);
     }
   );
+
+  export async function loginUser(creds : LoginCreds) {
+    return await axios.put(url.concat("users"), creds)
+  }
 
   /*
   Example request

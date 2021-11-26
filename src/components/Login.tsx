@@ -1,14 +1,16 @@
 import { useState, ChangeEvent } from "react"
 import { useNavigate } from "react-router-dom";
-import { LoginCreds } from "../types/types";
+import { LoginCreds, Token } from "../types/types";
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import '../styles/Login.css'
 import { Button } from "@mui/material";
-import { dispatch_to_props, state_to_props } from "../redux/redux";
+import { dispatch_to_props, FullProps, state_to_props } from "../redux/redux";
 import { connect } from "react-redux";
+import { loginUser } from "../axios/axios";
+import jwtDecode from "jwt-decode";
 
-function Login() {
+function Login(Props : FullProps) {
     const [login, setLogin] = useState<LoginCreds>({ username: "", pwd: "" });
     const [error, setError] = useState<boolean>(false)
 
@@ -37,7 +39,23 @@ function Login() {
     };
 
     const submitLogin = () => {
-
+        loginUser(login).then(
+            (res) => {
+                let decodedTkn = jwtDecode<Token>(res.headers.authorization);
+                let tkn: string = res.headers.authorization;
+                Props.login({
+                    isLogged: true,
+                    username: decodedTkn.username,
+                    token: tkn
+                })
+                localStorage.setItem("token", tkn);
+                console.log("Login succesfull")
+            }
+        ).catch(
+            (err) => {
+                alert(err)
+            }
+        )
     }
 
     return (
@@ -71,7 +89,7 @@ function Login() {
                     <Button
                         variant="contained"
                         className="LoginButton"
-                        onClick={() => { console.log(login) }}
+                        onClick={() => { submitLogin()}}
                     > Login
                     </Button>
                 </Box>

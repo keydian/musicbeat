@@ -40,9 +40,9 @@ export default store
 
 export const state_to_props = (state: any) => {
     return {
-        isLogged: state.session.isLogged,
-        token: state.session.token,
-        username: state.session.username
+        isLogged: state.isLogged,
+        token: state.token,
+        username: state.username
     }
 }
 

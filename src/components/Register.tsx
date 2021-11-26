@@ -71,10 +71,10 @@ function Register() {
             setError(true)
         }
     }
-//style={{ maxWidth: '70%', maxHeight: '70%', marginTop: "30vh", marginBottom:"0" }}
+
     return (
         <div className="RegisterWrapper">
-            
+        
             <img
                 src={logoFolder + 'Musicbeat-logos_transparent.png'}
                 alt="musicbeat-logo"

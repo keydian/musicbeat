@@ -1,9 +1,36 @@
 .LoginButton{
-    margin-top: 2vh !important;
-    color: black !important;
-    background-color:  rgba(209, 189, 255, 0.247) !important;
+    color: white !important;
+    background-color:  rgb(108, 87, 245) !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
 }
 
-.LoginForm{
-    padding-top: 25vh;
+.musicbeatLogoBig {
+    max-width: 30vw;
+    max-height: 30vh;
+    margin-top: 10vh;
+}
+
+.LoginFormWrapper {
+    padding-top: 5vh;
+    display: flex;
+}
+
+.LoginForm {
+    margin-left: auto;
+    margin-bottom: auto;
+    margin-right: 10vh;
+}
+
+.LoginFormHelper {
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: 10vh;
+}
+
+.LoginInput {
+    margin-bottom: 2vh !important;
+    background-color: white;
 }

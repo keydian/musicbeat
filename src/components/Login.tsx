@@ -2,7 +2,6 @@ import { useState, ChangeEvent } from "react"
 import { useNavigate } from "react-router-dom";
 import { LoginCreds, Token } from "../types/types";
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import '../styles/Login.css'
 import { Button } from "@mui/material";
 import { dispatch_to_props, FullProps, state_to_props } from "../redux/redux";
@@ -10,7 +9,8 @@ import { connect } from "react-redux";
 import { loginUser } from "../axios/axios";
 import jwtDecode from "jwt-decode";
 
-function Login(Props : FullProps) {
+function Login(Props: FullProps) {
+    const logoFolder = process.env.PUBLIC_URL + "/logos/";
     const [login, setLogin] = useState<LoginCreds>({ username: "", pwd: "" });
     const [error, setError] = useState<boolean>(false)
 
@@ -39,8 +39,8 @@ function Login(Props : FullProps) {
     };
 
     const submitLogin = () => {
-        if( login.username === null || login.username.trim() === '' || 
-        login.pwd === null || login.pwd.trim() === '' ) {
+        if (login.username === null || login.username.trim() === '' ||
+            login.pwd === null || login.pwd.trim() === '') {
             setError(true)
         } else {
             loginUser(login).then(
@@ -57,28 +57,31 @@ function Login(Props : FullProps) {
                 }
             ).catch(
                 (err) => {
-                    if(err.response) {
+                    if (err.response) {
                         console.log(err.response)
                         alert(err.response.data.message)
                     }
                 }
             )
         }
-        
+
     }
 
     return (
         <div className="LoginWrapper">
-                <Box
-                    component="form"
-                    noValidate
-                    autoComplete="off"
-                    className="LoginForm"
-                >
+            <img
+                src={logoFolder + 'Musicbeat-logos_transparent.png'}
+                alt="musicbeat-logo"
+                className="musicbeatLogoBig"
+            >
+            </img>
+            <div className="LoginFormWrapper">
+                <div className="LoginForm">
                     <TextField
                         required
                         error={error}
                         id="username"
+                        className="LoginInput"
                         label="Username"
                         variant="filled"
                         onChange={(e) => {
@@ -89,20 +92,31 @@ function Login(Props : FullProps) {
                         required
                         error={error}
                         id="pwd"
+                        type="password"
+                        className="LoginInput"
                         label="Password"
                         variant="filled"
                         onChange={(e) => {
                             changeLogin(e)
                         }} />
-                    <br />
+                </div>
+                <div className="LoginFormHelper">
                     <Button
                         variant="contained"
                         className="LoginButton"
-                        onClick={() => { submitLogin()}}
+                        onClick={() => { submitLogin() }}
                     > Login
                     </Button>
-                </Box>
+                    <p>Don't have an account?</p>
+                    <p 
+                    style={{color:"blue", textDecoration:"underline", cursor:"pointer"}}
+                    onClick={() => {navigate('/register')}}>
+                        Register
+                        </p>
+                </div>
             </div>
+
+        </div>
     )
 }
 

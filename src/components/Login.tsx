@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import '../styles/Login.css'
 import { Button } from "@mui/material";
+import { dispatch_to_props, state_to_props } from "../redux/redux";
+import { connect } from "react-redux";
 
 function Login() {
     const [login, setLogin] = useState<LoginCreds>({ username: "", pwd: "" });
@@ -39,41 +41,42 @@ function Login() {
     }
 
     return (
-        <div className="LoginForm">
-            <Box
-                component="form"
-                noValidate
-                autoComplete="off"
-            >
-                <TextField
-                    required
-                    error={error}
-                    id="username"
-                    label="Username"
-                    variant="filled"
-                    onChange={(e) => {
-                        changeLogin(e)
-                    }} />
-                <br />
-                <TextField
-                    required
-                    error={error}
-                    id="pwd"
-                    label="Password"
-                    variant="filled"
-                    onChange={(e) => {
-                        changeLogin(e)
-                    }} />
-                <br />
-                <Button
-                    variant="contained"
-                    className="LoginButton"
-                    onClick={() => { console.log(login) }}
-                > Login
-                </Button>
-            </Box>
-        </div>
+        <div className="LoginWrapper">
+                <Box
+                    component="form"
+                    noValidate
+                    autoComplete="off"
+                    className="LoginForm"
+                >
+                    <TextField
+                        required
+                        error={error}
+                        id="username"
+                        label="Username"
+                        variant="filled"
+                        onChange={(e) => {
+                            changeLogin(e)
+                        }} />
+                    <br />
+                    <TextField
+                        required
+                        error={error}
+                        id="pwd"
+                        label="Password"
+                        variant="filled"
+                        onChange={(e) => {
+                            changeLogin(e)
+                        }} />
+                    <br />
+                    <Button
+                        variant="contained"
+                        className="LoginButton"
+                        onClick={() => { console.log(login) }}
+                    > Login
+                    </Button>
+                </Box>
+            </div>
     )
 }
 
-export default Login
+export default connect(state_to_props, dispatch_to_props)(Login)

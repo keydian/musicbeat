@@ -11,14 +11,14 @@ import StartPage from './components/StartPage';
 import jwtDecode from "jwt-decode";
 import Header from './components/Header';
 import { useEffect } from 'react';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { dispatch_to_props, FullProps, state_to_props } from './redux/redux';
 import { Token } from './types/types';
 
-function App(Props : FullProps) {
-  
+function App(Props: FullProps) {
+
   //TODO: fazer com que n apareça o header no login e no register
-  useEffect( () => {
+  useEffect(() => {
     let token = localStorage.getItem("token");
     if (!Props.isLogged && token) {
       let decodedTkn = jwtDecode<Token>(token);
@@ -31,18 +31,18 @@ function App(Props : FullProps) {
   }, [])
 
   let location = useLocation();
-  
+
   return (
     <div className="App">
       <main>
-        {location.pathname !== '/login' && location.pathname !== '/register' && 
-          <Header/>
+        {location.pathname !== '/login' && location.pathname !== '/register' &&
+          <Header />
         }
         <Routes>
-          <Route path="/" element={<Homepage/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/home" element={<StartPage/>}/>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<StartPage />} />
         </Routes>
       </main>
     </div>

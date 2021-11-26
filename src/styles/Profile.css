@@ -1,0 +1,29 @@
+.UserBanner {
+    display: flex;
+    background-color:  rgba(215, 223, 217, 0.377);
+    height: 100%;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.UserInfo {
+   margin-right: 50vw;
+   padding-top: 30px;
+   padding-left: 30px;
+   text-align: left;
+}
+
+.defaultavatar {
+    padding-left: 2vw !important;
+    max-width: 25vw !important;
+    max-height: 25vh !important;
+}
+
+.OtherInfo {
+   
+}
+
+.LowerPartWrapper {
+    display: inline;
+}
+

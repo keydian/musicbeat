@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { connect } from "react-redux";
 import { dispatch_to_props, FullProps, state_to_props } from './redux/redux';
 import { Token } from './types/types';
+import Profile from './components/Profile';
 
 function App(Props: FullProps) {
 
@@ -43,6 +44,7 @@ function App(Props: FullProps) {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<StartPage />} />
+          <Route path="/profile/:username" element={<Profile/>} />
         </Routes>
       </main>
     </div>

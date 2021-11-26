@@ -16,10 +16,10 @@ export interface RegisterCreds {
 }
 
 export interface User {
+    id: string,
     username: string,
     email: string,
-    pwd: string,
-    collections: string[]
+    collections: string[],
     jams: string[]
 }
 

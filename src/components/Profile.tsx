@@ -47,7 +47,7 @@ function Profile(Props: FullProps) {
                             </img>
                             <div className="UserInfo">
                                 <p>{username}</p>
-                                <p>{user?.collections.length} Collections | 6 Reviews</p>
+                                <p>{user.collections.length} Collections | 6 Reviews</p>
                             </div>
                             <div className="OtherInfo">
                                 <p>LINKED ACCOUNTS</p>

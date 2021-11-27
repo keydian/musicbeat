@@ -1,0 +1,51 @@
+.ReviewsWrapper {
+    background-color:  rgba(215, 223, 217, 0.377);
+    border-radius: 25px;
+}
+
+.SmallReview {
+    border-radius: 25px;
+    padding-bottom: 2vh;
+}
+
+.SmallReviewHeader {
+    display: flex;
+    padding-top: 2vh;
+    padding-right: 1vw;
+    padding-left: 1vw;
+}
+
+.SongImg {
+    padding-right: 1vw;
+    width: 20%;
+}
+
+.SongImg2 {
+    width: 60px;
+    height: 60px;
+}
+
+.SongHeaderTitle {
+    text-align: left;
+    border-right: 1px solid black;
+    padding-right: 3vw;
+    width: 70%;
+}
+
+.ReviewRating {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    padding-left: 2vw;
+}
+
+.ReviewBody {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

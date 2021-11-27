@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { dispatch_to_props, FullProps, state_to_props } from "../redux/redux";
-import { User } from "../types/types";
-import '../styles/Profile.css'
-import { getUser } from "../axios/axios";
-
+import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
+import { User } from "../../types/types";
+import '../../styles/profile/Profile.css'
+import { getUser } from "../../axios/axios";
+import { Typography } from "@mui/material";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import ProfileReviewsDisplay from "./ProfileReviewsDisplay";
 
 function Profile(Props: FullProps) {
     let username = useParams().username;
@@ -46,19 +50,29 @@ function Profile(Props: FullProps) {
                             >
                             </img>
                             <div className="UserInfo">
-                                <p>{username}</p>
+                                <Typography variant="h2" gutterBottom component="div">
+                                    {username}
+                                </Typography>
                                 <p>{user.collections.length} Collections | 6 Reviews</p>
+                                <div style={{ display: "flex", alignItems: "center" }}>
+                                    <AddCircleOutlineIcon sx={{}} />
+                                    <p>Add as friend</p>
+                                </div>
                             </div>
                             <div className="OtherInfo">
-                                <p>LINKED ACCOUNTS</p>
+                                <div className="LinkedAcc">
+                                    <Typography variant="subtitle1">LINKED ACCOUNTS:</Typography>
+                                    <TwitterIcon fontSize={"large"} htmlColor={"rgb(51, 153, 255)"} />
+                                    <FacebookIcon fontSize={"large"} htmlColor={"rgb(0, 102, 204)"} />
+                                </div>
                             </div>
                         </div>
                         <div className="LowerPartWrapper">
                             <div className="CollectionsDisplay">
-
+                                <p>Collections will be here</p>
                             </div>
                             <div className="ReviewsDisplay">
-
+                                <ProfileReviewsDisplay/>
                             </div>
                         </div>
                     </>

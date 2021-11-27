@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { dispatch_to_props, FullProps, state_to_props } from './redux/redux';
 import { Token } from './types/types';
 import { createTheme, ThemeProvider} from "@mui/material";
-import Profile from './components/Profile';
+import Profile from './components/profile/Profile';
 
 
 function App(Props: FullProps) {

@@ -56,5 +56,6 @@ export interface Collection {
 export interface Reviews {
     title: string,
     author: string,
-    song: string
+    song: string,
+    rating: number
 }

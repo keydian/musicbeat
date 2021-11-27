@@ -11,6 +11,7 @@
    padding-top: 30px;
    padding-left: 30px;
    text-align: left;
+   width: 40%;
 }
 
 .defaultavatar {
@@ -20,10 +21,31 @@
 }
 
 .OtherInfo {
-   
+   position: relative;
+   width: 40%;
+}
+
+.LinkedAcc {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    right: 0;
+    padding-right: 2vw;
 }
 
 .LowerPartWrapper {
-    display: inline;
+    padding-top: 2vh;
+    display: flex;
+}
+
+.CollectionsDisplay {
+    width: 70vw;
+    padding-left: 1vw;
+}
+
+.ReviewsDisplay {
+    width: 30vw;
+    padding-right: 1vw;
 }
 

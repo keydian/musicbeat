@@ -30,35 +30,42 @@ function Profile(Props: FullProps) {
                 }
             )
         }
-    }, [Props.isLogged,username])
+    }, [Props.isLogged, username])
 
 
     return (
         <div>
-            <div className="UserBanner">
-                <img
-                    src={avatarFolder + 'defaultavatar.png'}
-                    alt="defaultavatar-logo"
-                    className="defaultavatar"
-                >
-                </img>
-                <div className="UserInfo">
-                    <p>{username}</p>
-                    <p>4 Collections | 6 Reviews</p>
-                </div>
-                <div className="OtherInfo">
-                    <p>LINKED ACCOUNTS</p>
-                </div>
-            </div>
-            <div className="LowerPartWrapper">
-                <div className="CollectionsDisplay">
+            {
+                user && (
+                    <>
+                        <div className="UserBanner">
+                            <img
+                                src={avatarFolder + 'defaultavatar.png'}
+                                alt="defaultavatar-logo"
+                                className="defaultavatar"
+                            >
+                            </img>
+                            <div className="UserInfo">
+                                <p>{username}</p>
+                                <p>{user?.collections.length} Collections | 6 Reviews</p>
+                            </div>
+                            <div className="OtherInfo">
+                                <p>LINKED ACCOUNTS</p>
+                            </div>
+                        </div>
+                        <div className="LowerPartWrapper">
+                            <div className="CollectionsDisplay">
 
-                </div>
-                <div className="ReviewsDisplay">
+                            </div>
+                            <div className="ReviewsDisplay">
 
-                </div>
+                            </div>
+                        </div>
+                    </>
+                )
 
-            </div>
+            }
+
         </div>
     )
 }

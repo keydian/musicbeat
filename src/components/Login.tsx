@@ -1,9 +1,9 @@
-import { useState, ChangeEvent } from "react"
+import { useState, ChangeEvent, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { LoginCreds, Token } from "../types/types";
 import TextField from '@mui/material/TextField';
 import '../styles/Login.css'
-import { Button } from "@mui/material";
+import { Alert, Button, Snackbar } from "@mui/material";
 import { dispatch_to_props, FullProps, state_to_props } from "../redux/redux";
 import { connect } from "react-redux";
 import { loginUser } from "../axios/axios";
@@ -12,7 +12,13 @@ import jwtDecode from "jwt-decode";
 function Login(Props: FullProps) {
     const logoFolder = process.env.PUBLIC_URL + "/logos/";
     const [login, setLogin] = useState<LoginCreds>({ username: "", pwd: "" });
+    //Input validation
     const [error, setError] = useState<boolean>(false)
+    //Snackbars
+    const [snackSuc, setSnacksuc] = useState<boolean>(false)
+    const [snackErr, setSnackerr] = useState<boolean>(false)
+    //Error handling
+    const [errMsg, setErrMsg] = useState<string>()
 
     let navigate = useNavigate();
 
@@ -53,14 +59,14 @@ function Login(Props: FullProps) {
                         token: tkn
                     })
                     localStorage.setItem("token", tkn);
-                    console.log("Login succesfull")
+                    setSnacksuc(true)
                     navigate("/")
                 }
             ).catch(
                 (err) => {
                     if (err.response) {
                         console.log(err.response)
-                        alert(err.response.data.message)
+                        setErrMsg(err.response.data.message)
                     }
                 }
             )
@@ -68,8 +74,38 @@ function Login(Props: FullProps) {
 
     }
 
+    const handleCloseSuc = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnacksuc(false);
+    };
+
+    const handleCloseErr = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackerr(false);
+    };
+
+    useEffect(() => {
+        if (errMsg) {
+            setSnackerr(true)
+        }
+    }, [errMsg])
+
     return (
         <div className="LoginWrapper">
+            <Snackbar open={snackSuc} autoHideDuration={3000} onClose={handleCloseSuc}>
+                <Alert onClose={handleCloseSuc} severity="success" sx={{ width: '100%' }}>
+                    Login succesfull!
+                </Alert>
+            </Snackbar>
+            <Snackbar open={snackErr} autoHideDuration={3000} onClose={handleCloseErr}>
+                <Alert onClose={handleCloseErr} severity="error" sx={{ width: '100%' }}>
+                    {errMsg}
+                </Alert>
+            </Snackbar>
             <img
                 src={logoFolder + 'Musicbeat-logos_transparent.png'}
                 alt="musicbeat-logo"
@@ -109,11 +145,11 @@ function Login(Props: FullProps) {
                     > Login
                     </Button>
                     <p>Don't have an account?</p>
-                    <p 
-                    style={{color:"blue", textDecoration:"underline", cursor:"pointer"}}
-                    onClick={() => {navigate('/register')}}>
+                    <p
+                        style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
+                        onClick={() => { navigate('/register') }}>
                         Register
-                        </p>
+                    </p>
                 </div>
             </div>
 

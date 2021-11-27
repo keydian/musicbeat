@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import '../../styles/profile/ProfileReviewsDisplay.css'
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function ReviewsDisplay(Props: FullProps) {
 
@@ -57,7 +58,9 @@ function ReviewsDisplay(Props: FullProps) {
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget nulla id dolor cursus molestie ut non sem. Nunc orci mi, varius vel pellentesque vel, maximus id urna. In eget pulvinar risus. Nullam aliquet nisl at nulla aliquet, nec laoreet ipsum tincidunt. Sed dictum, justo nec maximus finibus, enim nisi mollis eros, eu dapibus tellus mi ac enim. eu dapibus tellus mi ac enim. eu dapibus tellus mi ac enim. eu dapibus tellus mi ac enim. eu dapibus tellus mi ac enim.</p>
                     </div>
                 </div>
+                <KeyboardArrowDownIcon fontSize="large" htmlColor="grey"/>
             </div>
+            
         </div>
     )
 }

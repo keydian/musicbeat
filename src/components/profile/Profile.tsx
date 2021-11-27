@@ -72,6 +72,7 @@ function Profile(Props: FullProps) {
                                 <p>Collections will be here</p>
                             </div>
                             <div className="ReviewsDisplay">
+                                <Typography variant="h6" style={{textAlign:"left", paddingLeft:"1vw"}}>Recent reviews</Typography>
                                 <ProfileReviewsDisplay/>
                             </div>
                         </div>

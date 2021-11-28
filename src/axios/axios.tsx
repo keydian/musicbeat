@@ -3,6 +3,7 @@ import store, { logout, reset_token } from "../redux/redux";
 import { LoginCreds, RegisterCreds } from "../types/types";
 
 const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
+//const url = "http://localhost:8080/rest/"
 
 axios.interceptors.request.use(
   function (config: AxiosRequestConfig) {
@@ -66,9 +67,8 @@ export async function getUserCollections(
   })
 }
 
-export async function uploadProfilePicture(
-  image: File,
-  username: string
+export async function uploadPicture(
+  image: File
 ) {
     let formData = new FormData();
     formData.append("file", image);

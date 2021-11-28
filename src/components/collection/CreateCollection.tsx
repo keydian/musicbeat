@@ -1,4 +1,4 @@
-import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import { Box, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { connect } from "react-redux";
 import { dispatch_to_props, state_to_props } from "../../redux/redux";
@@ -6,6 +6,7 @@ import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp';
 import '../../styles/collection/CreateCollection.css'
 import { CreateCollection } from "../../types/types";
 import ImageIcon from '@mui/icons-material/Image';
+import { uploadPicture } from "../../axios/axios";
 
 function CreateCollectionModal() {
     const [createCol, setCreateCol] = useState<CreateCollection>({ name: "", description: "", image: "" })
@@ -50,9 +51,24 @@ function CreateCollectionModal() {
             case "createcoldescription":
                 setCreateCol({ ...createCol, description: value })
                 break;
-            case "createcolimg":
-                setCreateCol({ ...createCol, image: value })
-                break;
+        }
+    }
+
+    const uploadFile = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            uploadPicture(event.target.files[0]).then(
+                res => {
+                    console.log(res.data)
+                    setCreateCol({ ...createCol, image: res.data })
+                }
+            ).catch(
+                err => {
+                    event.target.files = null
+                    if(err.response) {
+                        console.log(err.response)
+                    }
+                }
+            );
         }
     }
 
@@ -72,8 +88,21 @@ function CreateCollectionModal() {
                 <Box sx={style}>
                     <div className="BoxDiv">
                         <div className="UploadWrapper">
-                            <Typography variant="h6">Upload Here</Typography>
-                            <ImageIcon fontSize="large" />
+                            <input
+                                id="file"
+                                name="file"
+                                style={{ display: 'none' }}
+                                type="file"
+                                accept="image/*"
+                                onChange={uploadFile}
+                            ></input>
+                            <label htmlFor="file">
+                                <Typography variant="h6">Upload Here</Typography>
+                                <IconButton aria-label="Upload Picture" component="span">
+                                    <ImageIcon fontSize="large" />
+                                </IconButton>
+                            </label>
+
                         </div>
                         <div className="InputWrapper">
                             <Typography variant="h6">Your collection's name</Typography>
@@ -123,12 +152,3 @@ function CreateCollectionModal() {
 }
 
 export default connect(state_to_props, dispatch_to_props)(CreateCollectionModal)
-
-
-/*
-  const uploadFile = (event: ChangeEvent<HTMLInputElement>) => {
-    if (profileUser && event.target.files) {
-      uploadProfilePicture(event.target.files[0], profileUser.username);
-    }
-  }
-  */

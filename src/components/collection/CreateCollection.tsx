@@ -1,15 +1,17 @@
 import { Box, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { dispatch_to_props, state_to_props } from "../../redux/redux";
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp';
 import '../../styles/collection/CreateCollection.css'
 import { CreateCollection } from "../../types/types";
 import ImageIcon from '@mui/icons-material/Image';
-import { uploadPicture } from "../../axios/axios";
+import { createCollection, uploadPicture } from "../../axios/axios";
+import { useNavigate } from "react-router";
 
 function CreateCollectionModal() {
-    const [createCol, setCreateCol] = useState<CreateCollection>({ name: "", description: "", image: "" })
+    let navigate = useNavigate();
+    const [createCol, setCreateCol] = useState<CreateCollection>({ name: "", description: "", imageUrl: "" })
     const [open, setOpen] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
 
@@ -59,7 +61,7 @@ function CreateCollectionModal() {
             uploadPicture(event.target.files[0]).then(
                 res => {
                     console.log(res.data)
-                    setCreateCol({ ...createCol, image: res.data })
+                    setCreateCol({ ...createCol, imageUrl: res.data })
                 }
             ).catch(
                 err => {
@@ -70,6 +72,33 @@ function CreateCollectionModal() {
                 }
             );
         }
+    }
+
+
+    const canCreate = () => {
+        if(createCol.name === undefined || createCol.name.trim() === '') {
+            return false;
+        }
+        return true;
+    }
+
+    const createColRequest = () => {
+       if(canCreate()) {
+            createCollection(createCol).then(
+                res => {
+                    console.log("Collection created")
+                    navigate("/collections")
+                }
+            ).catch(
+                err => {
+                    if(err.response){
+                        console.log(err.response)
+                    }
+                }
+            )
+       } else {
+           setError(true)
+       }
     }
 
     return (
@@ -124,6 +153,9 @@ function CreateCollectionModal() {
                                 className="CreatColInput"
                                 label="Description"
                                 variant="filled"
+                                onChange={(e) => {
+                                    changeCreateCol(e)
+                                }}
                             />
                             <div className="InputButtonsWrapper">
                                 <Button
@@ -138,6 +170,7 @@ function CreateCollectionModal() {
                                 <Button
                                     className="CreateColInputButton"
                                     variant="contained"
+                                    onClick={createColRequest}
                                     style={{ backgroundColor: "rgba(215, 223, 217, 0.377)", color: "black", border: "1px solid black" }}
                                 >
                                     <Typography variant="button">Create</Typography>

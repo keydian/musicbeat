@@ -12,4 +12,5 @@
     padding-top: 3vh;
     padding-bottom: 3vh;
     overflow: hidden;
+    min-height: 100%;
 }

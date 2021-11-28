@@ -9,6 +9,7 @@ import '../../styles/profile/ProfileCollectionDisplay.css'
 function ProfileCollectionDisplay(username: string) {
     const [collections, setCollections] = useState<Collection[]>()
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+    //For debug
     let c: Collection[] = [
         {
             id: "0",
@@ -16,7 +17,7 @@ function ProfileCollectionDisplay(username: string) {
             description: "",
             creator: username,
             songs: [],
-            image: "http://2.bp.blogspot.com/-t_j3mWFnRro/Tgo2PQ5r0NI/AAAAAAAAACs/OTTWy-PVEHM/s1600/tour.jpg"
+            imageUrl: "http://2.bp.blogspot.com/-t_j3mWFnRro/Tgo2PQ5r0NI/AAAAAAAAACs/OTTWy-PVEHM/s1600/tour.jpg"
         },
         {
             id: "1",
@@ -24,7 +25,7 @@ function ProfileCollectionDisplay(username: string) {
             description: "",
             creator: username,
             songs: [],
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
         },
         {
             id: "2",
@@ -32,7 +33,7 @@ function ProfileCollectionDisplay(username: string) {
             description: "",
             creator: username,
             songs: [],
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
         },
         {
             id: "3",
@@ -40,7 +41,7 @@ function ProfileCollectionDisplay(username: string) {
             description: "",
             creator: username,
             songs: [],
-            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
         }
     ]
 
@@ -68,8 +69,8 @@ function ProfileCollectionDisplay(username: string) {
     }, [collections])
 
     const colImg = (col: Collection) => {
-        if (col.image !== null && col.image.trim() !== '') {
-            return col.image
+        if (col.imageUrl !== undefined && col.imageUrl.trim() !== '') {
+            return col.imageUrl
         }
         return defaultImg
     }
@@ -77,13 +78,13 @@ function ProfileCollectionDisplay(username: string) {
     return (
         <div className="GridWrapper">
             {
-                c && c.length > 0 ? (
+                collections && collections.length > 0 ? (
                     <Grid container
                         justifyContent="flex-start"
                         alignItems="center"
                         rowSpacing={4}
                     >
-                        {c.map((col, i) => (
+                        {collections.map((col, i) => (
                             <Grid id={col.id + i} item xs={4}>
                                 <img
                                     src={colImg(col)}

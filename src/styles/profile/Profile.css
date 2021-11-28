@@ -15,9 +15,10 @@
 }
 
 .defaultavatar {
-    padding-left: 2vw !important;
+    margin-left: 2vw !important;
     max-width: 25vw !important;
     max-height: 25vh !important;
+    border-radius: 50%;
 }
 
 .OtherInfo {

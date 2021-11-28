@@ -6,7 +6,7 @@ export interface Token {
 export interface CreateCollection {
     name: string,
     description: string,
-    image: string
+    imageUrl: string
 }
 
 export interface LoginCreds {
@@ -61,7 +61,7 @@ export interface Collection {
     description: string,
     creator: string,
     songs: string[],
-    image: string
+    imageUrl: string
 }
 
 export interface Reviews {

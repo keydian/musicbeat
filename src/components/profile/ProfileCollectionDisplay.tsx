@@ -8,7 +8,7 @@ import '../../styles/profile/ProfileCollectionDisplay.css'
 
 function ProfileCollectionDisplay(username: string) {
     const [collections, setCollections] = useState<Collection[]>()
-
+    const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
     let c : Collection[] = [
         {
             id: "0",
@@ -22,21 +22,21 @@ function ProfileCollectionDisplay(username: string) {
             name: "Collection2",
             creator: username,
             songs: [],
-            image: "https://i.pinimg.com/736x/f5/31/be/f531be33d92a1431d5b274e65eae3a52.jpg"
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
         },
         {
             id: "2",
             name: "Collection3",
             creator: username,
             songs: [],
-            image: "https://www.artmajeur.com/medias/standard/d/o/domballada/artwork/10620700_wedding-party-02.jpg"
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
         },
         {
             id: "3",
             name: "Collection4",
             creator: username,
             songs: [],
-            image: "https://static.nationalgeographic.co.uk/files/styles/image_3200/public/cat-odyssey-turkey-04.jpg?w=1900&h=1267"
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
         }
     ]
 
@@ -63,12 +63,19 @@ function ProfileCollectionDisplay(username: string) {
         }
     }, [collections])
 
+    const colImg = (col : Collection) => {
+        if(col.image !== null && col.image.trim() !== '') {
+            return col.image
+        }
+        return defaultImg
+    }
+
     const renderItem = (col: Collection, ind: number) => {
         return (
             <>
                 {
                     ind < 6 && (
-                        <Grid id={col.name + ind} item xs={4}>
+                        <Grid id={colImg(col)} item xs={4}>
                             <img
                                 src={col.image}
                                 alt="collectionpic"

@@ -65,3 +65,16 @@ export async function getUserCollections(
     }
   })
 }
+
+export async function uploadProfilePicture(
+  image: File,
+  username: string
+) {
+    let formData = new FormData();
+    formData.append("file", image);
+    return await axios.post(url.concat(`media`), formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }
+    });
+}

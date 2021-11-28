@@ -3,6 +3,12 @@ export interface Token {
     username: string
 }
 
+export interface CreateCollection {
+    name: string,
+    description: string,
+    image: string
+}
+
 export interface LoginCreds {
     username: string,
     pwd: string
@@ -52,6 +58,7 @@ export interface Jam {
 export interface Collection {
     id : string,
     name: string,
+    description: string,
     creator: string,
     songs: string[],
     image: string

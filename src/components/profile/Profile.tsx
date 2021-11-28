@@ -5,13 +5,13 @@ import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux"
 import { User } from "../../types/types";
 import '../../styles/profile/Profile.css'
 import { getUser } from "../../axios/axios";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import ProfileReviewsDisplay from "./ProfileReviewsDisplay";
 import ProfileCollectionDisplay from "./ProfileCollectionDisplay";
-import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp';
+import CreateCollection from "../collection/CreateCollection";
 
 function Profile(Props: FullProps) {
     let username = useParams().username;
@@ -39,7 +39,7 @@ function Profile(Props: FullProps) {
                     if (err.response) {
                         //Should never happen
                         console.log(err.response)
-                        alert(err.response.data.message)
+                        //alert(err.response.data.message)
                     }
                 }
             )
@@ -81,16 +81,7 @@ function Profile(Props: FullProps) {
                             <div className="CollectionsDisplay">
                             <div className="CollectionsDisplayHeader">
                             <Typography variant="h4" style={{textAlign:"left", paddingLeft:"1vw", paddingBottom:"1vh"}}>{username}'s Collections</Typography>
-                            <Button 
-                            startIcon={<AddBoxSharpIcon/>}
-                            variant="contained" 
-                            className="createColButton" 
-                            onClick={() => {
-                                //Open create collection window
-                            }}>
-                                
-                                Collection
-                            </Button>
+                            <CreateCollection/>
                             </div>
                                 {
                                     username && (
@@ -107,9 +98,7 @@ function Profile(Props: FullProps) {
                         </div>
                     </>
                 )
-
             }
-
         </div>
     )
 }

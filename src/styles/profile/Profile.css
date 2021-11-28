@@ -51,14 +51,6 @@
     width: 100%;
 }
 
-.createColButton {
-    background-color: rgba(222, 226, 223, 1) !important;
-    color: black !important;
-    margin-left:auto !important;
-    margin-right: 1vw !important;
-    margin-bottom: 1vh !important;
-}
-
 .ReviewsDisplay {
     width: 30vw;
     margin-right: 1vw;

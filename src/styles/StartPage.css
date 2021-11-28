@@ -1,0 +1,30 @@
+.StartPage{
+    justify-content: center;
+}
+
+
+.DiscoveryQueue{
+    background-color: rgb(255, 255, 255, 0.8);
+    display:flex;
+    margin-top: 1vh !important;
+    margin: auto;
+    border-radius: 25px;
+    width: 80vw;
+    height: 35vh;
+}
+
+.Trending{
+    display:flex;
+    margin: auto;
+    margin-top: 1vh !important; 
+    background-color: rgb(255, 255, 255, 0.8);
+    border-radius: 25px;
+    width: 80vw;
+    height: 25vh;
+}
+
+.TitleText{
+    text-align: left;
+    margin-left: 10.5vw;
+    margin-top: 4vh
+}

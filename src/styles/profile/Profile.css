@@ -41,11 +41,15 @@
 
 .CollectionsDisplay {
     width: 70vw;
-    padding-left: 1vw;
+    margin-left: 1vw;
+    height: 100%;
+    padding-right: 1vw;
 }
 
 .ReviewsDisplay {
     width: 30vw;
-    padding-right: 1vw;
+    margin-right: 1vw;
+    height: 100%;
+    padding-left: 1vw;
 }
 

@@ -52,3 +52,17 @@ export async function registerUser(creds: RegisterCreds) {
 export async function getUser(username : string) {
   return await axios.get(url.concat(`users/${username}`))
 }
+
+export async function getUserCollections(
+  username : string,
+  pageNum : number,
+  pageSize : number
+) {
+  return await axios.get(url.concat('collections/search'), {
+    params: {
+      val : username,
+      pageNum : pageNum,
+      size : pageSize
+    }
+  })
+}

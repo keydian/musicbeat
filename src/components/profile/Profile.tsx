@@ -10,6 +10,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import ProfileReviewsDisplay from "./ProfileReviewsDisplay";
+import ProfileCollectionDisplay from "./ProfileCollectionDisplay";
 
 function Profile(Props: FullProps) {
     let username = useParams().username;
@@ -17,6 +18,13 @@ function Profile(Props: FullProps) {
     const avatarFolder = process.env.PUBLIC_URL + "/avatar/";
 
     const [user, setUser] = useState<User>()
+    const [pathusername, setPathusername] = useState<string>()
+
+    useEffect( () => {
+        if(!pathusername) {
+            setPathusername(username)
+        }
+    }, [pathusername,username])
 
     useEffect(() => {
         if (username && Props.isLogged) {
@@ -28,13 +36,14 @@ function Profile(Props: FullProps) {
             ).catch(
                 (err) => {
                     if (err.response) {
+                        //Should never happen
                         console.log(err.response)
                         alert(err.response.data.message)
                     }
                 }
             )
         }
-    }, [Props.isLogged, username])
+    }, [Props.isLogged, username, pathusername])
 
 
     return (
@@ -69,10 +78,17 @@ function Profile(Props: FullProps) {
                         </div>
                         <div className="LowerPartWrapper">
                             <div className="CollectionsDisplay">
-                                <p>Collections will be here</p>
+                            <Typography variant="h4" style={{textAlign:"left", paddingLeft:"1vw", paddingBottom:"1vh"}}>{username}'s Collections</Typography>
+                                {
+                                    username && (
+                                        <ProfileCollectionDisplay
+                                        {...username}
+                                        />
+                                    )
+                                }
                             </div>
                             <div className="ReviewsDisplay">
-                                <Typography variant="h6" style={{textAlign:"left", paddingLeft:"1vw"}}>Recent reviews</Typography>
+                                <Typography variant="h5" style={{textAlign:"left", paddingLeft:"1vw", paddingBottom:"2vh"}}>Recent reviews</Typography>
                                 <ProfileReviewsDisplay/>
                             </div>
                         </div>

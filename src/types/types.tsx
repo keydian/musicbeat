@@ -24,6 +24,7 @@ export interface User {
 }
 
 export interface Song {
+    id : string,
     name : string,
     album: string,
     artist: string,
@@ -34,12 +35,14 @@ export interface Song {
 }
 
 export interface Album {
+    id : string,
     name: string,
     artist: string,
     image: string
 }
 
 export interface Jam {
+    id : string,
     name: string,
     host: string,
     participants: string[],
@@ -47,6 +50,7 @@ export interface Jam {
 }
 
 export interface Collection {
+    id : string,
     name: string,
     creator: string,
     songs: string[],
@@ -54,6 +58,7 @@ export interface Collection {
 }
 
 export interface Reviews {
+    id : string,
     title: string,
     author: string,
     song: string,

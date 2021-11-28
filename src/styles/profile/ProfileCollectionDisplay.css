@@ -1,0 +1,14 @@
+.collectionpic {
+    width:  150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+
+.GridWrapper {
+    border-radius: 25px;
+    background-color:  rgba(215, 223, 217, 0.377);
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    overflow: hidden;
+}

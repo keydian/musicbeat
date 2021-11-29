@@ -1,0 +1,11 @@
+.MyColTitleWrapper {
+    display: flex;
+    padding-left: 10vw;
+    padding-top: 2vh;
+}
+
+.CollectionsDisplayWrapper {
+    padding-top: 2vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}

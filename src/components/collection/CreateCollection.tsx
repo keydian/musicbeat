@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Modal, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { dispatch_to_props, state_to_props } from "../../redux/redux";
@@ -13,11 +13,14 @@ function CreateCollectionModal() {
     let navigate = useNavigate();
     const [createCol, setCreateCol] = useState<CreateCollection>({ name: "", description: "", imageUrl: "" })
     const [open, setOpen] = useState<boolean>(false)
+    const [opensnack, setOpensnack] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
 
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const handleCloseSnack = () => setOpensnack(false);
+
 
 
     const style = {
@@ -62,11 +65,12 @@ function CreateCollectionModal() {
                 res => {
                     console.log(res.data)
                     setCreateCol({ ...createCol, imageUrl: res.data })
+                    setOpensnack(true)
                 }
             ).catch(
                 err => {
                     event.target.files = null
-                    if(err.response) {
+                    if (err.response) {
                         console.log(err.response)
                     }
                 }
@@ -76,29 +80,29 @@ function CreateCollectionModal() {
 
 
     const canCreate = () => {
-        if(createCol.name === undefined || createCol.name.trim() === '') {
+        if (createCol.name === undefined || createCol.name.trim() === '') {
             return false;
         }
         return true;
     }
 
     const createColRequest = () => {
-       if(canCreate()) {
+        if (canCreate()) {
             createCollection(createCol).then(
                 res => {
                     console.log("Collection created")
-                    navigate("/collections")
+                    navigate("/mycollections")
                 }
             ).catch(
                 err => {
-                    if(err.response){
+                    if (err.response) {
                         console.log(err.response)
                     }
                 }
             )
-       } else {
-           setError(true)
-       }
+        } else {
+            setError(true)
+        }
     }
 
     return (
@@ -114,6 +118,12 @@ function CreateCollectionModal() {
                 open={open}
                 onClose={handleClose}
             >
+                <>
+                <Snackbar open={opensnack} autoHideDuration={3000} onClose={handleCloseSnack}>
+                    <Alert onClose={handleCloseSnack} severity="success" sx={{ width: '100%' }}>
+                        Image uploaded with success!
+                    </Alert>
+                </Snackbar>
                 <Box sx={style}>
                     <div className="BoxDiv">
                         <div className="UploadWrapper">
@@ -179,6 +189,7 @@ function CreateCollectionModal() {
                         </div>
                     </div>
                 </Box>
+                </>
             </Modal>
         </div>
     )

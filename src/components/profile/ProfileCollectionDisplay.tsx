@@ -64,7 +64,6 @@ function ProfileCollectionDisplay(username: string) {
                     }
                 )
             }
-
         }
     }, [collections])
 

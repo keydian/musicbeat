@@ -109,7 +109,8 @@ function Login(Props: FullProps) {
             <img
                 src={logoFolder + 'Musicbeat-logos_transparent.png'}
                 alt="musicbeat-logo"
-                className="musicbeatLogoBig"
+                className="musicbeatLogoBig  Clickable"
+                onClick={() => navigate("/")}
             >
             </img>
             <div className="LoginFormWrapper">

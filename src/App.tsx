@@ -17,6 +17,7 @@ import { Token } from './types/types';
 import { createTheme, ThemeProvider} from "@mui/material";
 import Profile from './components/profile/Profile';
 import MyCollections from './components/collection/MyCollections';
+import CollectionPage from './components/collection/CollectionPage';
 
 
 function App(Props: FullProps) {
@@ -55,6 +56,7 @@ function App(Props: FullProps) {
           <Route path="/home" element={<StartPage />} />
           <Route path="/profile/:username" element={<Profile/>} />
           <Route path="/mycollections" element={<MyCollections/>} />
+          <Route path="/collections/:collectionid" element={<CollectionPage/>} />
         </Routes>
       </main>
     </div></ThemeProvider>

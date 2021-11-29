@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import store, { logout, reset_token } from "../redux/redux";
-import { CreateCollection, LoginCreds, RegisterCreds } from "../types/types";
+import { CollectionFull, CreateCollection, LoginCreds, RegisterCreds } from "../types/types";
 
 //const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
 const url = "http://localhost:8080/rest/"
@@ -80,4 +80,8 @@ export async function uploadPicture(
 
 export async function createCollection(cc : CreateCollection) {
   return await axios.post(url.concat('collections'), cc)
+}
+
+export async function getFullCollection(collectionid: string) {
+  return await axios.get(url.concat(`collections/${collectionid}/full`))
 }

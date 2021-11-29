@@ -3,6 +3,15 @@ export interface Token {
     username: string
 }
 
+export interface CollectionFull {
+    id: string,
+    name: string,
+    description: string,
+    creator: string,
+    imageUrl: string,
+    songs: SongList[]
+}
+
 export interface CreateCollection {
     name: string,
     description: string,
@@ -27,6 +36,14 @@ export interface User {
     email: string,
     collections: string[],
     jams: string[]
+}
+
+export interface SongList {
+    id: string,
+    name: string,
+    album:string,
+    artist: string,
+    imageUrl: string
 }
 
 export interface Song {

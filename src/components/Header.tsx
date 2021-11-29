@@ -33,6 +33,7 @@ function Header(Props: FullProps) {
                         navigate('../')
                     }}
                     alt="musicbeat-logo"
+                    className="Clickable"
                 >
                 </img>
                 <Button size="large" variant="outlined" className="Button">
@@ -50,7 +51,7 @@ function Header(Props: FullProps) {
                 <Button variant="outlined" size="large" className="Button">
                     FAQ
                 </Button>
-                <Avatar className="Avatar" sx={{ marginTop: "1vw" }} />
+                <Avatar className={"Avatar Clickable"} sx={{ marginTop: "1vw" }} />
             </div>
 
         </div>

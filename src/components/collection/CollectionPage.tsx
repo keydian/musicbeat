@@ -188,7 +188,8 @@ function CollectionPage(Props: FullProps) {
                                         >{s.artist}</Typography>}/>
                                         <Typography
                                         sx={{color:"slategray"}}
-                                        >{s.album}</Typography>
+                                        >{s.album}
+                                        </Typography>
                                         <MoreHorizIcon fontSize="large" style={{marginLeft:"60%"}}/>
                                     </ListItem>
                                 ))}

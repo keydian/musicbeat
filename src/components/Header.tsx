@@ -51,7 +51,7 @@ function Header(Props: FullProps) {
                 <Button variant="outlined" size="large" className="Button">
                     FAQ
                 </Button>
-                <Avatar className={"Avatar Clickable"} sx={{ marginTop: "1vw" }} />
+                <Avatar className={"Avatar Clickable"} sx={{ marginTop: "1vw" }} onClick={()=> navigate('/profile/'+Props.username)}/>
             </div>
 
         </div>

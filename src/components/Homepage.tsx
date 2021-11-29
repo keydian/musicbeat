@@ -19,9 +19,6 @@ function Homepage(Props : FullProps) {
                <Button variant="contained" className="HomepageButton" onClick={()=>navigate('/register')}>
                     Register    
                </Button>
-               <Button onClick={()=>navigate('/profile/u1')}>
-                   Go to U1's Profile
-               </Button>
            </div>
         </div>
     )

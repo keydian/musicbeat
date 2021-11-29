@@ -5,8 +5,10 @@ import { getUserCollections } from "../../axios/axios";
 import { dispatch_to_props, state_to_props } from "../../redux/redux";
 import { Collection } from "../../types/types";
 import '../../styles/profile/ProfileCollectionDisplay.css'
+import { useNavigate } from "react-router";
 
 function ProfileCollectionDisplay(username: string) {
+    let navigate = useNavigate()
     const [collections, setCollections] = useState<Collection[]>()
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
     //For debug
@@ -84,14 +86,20 @@ function ProfileCollectionDisplay(username: string) {
                         rowSpacing={4}
                     >
                         {collections.map((col, i) => (
-                            <Grid id={col.id + i} item xs={4}>
+                            <Grid id={col.id + i} item xs={4} >
                                 <img
                                     src={colImg(col)}
                                     alt="collectionpic"
-                                    className="collectionpic"
+                                    className="collectionpic Clickable"
+                                    onClick={() => navigate("/collections/"+col.id)}
                                 >
                                 </img>
-                                <Typography variant="h6">{col.name}</Typography>
+                                <Typography 
+                                className="Clickable" 
+                                variant="h6"
+                                onClick={() => navigate("/collections/"+col.id)}
+                                >{col.name}
+                                </Typography>
                             </Grid>
                         ))}
                     </Grid>

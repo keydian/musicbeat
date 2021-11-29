@@ -7,12 +7,14 @@ import { Collection } from "../../types/types";
 import '../../styles/collection/MyCollectionsDisplay.css'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { useNavigate } from "react-router";
 
 function MyCollectionsDisplay(Props: FullProps) {
     const [collections, setCollections] = useState<Collection[]>()
     const [page, setPage] = useState<number>(0)
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
     const pageSize = 8;
+    let navigate = useNavigate()
 
     let c: Collection[] = [
         {
@@ -150,9 +152,16 @@ function MyCollectionsDisplay(Props: FullProps) {
                                                         src={colImg(col)}
                                                         alt="collectionpic"
                                                         className="mycollectionpic Clickable"
+                                                        onClick={() => navigate("/collections/"+col.id)}
                                                     >
                                                     </img>
-                                                    <Typography align="center" noWrap={true} className="mycolname Clickable" variant="h6">
+                                                    <Typography 
+                                                    align="center" 
+                                                    noWrap={true} 
+                                                    className="mycolname Clickable" 
+                                                    variant="h6"
+                                                    onClick={() => navigate("/collections/"+col.id)}
+                                                    >
                                                         {col.name}
                                                     </Typography>
                                                 </div>

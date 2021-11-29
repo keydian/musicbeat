@@ -44,7 +44,7 @@ function App(Props: FullProps) {
       <ThemeProvider theme={theme}>
     <div className="App">
       <main>
-        {location.pathname !== '/login' && location.pathname !== '/register' &&
+        {location.pathname !== '/login' && location.pathname !== '/register' && (location.pathname !== '/' || Props.isLogged) &&
           <Header />
         }
         <Routes>

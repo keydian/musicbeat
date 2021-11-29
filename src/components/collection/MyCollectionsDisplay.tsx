@@ -145,13 +145,17 @@ function MyCollectionsDisplay(Props: FullProps) {
                                     >
                                         {collections.map((col, i) => (
                                             <Grid id={col.id + i} item xs={3}>
-                                                <img
-                                                    src={colImg(col)}
-                                                    alt="collectionpic"
-                                                    className="mycollectionpic"
-                                                >
-                                                </img>
-                                                <Typography variant="h6">{col.name}</Typography>
+                                                <div className="GridItemDiv">
+                                                    <img
+                                                        src={colImg(col)}
+                                                        alt="collectionpic"
+                                                        className="mycollectionpic Clickable"
+                                                    >
+                                                    </img>
+                                                    <Typography align="center" noWrap={true} className="mycolname Clickable" variant="h6">
+                                                        {col.name}
+                                                    </Typography>
+                                                </div>
                                             </Grid>
                                         ))}
                                     </Grid>

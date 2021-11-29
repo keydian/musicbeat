@@ -25,7 +25,7 @@ function Header(Props: FullProps) {
     return (
         <div className="Header" style={{ display: 'inline' }}>
 
-            <div style={{ justifyContent: "space-evenly", display: "flex" }}>
+            <div style={{ justifyContent: "space-evenly", display: "flex", borderBottom:"3px ridge black", marginRight:"1vw",marginLeft:"1vw", alignItems:"center" }}>
                 <img
                     src={logoFolder + 'Musicbeat-logos_transparent.png'}
                     style={{ maxWidth: '5%', maxHeight: '5%', float: "left", marginTop: "0.5vw" }}

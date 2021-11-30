@@ -5,12 +5,13 @@ import { getSong } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { Song } from "../../types/types";
 import '../../styles/songs/SongPage.css'
-import { Typography } from "@mui/material";
+import { styled, Tab, Tabs, Typography } from "@mui/material";
 
 
 function SongPage(Props: FullProps) {
     const [song, setSong] = useState<Song>()
     const [imageUrl, setImageurl] = useState<string>()
+    const [tabval, setTabval] = useState<number>(0)
     let songId = useParams().songid;
     let navigate = useNavigate();
 
@@ -46,6 +47,58 @@ function SongPage(Props: FullProps) {
     }
 
 
+    //FOR TABS
+    interface StyledTabsProps {
+        children?: React.ReactNode;
+        value: number;
+        onChange: (event: React.SyntheticEvent, newValue: number) => void;
+    }
+
+    const StyledTabs = styled((props: StyledTabsProps) => (
+        <Tabs
+            {...props}
+            TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+        />
+    ))({
+        borderLeft:"1px solid black",
+        '& .MuiTabs-indicator': {
+            display: 'flex',
+            justifyContent: 'center',
+            backgroundColor: 'transparent',
+        },
+        '& .MuiTabs-indicatorSpan': {
+            maxWidth: "100%",
+            width: '100%',
+            backgroundColor: 'black',
+        },
+    });
+
+    interface StyledTabProps {
+        label: string;
+    }
+
+    const StyledTab = styled((props: StyledTabProps) => (
+        <Tab disableRipple {...props} />
+    ))(({ theme }) => ({
+        textTransform: 'none',
+        fontWeight: theme.typography.fontWeightRegular,
+        fontSize: theme.typography.pxToRem(20),
+        borderRight: '1px solid black',
+        width: '100%',
+        color: 'rgba(0, 0, 0, 1)',
+        '&.Mui-selected': {
+            color: '#683f68',
+            backgroundColor: "rgba(255, 255, 255, 0.3)"
+        },
+        '&.Mui-focusVisible': {
+            backgroundColor: 'rgba(100, 95, 228, 0.32)',
+        },
+    }));
+
+    const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+        setTabval(newValue);
+      };
+
 
     return (
         <div className="SongPageWrapper">
@@ -53,37 +106,64 @@ function SongPage(Props: FullProps) {
                 song && (
                     <>
                         <div className="SongPageUpper">
-                            <img
-                                src={imageUrl}
-                                alt="songimage-logo"
-                                className="songimage"
-                            >
-                            </img>
-                            <div className="SongInfo">
-                                <Typography variant="h4">{song.name}</Typography>
-                                <Typography
-                                    variant="subtitle1"
-                                    style={{ color: "rgb(52, 52, 52)" }}
-                                >by {song.artist}</Typography>
-                                <Typography
-                                    variant="subtitle1"
-                                    style={{ color: "rgb(52, 52, 52)" }}
-                                >from {song.album}</Typography>
-                                <Typography variant="h6">
-                                    {calcTimeMin(song.length)}:{calcTimeSec(song.length)} Min
-                                </Typography>
-                                <div style={{paddingTop:"30%"}}>
-                                    <Typography variant="h6">Genres</Typography>
-                                    <Typography variant="overline">{song.genres.join(', ')}</Typography>
+                            <div className="SongPageUpperMain">
+                                <img
+                                    src={imageUrl}
+                                    alt="songimage-logo"
+                                    className="songimage"
+                                >
+                                </img>
+                                <div className="SongInfo">
+                                    <Typography variant="h4">{song.name}</Typography>
+                                    <Typography
+                                        variant="subtitle1"
+                                        style={{ color: "rgb(52, 52, 52)" }}
+                                    >by {song.artist}</Typography>
+                                    <Typography
+                                        variant="subtitle1"
+                                        style={{ color: "rgb(52, 52, 52)" }}
+                                    >from {song.album}</Typography>
+                                    <Typography variant="h6">
+                                        {calcTimeMin(song.length)}:{calcTimeSec(song.length)} Min
+                                    </Typography>
+                                    <div style={{ paddingTop: "3%" }}>
+                                        <Typography variant="h6">Genres</Typography>
+                                        <Typography variant="overline">{song.genres.join(', ')}</Typography>
+                                    </div>
                                 </div>
-
+                                <div className="SongRates">
+                                    <Typography variant="h6">{song.rating.toFixed(1)}/10 Beats</Typography>
+                                    <Typography variant="subtitle1">{song.numRates} Ratings</Typography>
+                                </div>
                             </div>
-                            <div className="SongRates">
-
+                            <div className="SongPageUpperTabs">
+                                <StyledTabs
+                                    value={tabval}
+                                    onChange={handleTabChange}
+                                    aria-label="styled tabs example"
+                                >
+                                    <StyledTab label="Critics" />
+                                    <StyledTab label="Lyrics" />
+                                    <StyledTab label="Info" />
+                                </StyledTabs>
                             </div>
                         </div>
                         <div className="SongPageLower">
-
+                            {
+                                tabval === 0 && (
+                                    <p>Critics</p>
+                                )
+                            }
+                            {
+                                tabval === 1 && (
+                                    <p>Lyrics</p>
+                                )
+                            }
+                            {
+                                tabval === 2 && (
+                                    <p>Info</p>
+                                )
+                            }
                         </div>
                     </>
                 )

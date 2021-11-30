@@ -4,19 +4,22 @@
 }
 
 .SongPageUpper {
-    display: flex;
     width: 100%;
     height: 100%;
     background-color:  rgba(215, 223, 217, 0.377);
     padding-top: 2vh;
-    padding-bottom: 2vh;
+}
+
+.SongPageUpperMain {
+    display: flex;
 }
 
 .songimage {
     margin-left: 2vw !important;
-    max-width: 30vw !important;
-    max-height: 30vh !important;
+    max-width: 25vw !important;
+    max-height: 25vh !important;
     border-radius: 20px;
+    border: 1px solid black;
 }
 
 .SongInfo {
@@ -24,8 +27,18 @@
     text-align: left;
     padding: auto;
     height: 100%;
+    width: 70%;
 }
 
 .SongRates {
+    margin-left: auto;
+    margin-right: 2vw;
+    text-align: right;
+    width: 20%;
+}
 
+.SongPageUpperTabs {
+    width: 100%;
+    padding-top: 2vh;
+    padding-left: 2vw;
 }

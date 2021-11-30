@@ -54,7 +54,9 @@ export interface Song {
     length: number,
     info: string,
     genres: string[],
-    image: string
+    image: string,
+    rating: number,
+    numRates: number
 }
 
 export interface Album {

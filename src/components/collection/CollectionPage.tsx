@@ -181,7 +181,7 @@ function CollectionPage(Props: FullProps) {
                                                     primary={<Typography
                                                         className="Clickable"
                                                         variant="h6"
-                                                        onClick={() => navigate('/song/'+s.id)}>
+                                                        onClick={() => navigate('/songs/'+s.id)}>
                                                         {s.name}
                                                     </Typography>}
                                                     secondary={<Typography

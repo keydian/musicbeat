@@ -1,0 +1,31 @@
+.SongPageWrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.SongPageUpper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color:  rgba(215, 223, 217, 0.377);
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.songimage {
+    margin-left: 2vw !important;
+    max-width: 30vw !important;
+    max-height: 30vh !important;
+    border-radius: 20px;
+}
+
+.SongInfo {
+    margin-left: 2vw;
+    text-align: left;
+    padding: auto;
+    height: 100%;
+}
+
+.SongRates {
+
+}

@@ -93,3 +93,7 @@ export async function deleteSongFromCol(colid: string, songid : string) {
 export async function addSongToCol(colid: string, songid : string) {
   return await axios.put(url.concat(`collections/${colid}/songs/${songid}`))
 }
+
+export async function getSong(songid : string) {
+  return await axios.get(url.concat(`songs/${songid}`))
+}

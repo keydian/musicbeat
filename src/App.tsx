@@ -19,6 +19,7 @@ import Profile from './components/profile/Profile';
 import MyCollections from './components/collection/MyCollections';
 import CollectionPage from './components/collection/CollectionPage';
 import MusicPlayer from './components/MusicPlayer';
+import SongPage from './components/songs/SongPage';
 
 
 function App(Props: FullProps) {
@@ -58,6 +59,7 @@ function App(Props: FullProps) {
           <Route path="/profile/:username" element={<Profile/>} />
           <Route path="/mycollections" element={<MyCollections/>} />
           <Route path="/collections/:collectionid" element={<CollectionPage/>} />
+          <Route path="/songs/:songid" element={<SongPage/>} />
         </Routes>
         {location.pathname !== '/login' && location.pathname !== '/register' && (location.pathname !== '/' || Props.isLogged) &&
           <MusicPlayer/>

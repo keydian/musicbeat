@@ -3,16 +3,12 @@ import '../styles/MusicPlayer.css'
 
 function MusicPlayer () {
 
-    const songCover = process.env.PUBLIC_URL + "/musicPlayer/Singularity Cover Concept 3.jpg";
-    const song = process.env.PUBLIC_URL + "/musicPlayer/Cardossii & K-DN - Singularity.mp3"
-
-
     const audioList= [
         {
             name: "Singularity",
             singer: "K-DN",
-            cover: songCover,
-            musicSrc: song,
+            cover: process.env.PUBLIC_URL + "/musicPlayer/SingularityCoverConcept3.jpg",
+            musicSrc: process.env.PUBLIC_URL + "/musicPlayer/Cardossii & K-DN - Singularity.mp3",
         }
     ]
 
@@ -22,6 +18,7 @@ function MusicPlayer () {
             <ReactJkMusicPlayer
             getAudioInstance={(instance)=>{
             }}
+            autoHiddenCover={false}
             audioLists={audioList}
             mode="full"
             toggleMode = {false}

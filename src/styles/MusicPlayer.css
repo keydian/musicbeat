@@ -1062,7 +1062,7 @@
     background-repeat:no-repeat;
     background-size:100%;
     border-radius:50%;
-    box-shadow:0 0 10px rgba(0,34,77,.05);
+    box-shadow:0 0 10px rgba(0,34,77,.2);
     cursor:pointer;
     height:50px;
     overflow:hidden;
@@ -1076,9 +1076,6 @@
 }
 .react-jinke-music-player-main .music-player-panel .panel-content .img-content img{
     width:100%
-}
-.react-jinke-music-player-main .music-player-panel .panel-content .img-rotate{
-    animation:imgRotate 15s linear infinite
 }
 .react-jinke-music-player-main .music-player-panel .panel-content .hide-panel,.react-jinke-music-player-main .music-player-panel .panel-content .upload-music{
     cursor:pointer;
@@ -1233,7 +1230,7 @@
     font-size:28px
 }
 .react-jinke-music-player-main .music-player-panel .panel-content .player-content .audio-lists-btn{
-    background-color:rgba(0,0,0,.3);
+    background-color:rgb(210, 216, 255);
     border-radius:40px;
     box-shadow:0 0 1px 1px hsla(0,0%,100%,.02);
     height:28px;

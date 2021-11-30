@@ -60,7 +60,7 @@ function Login(Props: FullProps) {
                     })
                     localStorage.setItem("token", tkn);
                     setSnacksuc(true)
-                    navigate("/")
+                    navigate("/home")
                 }
             ).catch(
                 (err) => {

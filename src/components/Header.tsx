@@ -30,7 +30,11 @@ function Header(Props: FullProps) {
                     src={logoFolder + 'Musicbeat-logos_transparent.png'}
                     style={{ maxWidth: '5%', maxHeight: '5%', float: "left", marginTop: "0.5vw" }}
                     onClick={() => {
-                        navigate('../')
+                        if (Props.isLogged){
+                            navigate('../home')
+                        }
+                        else navigate('../')
+                       
                     }}
                     alt="musicbeat-logo"
                     className="Clickable"

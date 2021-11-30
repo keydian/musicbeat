@@ -18,6 +18,7 @@ function MusicPlayer () {
             <ReactJkMusicPlayer
             getAudioInstance={(instance)=>{
             }}
+            autoPlay ={false}
             autoHiddenCover={false}
             audioLists={audioList}
             mode="full"

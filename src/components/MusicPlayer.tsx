@@ -22,7 +22,6 @@ function MusicPlayer () {
             autoHiddenCover={false}
             audioLists={audioList}
             mode="full"
-            toggleMode = {false}
             showThemeSwitch ={false}
             showDownload = {false}
             remove={false}

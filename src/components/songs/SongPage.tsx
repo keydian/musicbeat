@@ -7,6 +7,7 @@ import { Song } from "../../types/types";
 import '../../styles/songs/SongPage.css'
 import { styled, Tab, Tabs, Typography } from "@mui/material";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import SongTabDisplay from "./SongTabDisplay";
 
 
 function SongPage(Props: FullProps) {
@@ -125,7 +126,7 @@ function SongPage(Props: FullProps) {
                                         style={{ color: "rgb(52, 52, 52)" }}
                                     >from {song.album}</Typography>
                                     <div style={{ display: "flex", alignItems: "center" }}>
-                                        <PlayArrowIcon fontSize="large" style={{border:"1px solid black", borderRadius:"50%",marginRight:"10px"}}/>
+                                        <PlayArrowIcon fontSize="large" style={{ border: "1px solid black", borderRadius: "50%", marginRight: "10px" }} />
                                         <Typography variant="h6">
                                             {calcTimeMin(song.length)}:{calcTimeSec(song.length)} Min
                                         </Typography>
@@ -154,21 +155,13 @@ function SongPage(Props: FullProps) {
                             </div>
                         </div>
                         <div className="SongPageLower">
-                            {
-                                tabval === 0 && (
-                                    <p>Critics</p>
-                                )
-                            }
-                            {
-                                tabval === 1 && (
-                                    <p>Lyrics</p>
-                                )
-                            }
-                            {
-                                tabval === 2 && (
-                                    <p>Info</p>
-                                )
-                            }
+                            <div className="SongPageLowerLeft">
+                                <SongTabDisplay song={song} tabval={tabval} />
+                            </div>
+                            <div className="SongPageLowerRight">
+
+                            </div>
+
                         </div>
                     </>
                 )

@@ -6,6 +6,7 @@ import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux"
 import { Song } from "../../types/types";
 import '../../styles/songs/SongPage.css'
 import { styled, Tab, Tabs, Typography } from "@mui/material";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 
 function SongPage(Props: FullProps) {
@@ -60,7 +61,7 @@ function SongPage(Props: FullProps) {
             TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
         />
     ))({
-        borderLeft:"1px solid black",
+        borderLeft: "1px solid black",
         '& .MuiTabs-indicator': {
             display: 'flex',
             justifyContent: 'center',
@@ -97,7 +98,7 @@ function SongPage(Props: FullProps) {
 
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
         setTabval(newValue);
-      };
+    };
 
 
     return (
@@ -123,9 +124,13 @@ function SongPage(Props: FullProps) {
                                         variant="subtitle1"
                                         style={{ color: "rgb(52, 52, 52)" }}
                                     >from {song.album}</Typography>
-                                    <Typography variant="h6">
-                                        {calcTimeMin(song.length)}:{calcTimeSec(song.length)} Min
-                                    </Typography>
+                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                        <PlayArrowIcon fontSize="large" style={{border:"1px solid black", borderRadius:"50%",marginRight:"10px"}}/>
+                                        <Typography variant="h6">
+                                            {calcTimeMin(song.length)}:{calcTimeSec(song.length)} Min
+                                        </Typography>
+                                    </div>
+
                                     <div style={{ paddingTop: "3%" }}>
                                         <Typography variant="h6">Genres</Typography>
                                         <Typography variant="overline">{song.genres.join(', ')}</Typography>

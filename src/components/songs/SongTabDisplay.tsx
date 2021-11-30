@@ -48,7 +48,7 @@ function SongTabDisplay(props: SongTabDisplayInt) {
                                                         <Typography variant="h6">{r.title}</Typography>
                                                         <Typography
                                                             variant="subtitle1"
-                                                            style={{ color: "rgb(52, 52, 52)" }}
+                                                            style={{ color: "rgba(52, 52, 52, 0.8)" }}
                                                         >by {r.author}</Typography>
                                                     </div>
                                                     <Typography
@@ -73,14 +73,23 @@ function SongTabDisplay(props: SongTabDisplayInt) {
             {
                 props.tabval === 1 && (
                     <div className="LyricsAndInfoDisplay">
-                        <Typography variant="h6">Not implemented yet.</Typography>
+                        {
+                            (props.song.lyrics !== undefined && props.song.lyrics.trim() !== '') ? (
+                                <>
+                                    <Typography gutterBottom={true} variant="h6">Lyrics:</Typography>
+                                    <Typography variant="body1">{props.song.lyrics}</Typography>
+                                </>
+                            ) : (
+                                <Typography variant="h6">No lyrics for this song yet!</Typography>
+                            )
+                        }
                     </div>
                 )
             }
             {
                 props.tabval === 2 && (
                     <div className="LyricsAndInfoDisplay">
-                        <Typography variant="body1">{props.song.info}</Typography>
+                        <Typography style={{textAlign:"left"}} variant="body1">{props.song.info}</Typography>
                     </div>
                 )
             }

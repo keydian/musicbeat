@@ -8,6 +8,7 @@ import '../../styles/songs/SongPage.css'
 import { styled, Tab, Tabs, Typography } from "@mui/material";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SongTabDisplay from "./SongTabDisplay";
+import SmallJamDisplay from "./SmallJamDisplay";
 
 
 function SongPage(Props: FullProps) {
@@ -124,6 +125,8 @@ function SongPage(Props: FullProps) {
                                     <Typography
                                         variant="subtitle1"
                                         style={{ color: "rgb(52, 52, 52)" }}
+                                        className="Clickable"
+                                        onClick={() => navigate('/albums/'+song.album)}
                                     >from {song.album}</Typography>
                                     <div style={{ display: "flex", alignItems: "center" }}>
                                         <PlayArrowIcon fontSize="large" style={{ border: "1px solid black", borderRadius: "50%", marginRight: "10px" }} />
@@ -159,9 +162,9 @@ function SongPage(Props: FullProps) {
                                 <SongTabDisplay song={song} tabval={tabval} />
                             </div>
                             <div className="SongPageLowerRight">
-
+                                <Typography variant="h6">Currently playing in jams</Typography>
+                                <SmallJamDisplay songId={song.id}/>
                             </div>
-
                         </div>
                     </>
                 )

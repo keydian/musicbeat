@@ -45,12 +45,18 @@
     padding-left: 2vw;
 }
 
+.SongPageLower {
+    display: flex;
+}
+
 .SongPageLowerLeft {
     height: 100%;
     width: 70%;
+    border-right: 1px solid black;
 }
 
 .SongPageLowerRight {
     height: 100%;
     width: 30%;
+    padding-top: 2vh;
 }

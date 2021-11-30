@@ -56,7 +56,8 @@ export interface Song {
     genres: string[],
     image: string,
     rating: number,
-    numRates: number
+    numRates: number,
+    lyrics: string
 }
 
 export interface Album {
@@ -71,7 +72,8 @@ export interface Jam {
     name: string,
     host: string,
     participants: string[],
-    playlist: string[]
+    playlist: string[],
+    imageUrl: string,
 }
 
 export interface Collection {

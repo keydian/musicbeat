@@ -1,7 +1,6 @@
 .SongTabDisplayWrapper {
-    margin-left: 1vw;
-    margin-right: 1vw;
-    margin-top: 3vh;
+    padding-left: 1vw;
+    padding-top: 3vh;
     height: 100%;
     width: 100%;
     border-radius: 25px;
@@ -12,8 +11,10 @@
     padding-right: 1vw;
     padding-top: 1vh;
     padding-bottom: 1vh;
-    text-align: left;
-    min-height: 100%;
+    height: 100%;
+    width: 90%;
+    background-color:  rgba(215, 223, 217, 0.377);
+    border-radius: 25px;
 }
 
 .CriticsDisplay {
@@ -27,7 +28,7 @@
 
 .ReviewWrapper{
     height: 100%;
-    width: 100%;
+    width: 90%;
     background-color:  rgba(215, 223, 217, 0.377);
     border-radius: 25px;
     padding-left: 1vw;
@@ -43,13 +44,14 @@
 
 .ReviewAuthorTitle {
     text-align: left;
-
 }
 
 .ReviewContentWrapper {
+    text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    color: rgb(32, 32, 32);
 }

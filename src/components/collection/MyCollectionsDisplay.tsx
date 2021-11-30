@@ -57,9 +57,6 @@ function MyCollectionsDisplay(Props: FullProps) {
         }
     }
 
-    useEffect(() => {
-        console.log(page)
-    }, [page])
 
     return (
         <div className="MyColGridWrapper">

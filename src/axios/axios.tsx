@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import store, { logout, reset_token } from "../redux/redux";
-import { CollectionFull, CreateCollection, LoginCreds, RegisterCreds } from "../types/types";
+import { CreateCollection, LoginCreds, RegisterCreds } from "../types/types";
 
-const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
+//const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
+const url = "http://localhost:8080/rest/"
 
 axios.interceptors.request.use(
   function (config: AxiosRequestConfig) {
@@ -83,4 +84,12 @@ export async function createCollection(cc : CreateCollection) {
 
 export async function getFullCollection(collectionid: string) {
   return await axios.get(url.concat(`collections/${collectionid}/full`))
+}
+
+export async function deleteSongFromCol(colid: string, songid : string) {
+  return await axios.delete(url.concat(`collections/${colid}/songs/${songid}`))
+}
+
+export async function addSongToCol(colid: string, songid : string) {
+  return await axios.put(url.concat(`collections/${colid}/songs/${songid}`))
 }

@@ -1,87 +1,31 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { getFullCollection } from "../../axios/axios";
+import { deleteSongFromCol, getFullCollection } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
-import { CollectionFull, SongList } from "../../types/types";
+import { CollectionFull } from "../../types/types";
 import '../../styles/collection/CollectionPage.css'
-import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { Alert, List, ListItem, ListItemIcon, ListItemText, Snackbar, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function CollectionPage(Props: FullProps) {
     let collectionid = useParams().collectionid;
     let navigate = useNavigate();
     const [collection, setCollection] = useState<CollectionFull>()
+    const [sucSnack, setSucsnack] = useState<boolean>(false)
+    const [errSnack, setErrsnack] = useState<boolean>(false)
 
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-    const songs = [
-        {
-            id: "0",
-            name: "Song 1",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "1",
-            name: "Song 2",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "2",
-            name: "Song 3",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "3",
-            name: "Song 4",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "4",
-            name: "Song 5",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "5",
-            name: "Song 6",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "6",
-            name: "Song 7",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "7",
-            name: "Song 8",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "8",
-            name: "Song 9",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        },
-        {
-            id: "9",
-            name: "Song 10",
-            artist: "ArtistHere",
-            album: "AlbumHere"
-        }
-    ]
 
     useEffect(() => {
+        getFullCollectionRequest()
+    }, [Props.isLogged, collectionid])
+
+    const getFullCollectionRequest = () => {
         if (collectionid && Props.isLogged) {
             getFullCollection(collectionid).then(
                 res => {
@@ -96,7 +40,7 @@ function CollectionPage(Props: FullProps) {
                 }
             )
         }
-    }, [Props.isLogged, collectionid])
+    }
 
     const descCheck = () => {
         if (collection) {
@@ -107,16 +51,66 @@ function CollectionPage(Props: FullProps) {
         }
         return false
     }
-//rgb(149, 162, 241);
-//rgba(221, 221, 221, 0.486)
+
+    const delSong = (songid: string) => {
+        if (collectionid) {
+            deleteSongFromCol(collectionid, songid).then(
+                res => {
+                    setSucsnack(true)
+                    getFullCollectionRequest()
+                }
+            ).catch(
+                err => {
+                    setErrsnack(true)
+                    if(err.response) {
+                        console.log(err.response)
+                    }
+                }
+            )
+        }
+    }
+
+    const colImg = (colimage: string) => {
+        if (colimage !== undefined && colimage.trim() !== '') {
+            return colimage
+        }
+        return defaultImg
+    }
+
+    const handleCloseSuc = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSucsnack(false);
+    };
+
+    const handleCloseErr = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setErrsnack(false);
+    };
+
+
     return (
         <div className="CollectionPageWrapper">
             {
                 collection && (
                     <>
+                        <Snackbar open={sucSnack} autoHideDuration={2500} onClose={handleCloseSuc}>
+                            <Alert  variant="filled" onClose={handleCloseSuc} severity="success" sx={{ width: '100%' }}>
+                                Song deleted!
+                            </Alert>
+                        </Snackbar>
+                        <Snackbar open={errSnack} autoHideDuration={2500} onClose={handleCloseErr}>
+                            <Alert  variant="filled" onClose={handleCloseErr} severity="error" sx={{ width: '100%' }}>
+                                Erro! Could not delete song!
+                            </Alert>
+                        </Snackbar>
                         <div className="ColPageUpper">
                             <img
-                                src={collection.imageUrl}
+                                src={colImg(collection.imageUrl)}
                                 alt="collectionimage-logo"
                                 className="collectionimage"
                             >
@@ -151,49 +145,68 @@ function CollectionPage(Props: FullProps) {
                                 <Typography variant="h6">{collection.songs.length} songs</Typography>
                             </div>
                             <div className="CollectionShare">
-                                <TwitterIcon fontSize="large" style={{ color: "rgb(60, 140, 255)", paddingBottom:"3vh" }} />
-                                <FacebookIcon fontSize="large" style={{ color: "rgb(34, 62, 248)", paddingBottom:"3vh"  }} />
+                                <TwitterIcon fontSize="large" style={{ color: "rgb(60, 140, 255)", paddingBottom: "3vh" }} />
+                                <FacebookIcon fontSize="large" style={{ color: "rgb(34, 62, 248)", paddingBottom: "3vh" }} />
                                 <InstagramIcon fontSize="large" style={{ color: "rgb(255, 51, 0)" }} />
                             </div>
                         </div>
                         <div className="ColPageLower">
-                            <Typography align="left" variant="h4">Your beats, right here</Typography>
-                            <List
-                                sx={{
-                                    width: '100%',
-                                    bgcolor: 'rgba(255, 255, 255, 0.637)',
-                                    position: 'relative',
-                                    alignItems: 'center',
-                                    maxHeight: 350,
-                                    borderRadius: '25px 0px 0px 25px',
-                                    overflow: 'auto',
-                                    border: '1px solid black'
-                                }}
-                            >
-                                {songs.map((s, i) => (
-                                    <ListItem className="SongListItem" key={`item-${i}-${s.name}`}>
-                                        <ListItemIcon>
-                                            <img
-                                                src={defaultImg}
-                                                alt="songlistimage-logo"
-                                                className="songlistimage"
-                                            >
-                                            </img>
-                                        </ListItemIcon>
-                                        <ListItemText sx={{fontSize:"20px"}}
-                                        disableTypography={true}
-                                        primary={<Typography variant="h6">{s.name}</Typography>} 
-                                        secondary={<Typography 
-                                        variant="subtitle1"
-                                        >{s.artist}</Typography>}/>
-                                        <Typography
-                                        sx={{color:"slategray"}}
-                                        >{s.album}
-                                        </Typography>
-                                        <MoreHorizIcon fontSize="large" style={{marginLeft:"60%"}}/>
-                                    </ListItem>
-                                ))}
-                            </List>
+                            {collection.songs.length > 0 ? (
+                                <>
+                                    <Typography align="left" variant="h4">Your beats, right here</Typography>
+                                    <List
+                                        sx={{
+                                            width: '100%',
+                                            bgcolor: 'rgba(255, 255, 255, 0.637)',
+                                            position: 'relative',
+                                            alignItems: 'center',
+                                            maxHeight: 350,
+                                            borderRadius: '25px 0px 0px 25px',
+                                            overflow: 'auto',
+                                            border: '1px solid black'
+                                        }}
+                                    >
+                                        {collection.songs.map((s, i) => (
+                                            <ListItem className="SongListItem" key={`item-${i}-${s.name}`}>
+                                                <ListItemIcon>
+                                                    <img
+                                                        src={s.imageUrl}
+                                                        alt="songlistimage-logo"
+                                                        className="songlistimage Clickable"
+                                                    >
+                                                    </img>
+                                                </ListItemIcon>
+                                                <ListItemText sx={{ fontSize: "20px" }}
+                                                    disableTypography={true}
+                                                    primary={<Typography
+                                                        className="Clickable"
+                                                        variant="h6"
+                                                        onClick={() => navigate('/song/'+s.id)}>
+                                                        {s.name}
+                                                    </Typography>}
+                                                    secondary={<Typography
+                                                        variant="subtitle1"
+                                                    >
+                                                        {s.artist}
+                                                    </Typography>}
+                                                />
+                                                <Typography
+                                                    sx={{ color: "slategray" }}
+                                                    className="Clickable"
+                                                    onClick={() => navigate('/album/'+s.album)}
+                                                >{s.album}
+                                                </Typography>
+                                                <DeleteIcon onClick={() => delSong(s.id)}className="Clickable" fontSize="large" style={{ marginLeft: "60%" }} />
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                </>
+                            ) : (
+                                <>
+                                    <Typography variant="h2">No songs yet :(</Typography>
+                                </>
+                            )}
+
                         </div>
                     </>
                 )

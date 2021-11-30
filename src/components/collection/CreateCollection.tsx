@@ -1,5 +1,5 @@
 import { Alert, Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from "@mui/material";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { connect } from "react-redux";
 import { dispatch_to_props, state_to_props } from "../../redux/redux";
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp';
@@ -18,7 +18,12 @@ function CreateCollectionModal() {
 
 
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setCreateCol({ name: "", description: "", imageUrl: "" })
+        setError(false)
+        setOpensnack(false)
+    }
     const handleCloseSnack = () => setOpensnack(false);
 
 
@@ -119,76 +124,88 @@ function CreateCollectionModal() {
                 onClose={handleClose}
             >
                 <>
-                <Snackbar open={opensnack} autoHideDuration={3000} onClose={handleCloseSnack}>
-                    <Alert onClose={handleCloseSnack} severity="success" sx={{ width: '100%' }}>
-                        Image uploaded with success!
-                    </Alert>
-                </Snackbar>
-                <Box sx={style}>
-                    <div className="BoxDiv">
-                        <div className="UploadWrapper">
-                            <input
-                                id="file"
-                                name="file"
-                                style={{ display: 'none' }}
-                                type="file"
-                                accept="image/*"
-                                onChange={uploadFile}
-                            ></input>
-                            <label htmlFor="file">
+                    <Snackbar open={opensnack} autoHideDuration={3000} onClose={handleCloseSnack}>
+                        <Alert onClose={handleCloseSnack} severity="success" sx={{ width: '100%' }}>
+                            Image uploaded with success!
+                        </Alert>
+                    </Snackbar>
+                    <Box sx={style}>
+                        <div className="BoxDiv">
+                            <div className="UploadWrapper">
+                                <input
+                                    id="file"
+                                    name="file"
+                                    style={{ display: 'none' }}
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={uploadFile}
+                                ></input>
+                                <label htmlFor="file">
+                            {
+                                createCol.imageUrl !== '' && createCol.imageUrl !== undefined && (
+                                <>
+                                <img
+                                src={createCol.imageUrl}
+                                alt="collectionpic"
+                                className="mycollectionpic"
+                                >
+                                    </img>
+                                </>
+                            )
+                                    }
                                 <Typography variant="h6">Upload Here</Typography>
                                 <IconButton aria-label="Upload Picture" component="span">
-                                    <ImageIcon fontSize="large" />
+                                <ImageIcon fontSize="large" />
                                 </IconButton>
-                            </label>
+                                </label>
 
-                        </div>
-                        <div className="InputWrapper">
-                            <Typography variant="h6">Your collection's name</Typography>
-                            <TextField
-                                required
-                                error={error}
-                                id="createcolname"
-                                className="CreatColInput"
-                                label="Collection name"
-                                variant="filled"
-                                onChange={(e) => {
-                                    changeCreateCol(e)
-                                }} />
-                            <Typography variant="h6">Your collection's description</Typography>
-                            <TextField
-                                required
-                                error={error}
-                                id="createcoldescription"
-                                className="CreatColInput"
-                                label="Description"
-                                variant="filled"
-                                onChange={(e) => {
-                                    changeCreateCol(e)
-                                }}
-                            />
-                            <div className="InputButtonsWrapper">
-                                <Button
-                                    className="CreateColInputButton"
-                                    variant="outlined"
-                                    color="error"
-                                    disableElevation={true}
-                                    onClick={handleClose}
-                                >
-                                    <Typography variant="button">Cancel</Typography>
-                                </Button>
-                                <Button
-                                    className="CreateColInputButton"
-                                    variant="contained"
-                                    onClick={createColRequest}
-                                    style={{ backgroundColor: "rgba(215, 223, 217, 0.377)", color: "black", border: "1px solid black" }}
-                                >
-                                    <Typography variant="button">Create</Typography>
-                                </Button>
+                            </div>
+                            <div className="InputWrapper">
+                                <Typography variant="h6">Your collection's name</Typography>
+                                <TextField
+                                    required
+                                    error={error}
+                                    id="createcolname"
+                                    className="CreatColInput"
+                                    label="Collection name"
+                                    variant="filled"
+                                    onChange={(e) => {
+                                        changeCreateCol(e)
+                                    }} />
+                                <Typography variant="h6">Your collection's description</Typography>
+                                <TextField
+                                    required
+                                    error={error}
+                                    id="createcoldescription"
+                                    className="CreatColInput"
+                                    label="Description"
+                                    variant="filled"
+                                    onChange={(e) => {
+                                        changeCreateCol(e)
+                                    }}
+                                />
+                                <div className="InputButtonsWrapper">
+                                    <Button
+                                        className="CreateColInputButton"
+                                        variant="outlined"
+                                        color="error"
+                                        disableElevation={true}
+                                        onClick={handleClose}
+                                    >
+                                        <Typography variant="button">Cancel</Typography>
+                                    </Button>
+                                    <Button
+                                        className="CreateColInputButton"
+                                        variant="contained"
+                                        onClick={createColRequest}
+                                        style={{ backgroundColor: "rgba(215, 223, 217, 0.377)", color: "black", border: "1px solid black" }}
+                                    >
+                                        <Typography variant="button">Create</Typography>
+                                    </Button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </Box>
+                    </Box>
                 </>
             </Modal>
         </div>

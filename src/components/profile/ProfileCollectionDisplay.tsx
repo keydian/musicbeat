@@ -86,7 +86,7 @@ function ProfileCollectionDisplay(username: string) {
                         rowSpacing={4}
                     >
                         {collections.map((col, i) => (
-                            <Grid id={col.id + i} item xs={4} >
+                            <Grid className="GridItemDiv" id={col.id + i} item xs={4} >
                                 <img
                                     src={colImg(col)}
                                     alt="collectionpic"
@@ -95,7 +95,7 @@ function ProfileCollectionDisplay(username: string) {
                                 >
                                 </img>
                                 <Typography 
-                                className="Clickable" 
+                                className="mycolname Clickable" 
                                 variant="h6"
                                 onClick={() => navigate("/collections/"+col.id)}
                                 >{col.name}

@@ -84,7 +84,7 @@ function MyCollectionsDisplay(Props: FullProps) {
     ]
 
     useEffect(() => {
-        console.log("Trying to retrieve collections", c)
+        console.log("Trying to retrieve collections", collections)
         if (Props.isLogged && page >= 0) {
             if (Props.username) {
                 console.log("Retrieving collections")

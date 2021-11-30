@@ -21,18 +21,19 @@
     width: 10%;
 }
 
+
+.GridItemDiv {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .mycollectionpic {
     width:  180px;
     height: 180px;
     object-fit: cover;
     border-radius: 20%;
     border: 1px solid black;
-}
-
-.GridItemDiv {
-    position: relative;
-    width: 100%;
-    height: 100%;
 }
 
 .mycolname {

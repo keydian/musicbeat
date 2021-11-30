@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import '../../styles/collection/MyCollections.css'
+import CreateCollection from "./CreateCollection";
 import MyCollectionsDisplay from "./MyCollectionsDisplay";
 
 
@@ -13,10 +14,13 @@ function MyCollections(Props: FullProps) {
         <div className="MyCollectionsWrapper">
             <div className="MyColTitleWrapper">
                 <Typography variant="h4">My Collections</Typography>
+                <div style={{ paddingTop: "10px", paddingLeft: "2vw" }}>
+                    <CreateCollection />
+                </div>
             </div>
             <div className="CollectionsDisplayWrapper">
-                <MyCollectionsDisplay {...Props}/>
-            </div>    
+                <MyCollectionsDisplay {...Props} />
+            </div>
         </div>
     )
 }

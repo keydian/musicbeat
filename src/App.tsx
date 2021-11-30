@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider} from "@mui/material";
 import Profile from './components/profile/Profile';
 import MyCollections from './components/collection/MyCollections';
 import CollectionPage from './components/collection/CollectionPage';
+import MusicPlayer from './components/MusicPlayer';
 
 
 function App(Props: FullProps) {
@@ -58,6 +59,9 @@ function App(Props: FullProps) {
           <Route path="/mycollections" element={<MyCollections/>} />
           <Route path="/collections/:collectionid" element={<CollectionPage/>} />
         </Routes>
+        {location.pathname !== '/login' && location.pathname !== '/register' && (location.pathname !== '/' || Props.isLogged) &&
+          <MusicPlayer/>
+        }
       </main>
     </div></ThemeProvider>
   );

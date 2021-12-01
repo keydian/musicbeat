@@ -1,0 +1,16 @@
+.JamPageWrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.JamPageHeader {
+    height: 100%;
+    width: 100%;
+    text-align: left;
+}
+
+.JamDisplayWrapper {
+    height: 100%;
+    width: 100%;
+    background-color:  rgba(215, 223, 217, 0.377);
+}

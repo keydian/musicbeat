@@ -20,6 +20,7 @@ import MyCollections from './components/collection/MyCollections';
 import CollectionPage from './components/collection/CollectionPage';
 import MusicPlayer from './components/MusicPlayer';
 import SongPage from './components/songs/SongPage';
+import JamsPage from './components/jams/JamsPage';
 
 
 function App(Props: FullProps) {
@@ -56,6 +57,7 @@ function App(Props: FullProps) {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<StartPage />} />
+            <Route path="/jams" element={<JamsPage />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/collections/:username" element={<MyCollections />} />
             <Route path="/collections/:collectionid" element={<CollectionPage />} />

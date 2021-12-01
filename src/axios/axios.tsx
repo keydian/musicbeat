@@ -97,3 +97,15 @@ export async function addSongToCol(colid: string, songid : string) {
 export async function getSong(songid : string) {
   return await axios.get(url.concat(`songs/${songid}`))
 }
+
+export async function searchJams(
+  pageNum : number,
+  pageSize : number
+) {
+  return await axios.get(url.concat(`jams/search`), {
+    params: {
+      pageNum : pageNum,
+      size : pageSize
+    }
+  })
+}

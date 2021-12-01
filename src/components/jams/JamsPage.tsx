@@ -6,8 +6,11 @@ function JamsPage(Props : FullProps) {
 
 
     return (
-        <div>
-
+        <div className="JamPageWrapper">
+            <div className="JamPageHeader">
+            </div>
+            <div className="JamDisplayWrapper">
+            </div>  
         </div>
     )
 }

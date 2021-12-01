@@ -60,6 +60,13 @@ export interface Song {
     lyrics: string
 }
 
+export interface SongMinimal {
+    id: string,
+    name: string,
+    artist: string,
+    imageUrl: string
+}
+
 export interface Album {
     id : string,
     name: string,
@@ -74,6 +81,16 @@ export interface Jam {
     participants: string[],
     playlist: string[],
     imageUrl: string,
+}
+
+export interface JamWithSong {
+    id : string,
+    name: string,
+    host: string,
+    participants: string[],
+    playlist: string[],
+    imageUrl: string,
+    firstSong : SongMinimal
 }
 
 export interface Collection {

@@ -170,7 +170,7 @@ function JamsPageDisplay(Props: JamPageInterface) {
                                                             onClick={() => navigate("/jam/" + j.id)}
                                                         >
                                                         </img>
-                                                        <div className="JamImgOverview Clickable">
+                                                        <div className="JamImgOverview">
                                                             <div style={{
                                                                 display: "flex",
                                                                 alignItems: "center",
@@ -195,6 +195,7 @@ function JamsPageDisplay(Props: JamPageInterface) {
                                                                 variant="contained"
                                                                 startIcon={<SendIcon />}
                                                                 style={{ backgroundColor: "rgb(106, 90, 205)", color: "white", borderRadius: "20px" }}
+                                                                onClick={() => navigate("/join/"+j.id)}
                                                             >
                                                                 Join
                                                             </Button>
@@ -205,8 +206,7 @@ function JamsPageDisplay(Props: JamPageInterface) {
                                         ))}
                                     </Grid>
                                 ) : (
-                                    <>
-                                    </>
+                                    <Typography variant="h3">No one jamming at the moment...</Typography>
                                 )
                             }
                         </div>

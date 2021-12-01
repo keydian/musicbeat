@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import { dispatch_to_props, state_to_props } from "../redux/redux";
 import '../styles/Register.css'
-import { Alert, Button, Snackbar, TextField } from "@mui/material";
+import { Alert, Button, Snackbar, TextField, Typography } from "@mui/material";
 import { RegisterCreds } from "../types/types";
 import { registerUser } from "../axios/axios";
 
@@ -45,6 +45,11 @@ function Register() {
         switch (id) {
             case "username":
                 setRegister({ ...register, username: value });
+                if(value.length > 10) {
+                    setError(true)
+                } else {
+                    setError(false)
+                }
                 break;
             case "email":
                 setRegister({ ...register, email: value });
@@ -99,6 +104,7 @@ function Register() {
         }
     }, [errMsg])
 
+
     return (
         <div className="RegisterWrapper">
             <Snackbar open={snackSuc} autoHideDuration={3000} onClose={handleCloseSuc}>
@@ -124,6 +130,7 @@ function Register() {
                         className="RegisterInput"
                         required
                         error={error}
+                        helperText="Maximum 10 characters!"
                         id="username"
                         label="Username"
                         variant="filled"

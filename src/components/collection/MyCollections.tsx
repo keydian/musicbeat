@@ -1,26 +1,37 @@
 import { Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import '../../styles/collection/MyCollections.css'
-import CreateCollection from "./CreateCollection";
 import MyCollectionsDisplay from "./MyCollectionsDisplay";
 
 
 function MyCollections(Props: FullProps) {
     let navigate = useNavigate()
+    let usernamePath = useParams().username
+    const [username, setUsername] = useState<string>('')
+
+    useEffect(() => {
+        if(usernamePath && (username === undefined || username.trim() === '' || username !== usernamePath)) {
+            setUsername(usernamePath)
+        }
+    }, [username, usernamePath])
 
     return (
         <div className="MyCollectionsWrapper">
-            <div className="MyColTitleWrapper">
-                <Typography variant="h4">My Collections</Typography>
-                <div style={{ paddingTop: "10px", paddingLeft: "2vw" }}>
-                    <CreateCollection />
-                </div>
-            </div>
-            <div className="CollectionsDisplayWrapper">
-                <MyCollectionsDisplay {...Props} />
-            </div>
+            {
+                username && (
+                    <>
+                        <div className="MyColTitleWrapper">
+                            <Typography variant="h4">{username} Collections</Typography>
+                        </div>
+                        <div className="CollectionsDisplayWrapper">
+                            <MyCollectionsDisplay fProps={Props} targetUser={username} />
+                        </div>
+                    </>
+                )
+            }
         </div>
     )
 }

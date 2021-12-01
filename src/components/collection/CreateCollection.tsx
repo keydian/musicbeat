@@ -8,8 +8,13 @@ import { CreateCollection } from "../../types/types";
 import ImageIcon from '@mui/icons-material/Image';
 import { createCollection, uploadPicture } from "../../axios/axios";
 import { useNavigate } from "react-router";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-function CreateCollectionModal() {
+interface CreateColInterface {
+    mode: string
+}
+
+function CreateCollectionModal(Props: CreateColInterface) {
     let navigate = useNavigate();
     const [createCol, setCreateCol] = useState<CreateCollection>({ name: "", description: "", imageUrl: "" })
     const [open, setOpen] = useState<boolean>(false)
@@ -112,13 +117,22 @@ function CreateCollectionModal() {
 
     return (
         <div className="createColWrapper">
-            <Button
-                startIcon={<AddBoxSharpIcon />}
-                variant="contained"
-                className="createColButton"
-                onClick={handleOpen}>
-                Collection
-            </Button>
+            {
+                Props.mode === 'button' ? (
+                    <Button
+                        startIcon={<AddBoxSharpIcon />}
+                        variant="contained"
+                        className="createColButton"
+                        onClick={handleOpen}>
+                        Collection
+                    </Button>
+                ) : (
+                    <IconButton onClick={handleOpen} style={{ top: "40%", color: "black" }} size="large">
+                        <AddCircleIcon fontSize="large" />
+                    </IconButton>
+                )
+            }
+
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -141,22 +155,22 @@ function CreateCollectionModal() {
                                     onChange={uploadFile}
                                 ></input>
                                 <label htmlFor="file">
-                            {
-                                createCol.imageUrl !== '' && createCol.imageUrl !== undefined && (
-                                <>
-                                <img
-                                src={createCol.imageUrl}
-                                alt="collectionpic"
-                                className="mycollectionpic"
-                                >
-                                    </img>
-                                </>
-                            )
+                                    {
+                                        createCol.imageUrl !== '' && createCol.imageUrl !== undefined && (
+                                            <>
+                                                <img
+                                                    src={createCol.imageUrl}
+                                                    alt="collectionpic"
+                                                    className="mycollectionpic"
+                                                >
+                                                </img>
+                                            </>
+                                        )
                                     }
-                                <Typography variant="h6">Upload Here</Typography>
-                                <IconButton aria-label="Upload Picture" component="span">
-                                <ImageIcon fontSize="large" />
-                                </IconButton>
+                                    <Typography variant="h6">Upload Here</Typography>
+                                    <IconButton aria-label="Upload Picture" component="span">
+                                        <ImageIcon fontSize="large" />
+                                    </IconButton>
                                 </label>
 
                             </div>

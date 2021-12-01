@@ -5,12 +5,14 @@ import { deleteSongFromCol, getFullCollection } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { CollectionFull } from "../../types/types";
 import '../../styles/collection/CollectionPage.css'
-import { Alert, List, ListItem, ListItemIcon, ListItemText, Snackbar, Typography } from "@mui/material";
+import { Alert, Button, IconButton, List, ListItem, ListItemIcon, ListItemText, Snackbar, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import DeleteIcon from '@mui/icons-material/Delete';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 function CollectionPage(Props: FullProps) {
     let collectionid = useParams().collectionid;
@@ -62,7 +64,7 @@ function CollectionPage(Props: FullProps) {
             ).catch(
                 err => {
                     setErrsnack(true)
-                    if(err.response) {
+                    if (err.response) {
                         console.log(err.response)
                     }
                 }
@@ -99,12 +101,12 @@ function CollectionPage(Props: FullProps) {
                 collection && (
                     <>
                         <Snackbar open={sucSnack} autoHideDuration={2500} onClose={handleCloseSuc}>
-                            <Alert  variant="filled" onClose={handleCloseSuc} severity="success" sx={{ width: '100%' }}>
+                            <Alert variant="filled" onClose={handleCloseSuc} severity="success" sx={{ width: '100%' }}>
                                 Song deleted!
                             </Alert>
                         </Snackbar>
                         <Snackbar open={errSnack} autoHideDuration={2500} onClose={handleCloseErr}>
-                            <Alert  variant="filled" onClose={handleCloseErr} severity="error" sx={{ width: '100%' }}>
+                            <Alert variant="filled" onClose={handleCloseErr} severity="error" sx={{ width: '100%' }}>
                                 Erro! Could not delete song!
                             </Alert>
                         </Snackbar>
@@ -153,7 +155,20 @@ function CollectionPage(Props: FullProps) {
                         <div className="ColPageLower">
                             {collection.songs.length > 0 ? (
                                 <>
-                                    <Typography align="left" variant="h4">Your beats, right here</Typography>
+                                    <div style={{ display: "flex", paddingBottom:"5px" }}>
+                                        <Typography 
+                                        style={{paddingRight:"1vw"}} 
+                                        align="left" variant="h4">
+                                            Your beats, right here
+                                            </Typography>
+                                        <Button 
+                                        variant="outlined" 
+                                        startIcon={<SearchIcon />}
+                                        onClick={() => navigate("/search")}
+                                        style={{marginLeft:"auto",backgroundColor:"transparent",color:"rgb(106, 90, 205)",border:"1px solid rgb(106, 90, 205)"}}>
+                                            More songs!
+                                        </Button>
+                                    </div>
                                     <List
                                         sx={{
                                             width: '100%',
@@ -173,7 +188,7 @@ function CollectionPage(Props: FullProps) {
                                                         src={s.imageUrl}
                                                         alt="songlistimage-logo"
                                                         className="songlistimage Clickable"
-                                                        onClick={() => navigate('/songs/'+s.id)}
+                                                        onClick={() => navigate('/songs/' + s.id)}
                                                     >
                                                     </img>
                                                 </ListItemIcon>
@@ -182,7 +197,7 @@ function CollectionPage(Props: FullProps) {
                                                     primary={<Typography
                                                         className="Clickable"
                                                         variant="h6"
-                                                        onClick={() => navigate('/songs/'+s.id)}>
+                                                        onClick={() => navigate('/songs/' + s.id)}>
                                                         {s.name}
                                                     </Typography>}
                                                     secondary={<Typography
@@ -194,10 +209,10 @@ function CollectionPage(Props: FullProps) {
                                                 <Typography
                                                     sx={{ color: "slategray" }}
                                                     className="Clickable"
-                                                    onClick={() => navigate('/album/'+s.album)}
+                                                    onClick={() => navigate('/album/' + s.album)}
                                                 >{s.album}
                                                 </Typography>
-                                                <DeleteIcon onClick={() => delSong(s.id)}className="Clickable" fontSize="large" style={{ marginLeft: "60%" }} />
+                                                <DeleteIcon onClick={() => delSong(s.id)} className="Clickable" fontSize="large" style={{ marginLeft: "60%" }} />
                                             </ListItem>
                                         ))}
                                     </List>

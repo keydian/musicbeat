@@ -57,9 +57,9 @@ export async function getUserCollections(
   pageNum : number,
   pageSize : number
 ) {
-  return await axios.get(url.concat('collections/search'), {
+  return await axios.get(url.concat(`collections/search`), {
     params: {
-      val : username,
+      username : username,
       pageNum : pageNum,
       size : pageSize
     }

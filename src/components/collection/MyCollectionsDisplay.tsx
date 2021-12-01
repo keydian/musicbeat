@@ -8,21 +8,27 @@ import '../../styles/collection/MyCollectionsDisplay.css'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useNavigate } from "react-router";
+import CreateCollection from "./CreateCollection";
 
-function MyCollectionsDisplay(Props: FullProps) {
+interface MyColInterface {
+    fProps: FullProps,
+    targetUser: string
+}
+
+function MyCollectionsDisplay(Props: MyColInterface) {
     const [collections, setCollections] = useState<Collection[]>()
     const [page, setPage] = useState<number>(0)
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-    const pageSize = 8;
+    const pageSize = 7;
     let navigate = useNavigate()
 
 
     useEffect(() => {
         console.log("Trying to retrieve collections", collections)
-        if (Props.isLogged && page >= 0) {
-            if (Props.username) {
-                console.log("Retrieving collections")
-                getUserCollections(Props.username, page, pageSize).then(
+        if (Props.fProps.isLogged && page >= 0) {
+            if (Props.targetUser) {
+                console.log("Retrieving collections", Props.targetUser)
+                getUserCollections(Props.targetUser, page, pageSize).then(
                     res => {
                         console.log("Collections fetch success", res.data.content)
                         setCollections(res.data.content)
@@ -38,7 +44,7 @@ function MyCollectionsDisplay(Props: FullProps) {
                 )
             }
         }
-    }, [Props.isLogged, page])
+    }, [Props.fProps.isLogged, page, Props.targetUser])
 
     const colImg = (col: Collection) => {
         if (col.imageUrl !== undefined && col.imageUrl.trim() !== '') {
@@ -83,21 +89,30 @@ function MyCollectionsDisplay(Props: FullProps) {
                                                         src={colImg(col)}
                                                         alt="collectionpic"
                                                         className="mycollectionpic Clickable"
-                                                        onClick={() => navigate("/collections/"+col.id)}
+                                                        onClick={() => navigate("/collections/" + col.id)}
                                                     >
                                                     </img>
-                                                    <Typography 
-                                                    align="center" 
-                                                    noWrap={true} 
-                                                    className="mycolname Clickable" 
-                                                    variant="h6"
-                                                    onClick={() => navigate("/collections/"+col.id)}
+                                                    <Typography
+                                                        align="center"
+                                                        noWrap={true}
+                                                        className="mycolname Clickable"
+                                                        variant="h6"
+                                                        onClick={() => navigate("/collections/" + col.id)}
                                                     >
                                                         {col.name}
                                                     </Typography>
                                                 </div>
                                             </Grid>
                                         ))}
+                                        {
+                                            Props.fProps.username === Props.targetUser && (
+                                                <Grid id={"addcolgrid"+Props.targetUser} item xs={3}>
+                                                    <div className="GridItemDiv">
+                                                        <CreateCollection mode={"icon"} />
+                                                    </div>
+                                                </Grid>
+                                            )
+                                        }
                                     </Grid>
                                 ) : (
                                     <>
@@ -105,7 +120,14 @@ function MyCollectionsDisplay(Props: FullProps) {
                                             page === 0 ? (
                                                 <p>No collections yet!</p>
                                             ) : (
-                                                <p>No more collections!</p>
+                                                <>
+                                                    <Typography variant="h6">No more collections!</Typography>
+                                                    {
+                                                        Props.fProps.username === Props.targetUser && (
+                                                            <CreateCollection mode={"icon"} />
+                                                        )
+                                                    }
+                                                </>
                                             )
                                         }
                                     </>

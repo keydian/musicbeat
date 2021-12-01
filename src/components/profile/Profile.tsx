@@ -81,7 +81,7 @@ function Profile(Props: FullProps) {
                             <div className="CollectionsDisplay">
                             <div className="CollectionsDisplayHeader">
                             <Typography variant="h4" style={{textAlign:"left", paddingLeft:"1vw", paddingBottom:"1vh"}}>{username}'s Collections</Typography>
-                            <CreateCollection/>
+                            <CreateCollection mode="button"/>
                             </div>
                                 {
                                     username && (

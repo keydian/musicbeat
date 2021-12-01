@@ -57,7 +57,7 @@ function App(Props: FullProps) {
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<StartPage />} />
             <Route path="/profile/:username" element={<Profile />} />
-            <Route path="/mycollections" element={<MyCollections />} />
+            <Route path="/collections/:username" element={<MyCollections />} />
             <Route path="/collections/:collectionid" element={<CollectionPage />} />
             <Route path="/songs/:songid" element={<SongPage />} />
           </Routes>

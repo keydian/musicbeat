@@ -46,7 +46,7 @@ function Header(Props: FullProps) {
                 <Button variant="outlined" size="large" className="Button">
                     Top Rated
                 </Button>
-                <Button variant="outlined" size="large" className="Button" onClick={() => {navigate("/mycollections")}}>
+                <Button variant="outlined" size="large" className="Button" onClick={() => {navigate("/collections/"+Props.username)}}>
                     My Collections
                 </Button>
                 <Button variant="outlined" size="large" className="Button">

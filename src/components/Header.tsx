@@ -49,7 +49,7 @@ function Header(Props: FullProps) {
                 <Button variant="outlined" size="large" className="Button" onClick={() => {navigate("/collections/"+Props.username)}}>
                     My Collections
                 </Button>
-                <Button variant="outlined" size="large" className="Button">
+                <Button variant="outlined" size="large" className="Button" onClick={()=> navigate('/jams')}>
                     Jams
                 </Button>
                 <Button variant="outlined" size="large" className="Button">

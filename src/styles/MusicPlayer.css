@@ -1412,7 +1412,9 @@
     cursor:pointer;
     height:80px;
     position:relative;
-    width:80px
+    width:80px;
+    margin-left: 90vw;
+    margin-top: 85vh;
 }
 @media screen and (max-width:767px){
     .react-jinke-music-player .music-player{
@@ -1453,8 +1455,6 @@
     justify-content:center;
     padding:10px;
     position:absolute;
-    left:2075%;
-    top:865%;
     text-align:center;
     transition:all .3s cubic-bezier(.43,-.1,.16,1.1);
     width:80px;

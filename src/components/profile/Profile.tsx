@@ -22,7 +22,7 @@ function Profile(Props: FullProps) {
     const [pathusername, setPathusername] = useState<string>('')
 
     useEffect( () => {
-        if(!pathusername && username) {
+        if(username && (!pathusername === undefined || pathusername.trim() ==='' || pathusername !== username)) {
             setPathusername(username)
         }
     }, [pathusername,username])
@@ -31,7 +31,6 @@ function Profile(Props: FullProps) {
         if (pathusername.trim() !== '' && pathusername !== undefined && Props.isLogged) {
             getUser(pathusername).then(
                 (res) => {
-                    console.log("Profile success")
                     setUser(res.data)
                 }
             ).catch(
@@ -86,7 +85,8 @@ function Profile(Props: FullProps) {
                                 {
                                     pathusername && (
                                         <ProfileCollectionDisplay
-                                        {...pathusername}
+                                        profileUser={pathusername}
+                                        
                                         />
                                     )
                                 }

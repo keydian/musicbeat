@@ -8,7 +8,7 @@ import '../../styles/profile/ProfileCollectionDisplay.css'
 import { useNavigate } from "react-router";
 
 interface ProfileCollectionDisplayInterface {
-    username : string
+    profileUser : string
 }
 
 function ProfileCollectionDisplay(Props: ProfileCollectionDisplayInterface) {
@@ -17,13 +17,10 @@ function ProfileCollectionDisplay(Props: ProfileCollectionDisplayInterface) {
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
 
     useEffect(() => {
-        console.log("Collections", collections)
-        if (!collections) {
-            if (Props.username) {
-                console.log("AAAAAAAAAAAAAAAA",Props.username)
-                getUserCollections(Props.username, 0, 6).then(
+            if (Props.profileUser) {
+                console.log("AAAAAAAAAAAAAAAA",Props.profileUser)
+                getUserCollections(Props.profileUser, 0, 6).then(
                     res => {
-                        console.log("Collections fetch success")
                         setCollections(res.data.content)
                     }
                 ).catch(
@@ -36,8 +33,7 @@ function ProfileCollectionDisplay(Props: ProfileCollectionDisplayInterface) {
                     }
                 )
             }
-        }
-    }, [collections])
+    }, [Props.profileUser])
 
     const colImg = (col: Collection) => {
         if (col.imageUrl !== undefined && col.imageUrl.trim() !== '') {

@@ -89,7 +89,7 @@ function MyCollectionsDisplay(Props: MyColInterface) {
                                                         src={colImg(col)}
                                                         alt="collectionpic"
                                                         className="mycollectionpic Clickable"
-                                                        onClick={() => navigate("/collections/" + col.id)}
+                                                        onClick={() => navigate("/collection/" + col.id)}
                                                     >
                                                     </img>
                                                     <Typography
@@ -97,7 +97,7 @@ function MyCollectionsDisplay(Props: MyColInterface) {
                                                         noWrap={true}
                                                         className="mycolname Clickable"
                                                         variant="h6"
-                                                        onClick={() => navigate("/collections/" + col.id)}
+                                                        onClick={() => navigate("/collection/" + col.id)}
                                                     >
                                                         {col.name}
                                                     </Typography>

@@ -57,13 +57,13 @@ function ProfileCollectionDisplay(Props: ProfileCollectionDisplayInterface) {
                                     src={colImg(col)}
                                     alt="collectionpic"
                                     className="collectionpic Clickable"
-                                    onClick={() => navigate("/collections/"+col.id)}
+                                    onClick={() => navigate("/collection/"+col.id)}
                                 >
                                 </img>
                                 <Typography 
                                 className="mycolname Clickable" 
                                 variant="h6"
-                                onClick={() => navigate("/collections/"+col.id)}
+                                onClick={() => navigate("/collection/"+col.id)}
                                 >{col.name}
                                 </Typography>
                             </Grid>

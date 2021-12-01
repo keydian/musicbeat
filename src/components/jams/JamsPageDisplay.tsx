@@ -1,4 +1,4 @@
-import { Button, Grid, IconButton, Typography } from '@mui/material'
+import { Grid, IconButton, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { searchJams } from '../../axios/axios'
@@ -9,7 +9,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import SendIcon from '@mui/icons-material/Send';
+import JoinJam from './JoinJam'
 
 interface JamPageInterface {
     fProps: FullProps,
@@ -35,7 +35,8 @@ function JamsPageDisplay(Props: JamPageInterface) {
                 name: "What You Know",
                 artist: "Two Door Cinema Club",
                 imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-        }},
+            }
+        },
         {
             id: "1",
             name: "Indie chill",
@@ -48,7 +49,8 @@ function JamsPageDisplay(Props: JamPageInterface) {
                 name: "What You Know",
                 artist: "Two Door Cinema Club",
                 imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-        }},
+            }
+        },
         {
             id: "2",
             name: "Indie chill",
@@ -61,7 +63,8 @@ function JamsPageDisplay(Props: JamPageInterface) {
                 name: "What You Know",
                 artist: "Two Door Cinema Club",
                 imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-        }},
+            }
+        },
         {
             id: "3",
             name: "Indie chill",
@@ -74,7 +77,8 @@ function JamsPageDisplay(Props: JamPageInterface) {
                 name: "What You Know",
                 artist: "Two Door Cinema Club",
                 imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-        }},
+            }
+        },
         {
             id: "4",
             name: "Indie chill",
@@ -87,7 +91,8 @@ function JamsPageDisplay(Props: JamPageInterface) {
                 name: "What You Know",
                 artist: "Two Door Cinema Club",
                 imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-        }},
+            }
+        },
         {
             id: "5",
             name: "Indie chill",
@@ -100,7 +105,8 @@ function JamsPageDisplay(Props: JamPageInterface) {
                 name: "What You Know",
                 artist: "Two Door Cinema Club",
                 imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-        }}
+            }
+        }
     ]
 
     useEffect(() => {
@@ -171,34 +177,28 @@ function JamsPageDisplay(Props: JamPageInterface) {
                                                         >
                                                         </img>
                                                         <div className="JamImgOverview">
-                                                            <div style={{
-                                                                display: "flex",
-                                                                alignItems: "center",
-                                                            }}>
-                                                                <RecordVoiceOverIcon style={{ paddingRight: "5px" }} />
-                                                                <Typography variant="h6">{j.host}</Typography>
-                                                                <div style={{ paddingLeft: "20px", display: "flex", alignItems: "center" }}>
-                                                                    <p>{j.participants.length}</p>
-                                                                    <PeopleAltIcon />
-                                                                </div>
-                                                            </div>
+                                                            <Typography style={{color:"rgb(96, 0, 128)"}}noWrap={true} variant="h6">{j.name}</Typography>
                                                             {
                                                                 j.firstSong && (
                                                                     <div className="JamItemPlaying">
                                                                         <Typography variant="subtitle1">Playing:</Typography>
                                                                         <Typography variant="body1">{j.firstSong.name} - {j.firstSong.artist}</Typography>
-                                                                        
+
                                                                     </div>
                                                                 )
                                                             }
-                                                            <Button
-                                                                variant="contained"
-                                                                startIcon={<SendIcon />}
-                                                                style={{ backgroundColor: "rgb(106, 90, 205)", color: "white", borderRadius: "20px" }}
-                                                                onClick={() => navigate("/join/"+j.id)}
-                                                            >
-                                                                Join
-                                                            </Button>
+                                                            <div style={{
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                            }}>
+                                                                <RecordVoiceOverIcon style={{ paddingRight: "5px" }} />
+                                                                <Typography variant="body1">{j.host}</Typography>
+                                                                <div style={{ paddingLeft: "20px", display: "flex", alignItems: "center" }}>
+                                                                    <p>{j.participants.length}</p>
+                                                                    <PeopleAltIcon />
+                                                                </div>
+                                                            </div>
+                                                            <JoinJam fProps={Props.fProps} jam={j} />
                                                         </div>
                                                     </div>
                                                 </Grid>

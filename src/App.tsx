@@ -60,7 +60,7 @@ function App(Props: FullProps) {
             <Route path="/jams" element={<JamsPage />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/collections/:username" element={<MyCollections />} />
-            <Route path="/collections/:collectionid" element={<CollectionPage />} />
+            <Route path="/collection/:collectionid" element={<CollectionPage />} />
             <Route path="/songs/:songid" element={<SongPage />} />
           </Routes>
           {location.pathname !== '/login' && location.pathname !== '/register' && (location.pathname !== '/' || Props.isLogged) &&

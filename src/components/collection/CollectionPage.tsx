@@ -173,6 +173,7 @@ function CollectionPage(Props: FullProps) {
                                                         src={s.imageUrl}
                                                         alt="songlistimage-logo"
                                                         className="songlistimage Clickable"
+                                                        onClick={() => navigate('/songs/'+s.id)}
                                                     >
                                                     </img>
                                                 </ListItemIcon>

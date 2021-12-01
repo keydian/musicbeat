@@ -5,10 +5,11 @@ import { getSong } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { Song } from "../../types/types";
 import '../../styles/songs/SongPage.css'
-import { styled, Tab, Tabs, Typography } from "@mui/material";
+import { Button, styled, Tab, Tabs, Typography } from "@mui/material";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SongTabDisplay from "./SongTabDisplay";
 import SmallJamDisplay from "./SmallJamDisplay";
+import AudiotrackIcon from '@mui/icons-material/Audiotrack';
 
 
 function SongPage(Props: FullProps) {
@@ -126,7 +127,7 @@ function SongPage(Props: FullProps) {
                                         variant="subtitle1"
                                         style={{ color: "rgb(52, 52, 52)" }}
                                         className="Clickable"
-                                        onClick={() => navigate('/albums/'+song.album)}
+                                        onClick={() => navigate('/albums/' + song.album)}
                                     >from {song.album}</Typography>
                                     <div style={{ display: "flex", alignItems: "center" }}>
                                         <PlayArrowIcon fontSize="large" style={{ border: "1px solid black", borderRadius: "50%", marginRight: "10px" }} />
@@ -140,9 +141,12 @@ function SongPage(Props: FullProps) {
                                         <Typography variant="overline">{song.genres.join(', ')}</Typography>
                                     </div>
                                 </div>
-                                <div className="SongRates">
+                                <div className="SongRatesWrapper">
                                     <Typography variant="h6">{song.rating.toFixed(1)}/10 Beats</Typography>
                                     <Typography variant="subtitle1">{song.numRates} Ratings</Typography>
+                                    <Button style={{color:"rgb(106, 90, 205)", border:"1px solid rgb(106, 90, 205)"}} size="small" variant="outlined" startIcon={<AudiotrackIcon />}>
+                                        Rate
+                                    </Button>
                                 </div>
                             </div>
                             <div className="SongPageUpperTabs">
@@ -163,7 +167,7 @@ function SongPage(Props: FullProps) {
                             </div>
                             <div className="SongPageLowerRight">
                                 <Typography variant="h6">Currently playing in jams</Typography>
-                                <SmallJamDisplay songId={song.id}/>
+                                <SmallJamDisplay songId={song.id} />
                             </div>
                         </div>
                     </>

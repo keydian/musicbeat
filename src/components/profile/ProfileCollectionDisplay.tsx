@@ -7,51 +7,21 @@ import { Collection } from "../../types/types";
 import '../../styles/profile/ProfileCollectionDisplay.css'
 import { useNavigate } from "react-router";
 
-function ProfileCollectionDisplay(username: string) {
+interface ProfileCollectionDisplayInterface {
+    username : string
+}
+
+function ProfileCollectionDisplay(Props: ProfileCollectionDisplayInterface) {
     let navigate = useNavigate()
     const [collections, setCollections] = useState<Collection[]>()
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-    //For debug
-    let c: Collection[] = [
-        {
-            id: "0",
-            name: "Collection1",
-            description: "",
-            creator: username,
-            songs: [],
-            imageUrl: "http://2.bp.blogspot.com/-t_j3mWFnRro/Tgo2PQ5r0NI/AAAAAAAAACs/OTTWy-PVEHM/s1600/tour.jpg"
-        },
-        {
-            id: "1",
-            name: "Collection2",
-            description: "",
-            creator: username,
-            songs: [],
-            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-        },
-        {
-            id: "2",
-            name: "Collection3",
-            description: "",
-            creator: username,
-            songs: [],
-            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-        },
-        {
-            id: "3",
-            name: "Collection4",
-            description: "",
-            creator: username,
-            songs: [],
-            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
-        }
-    ]
 
     useEffect(() => {
         console.log("Collections", collections)
         if (!collections) {
-            if (username) {
-                getUserCollections(username, 0, 6).then(
+            if (Props.username) {
+                console.log("AAAAAAAAAAAAAAAA",Props.username)
+                getUserCollections(Props.username, 0, 6).then(
                     res => {
                         console.log("Collections fetch success")
                         setCollections(res.data.content)
@@ -61,7 +31,7 @@ function ProfileCollectionDisplay(username: string) {
                         if (err.response) {
                             //Should never happen
                             console.log(err.response)
-                            alert(err.response.data.message)
+                            //alert(err.response.data.message)
                         }
                     }
                 )

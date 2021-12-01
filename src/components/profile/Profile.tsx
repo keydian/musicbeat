@@ -19,17 +19,17 @@ function Profile(Props: FullProps) {
     const avatarFolder = process.env.PUBLIC_URL + "/avatar/";
 
     const [user, setUser] = useState<User>()
-    const [pathusername, setPathusername] = useState<string>()
+    const [pathusername, setPathusername] = useState<string>('')
 
     useEffect( () => {
-        if(!pathusername) {
+        if(!pathusername && username) {
             setPathusername(username)
         }
     }, [pathusername,username])
 
     useEffect(() => {
-        if (username && Props.isLogged) {
-            getUser(username).then(
+        if (pathusername.trim() !== '' && pathusername !== undefined && Props.isLogged) {
+            getUser(pathusername).then(
                 (res) => {
                     console.log("Profile success")
                     setUser(res.data)
@@ -44,7 +44,7 @@ function Profile(Props: FullProps) {
                 }
             )
         }
-    }, [Props.isLogged, username, pathusername])
+    }, [Props.isLogged, pathusername])
 
 
     return (
@@ -84,9 +84,9 @@ function Profile(Props: FullProps) {
                             <CreateCollection mode="button"/>
                             </div>
                                 {
-                                    username && (
+                                    pathusername && (
                                         <ProfileCollectionDisplay
-                                        {...username}
+                                        {...pathusername}
                                         />
                                     )
                                 }

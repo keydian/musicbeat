@@ -42,7 +42,17 @@
     left: 50%;
     bottom: -10px;
     transform: translate(-50%, -10%);
-    
     border-radius:5px;
     padding-bottom: 1vw;
+}
+
+.JamItemPlaying {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    padding-left: 5px;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    
 }

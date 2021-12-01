@@ -183,12 +183,11 @@ function JamsPageDisplay(Props: JamPageInterface) {
                                                                 </div>
                                                             </div>
                                                             {
-
                                                                 j.firstSong && (
-                                                                    <div style={{ paddingLeft: "5px", textAlign: "left", }}>
+                                                                    <div className="JamItemPlaying">
                                                                         <Typography variant="subtitle1">Playing:</Typography>
-                                                                        <Typography variant="body1">{j.firstSong.name}</Typography>
-                                                                        <Typography variant="body2">{j.firstSong.artist}</Typography>
+                                                                        <Typography variant="body1">{j.firstSong.name} - {j.firstSong.artist}</Typography>
+                                                                        
                                                                     </div>
                                                                 )
                                                             }

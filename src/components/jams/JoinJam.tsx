@@ -6,12 +6,12 @@ import { useNavigate } from "react-router";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { JamWithSong } from "../../types/types";
 
-interface JoinJam {
+interface JoinJamInterface {
     jam: JamWithSong,
     fProps: FullProps
 }
 
-function JoinJam(Props : JoinJam) {
+function JoinJam(Props : JoinJamInterface) {
     let navigate = useNavigate()
 
     const [open, setOpen] = useState<boolean>(false)
@@ -32,7 +32,7 @@ function JoinJam(Props : JoinJam) {
     };
 
     const joinAttempt = () => {
-
+        //send join request, if 200 then go to jam page, otherwise byebye
     }
 
     return (

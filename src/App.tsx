@@ -40,7 +40,7 @@ function App(Props: FullProps) {
         isLogged: true,
         username: decodedTkn.username,
         token: token,
-        jam: ""
+        jam: decodedTkn.jam
       });
     }
   }, [])

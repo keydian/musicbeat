@@ -8,7 +8,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 interface JamQueueInterface {
     jamid: string,
-    currSong : SongList
+    currSong: SongList
 }
 
 function JamQueue(props: JamQueueInterface) {
@@ -33,7 +33,7 @@ function JamQueue(props: JamQueueInterface) {
             rating: 10.0,
             numRates: [],
             bpm: 150,
-            key: "G#"
+            key: "F#"
         },
         {
             id: "1",
@@ -50,7 +50,7 @@ function JamQueue(props: JamQueueInterface) {
             rating: 10.0,
             numRates: [],
             bpm: 160,
-            key: "G#"
+            key: "G"
         },
         {
             id: "2",
@@ -68,7 +68,7 @@ function JamQueue(props: JamQueueInterface) {
             numRates: [],
             lyrics: "",
             bpm: 180,
-            key: "G#"
+            key: "A"
         },
         {
             id: "3",
@@ -85,7 +85,7 @@ function JamQueue(props: JamQueueInterface) {
             rating: 10.0,
             numRates: [],
             bpm: 200,
-            key: "G#"
+            key: "B"
         }
     ]
 
@@ -122,36 +122,51 @@ function JamQueue(props: JamQueueInterface) {
         return i >= min && i < max
     }
 
-    const bpmCalc = (bpm : number) => {
-       let diff = Math.abs(bpm - props.currSong.bpm)
-       if(diff <= 10) {
-        //green
-        return "rgba(90, 205, 100, 0.5)"
-       } else if (diff >10 && diff <=30) {
-        //yellow
-        return "rgba(194, 170, 63, 0.5)"
-       } else {
-        //red
-        return "rgba(218, 64, 64, 0.5)"
-       }
+    const bpmCalc = (bpm: number) => {
+        let diff = Math.abs(bpm - props.currSong.bpm)
+        if (diff <= 10) {
+            //green
+            return "rgba(90, 205, 100, 0.5)"
+        } else if (diff > 10 && diff <= 30) {
+            //yellow
+            return "rgba(194, 170, 63, 0.5)"
+        } else {
+            //red
+            return "rgba(218, 64, 64, 0.5)"
+        }
     }
 
-    const bpmIndicator = (bpm : number) => {
+    const bpmIndicator = (bpm: number) => {
         return (
-            <p style={{backgroundColor:bpmCalc(bpm), borderRadius:"5px",padding:"3px"}}>{bpm}</p>
+            <Typography
+                style={{ backgroundColor: bpmCalc(bpm), borderRadius: "5px", border:"1px solid black", marginBottom:"5px"}}>
+                {bpm}
+            </Typography>
         )
     }
-       
-    
 
 
-    const keyCalc = () => {
-
+    const keyCalc = (key: string) => {
+        if (key === props.currSong.key) {
+            return "rgba(90, 205, 100, 0.5)"
+        }
+        let val = Math.random()
+        if (val <= 0.3) {
+            return "rgba(90, 205, 100, 0.5)"
+        } else if (val > 0.3 && val <= 0.6) {
+            return "rgba(194, 170, 63, 0.5)"
+        } else {
+            return "rgba(218, 64, 64, 0.5)"
+        }
     }
 
-    const keyIndicator = () => (
-        <p></p>
-    )
+    const keyIndicator = (key: string) => {
+        return (
+            <Typography
+                style={{ backgroundColor: keyCalc(key), borderRadius: "5px", border:"1px solid black" }}
+            >{key}</Typography>
+        )
+    }
 
     return (
         <div className="QueueWrapper">
@@ -184,6 +199,7 @@ function JamQueue(props: JamQueueInterface) {
                                                         </div>
                                                         <div className="SongIndicators">
                                                             {bpmIndicator(s.bpm)}
+                                                            {keyIndicator(s.key)}
                                                         </div>
                                                     </div>
                                                 </Grid>

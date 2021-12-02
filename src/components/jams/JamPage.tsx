@@ -7,33 +7,15 @@ import { Jam, SongList } from "../../types/types";
 import '../../styles/jams/JamPage.css'
 import { Typography } from "@mui/material";
 import JamQueue from "./JamQueue";
+import LikeButtons from "./LikeButtons";
+
 
 function JamPage(Props: FullProps) {
     const [jam, setJam] = useState<Jam>()
-    const [likes, setLikes] = useState<number[]>([0, 0])
     const [currSong, setCurrsong] = useState<SongList>()
     let jamid = useParams().jamid;
+    const songwave = process.env.PUBLIC_URL + "/other/songwave.png";
 
-
-    const jamTest = {
-        id: "0",
-        name: "Indie chill",
-        host: "Valgreen",
-        participants: ["user0", "user1", "user2", "user3", "user4"],
-        playlist: ["0", "1", "2", "3"],
-        imageUrl: ''
-    }
-
-    /*
-    useEffect(() => {
-        if (jamid && Props.isLogged) {
-            console.log("Got jam", jamTest)
-            setJam(jamTest)
-        }
-    }, [Props.isLogged, jamid])
-    */
-
-    
     useEffect(() => {
         if (jamid && Props.isLogged) {
             getJam(jamid).then(
@@ -50,7 +32,7 @@ function JamPage(Props: FullProps) {
             )
         }
     }, [Props.isLogged, jamid])
-    
+
 
     useEffect(() => {
         if (jam) {
@@ -89,23 +71,34 @@ function JamPage(Props: FullProps) {
                                         className="songimagejam"
                                     >
                                     </img>
-                                    <Typography variant="body1">{currSong.name} - {currSong.artist}</Typography>
                                 </div>
                                 <div className="MusicDisplayerMid">
                                     <div className="SongDetails">
-                                        <div style={{ display: "flex" }}>
-
+                                        <Typography 
+                                        variant="h6"
+                                        style={{color:"rgb(129, 103, 184)"}}
+                                        >
+                                            Now playing:
+                                            </Typography>
+                                        <Typography variant="h6">{currSong.name} - {currSong.artist}</Typography>
+                                        <div style={{ display: "flex", alignItems: "center" }}>
+                                            <Typography style={{color:"rgb(129, 103, 184)", fontWeight:"900",paddingRight:"5px"}} variant="body1">BPM:</Typography>
+                                            <Typography variant="subtitle1">{currSong.bpm}</Typography>
                                         </div>
-                                        <div style={{ display: "flex" }}>
-
+                                        <div style={{ display: "flex", alignItems: "center" }}>
+                                            <Typography style={{color:"rgb(129, 103, 184)", fontWeight:"900",paddingRight:"5px"}} variant="body1">Key:</Typography>
+                                            <Typography variant="subtitle1">{currSong.key}</Typography>
                                         </div>
-                                        <Typography variant="body1">BPM: {currSong.bpm}</Typography>
-                                        <Typography variant="body1">Key: {currSong.key}</Typography>
                                     </div>
-
                                 </div>
                                 <div className="MusicDisplayerRight">
-                                    <p>Music slider here</p>
+                                    <img
+                                        src={songwave}
+                                        alt="songwave-logo"
+                                        className="songwave"
+                                    >
+                                    </img>
+                                    <LikeButtons />
                                 </div>
                             </div>
                             <Typography style={{ textAlign: "left", paddingTop: "1vh" }} variant="h6">Track Selection</Typography>
@@ -119,7 +112,7 @@ function JamPage(Props: FullProps) {
                                     </div>
                                 </div>
                                 <div className="Queue">
-                                    <JamQueue jamid={jam.id} currSong={currSong}/>
+                                    <JamQueue jamid={jam.id} currSong={currSong} />
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 //REVIEW AND ALTER THIS AS NECESSARY
 export interface Token {
-    username: string
+    username: string,
+    jam: string
 }
 
 export interface CollectionFull {

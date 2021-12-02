@@ -57,7 +57,7 @@ function Login(Props: FullProps) {
                         isLogged: true,
                         username: decodedTkn.username,
                         token: tkn,
-                        jam:""
+                        jam:decodedTkn.jam
                     })
                     localStorage.setItem("token", tkn);
                     setSnacksuc(true)

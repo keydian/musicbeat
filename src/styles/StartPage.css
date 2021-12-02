@@ -8,6 +8,7 @@
     display:flex;
     margin-top: 1vh !important;
     margin: auto;
+    justify-content: center;
     border-radius: 25px;
     width: 80vw;
     height: 35vh;

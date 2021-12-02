@@ -54,7 +54,7 @@ export interface Song {
     length: number,
     info: string,
     genres: string[],
-    image: string,
+    imageUrl: string,
     rating: number,
     numRates: number,
     lyrics: string

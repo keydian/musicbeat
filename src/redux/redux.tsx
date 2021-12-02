@@ -1,8 +1,8 @@
 import { createStore } from "redux";
-import { LOGIN, LoginAction, LOGOUT, LogoutAction, RESET_TOKEN, Reset_Token_Action, SessionActionTypes, SessionInfo } from "./redux-types";
+import { JOINJAM, JoinJam, LeaveJam, LEAVEJAM, LOGIN, LoginAction, LOGOUT, LogoutAction, RESET_TOKEN, Reset_Token_Action, SessionActionTypes, SessionInfo } from "./redux-types";
 
 //SESSION REDUCER
-const STATE: SessionInfo = { isLogged: false, username: "", token: "" }
+const STATE: SessionInfo = { isLogged: false, username: "", token: "", jam: "" }
 const session_reducer = function (state = STATE, actions: SessionActionTypes): SessionInfo {
     switch (actions.type) {
         case LOGIN:
@@ -13,6 +13,12 @@ const session_reducer = function (state = STATE, actions: SessionActionTypes): S
             break;
         case RESET_TOKEN:
             state = { ...state, token: actions.data };
+            break;
+        case JOINJAM:
+            state = {...state, jam: actions.data}
+            break;
+        case LEAVEJAM:
+            state = {...state, jam:""}
             break;
     }
     return state;
@@ -31,10 +37,18 @@ export function reset_token(data: string): Reset_Token_Action {
     return { type: RESET_TOKEN, data: data }
 }
 
+export function joinjam(data : string): JoinJam {
+    return { type: JOINJAM, data: data}
+}
+
+export function  leavejam(data : string): LeaveJam {
+    return { type: LEAVEJAM}
+}
+
 //STORE
 const store = createStore(session_reducer)
 store.subscribe(() => {
-    //console.log("ReduxSub -> Store changed", store.getState())
+    console.log("ReduxSub -> Store changed -> Curr. Jam", store.getState().jam)
 })
 export default store
 
@@ -42,7 +56,8 @@ export const state_to_props = (state: any) => {
     return {
         isLogged: state.isLogged,
         token: state.token,
-        username: state.username
+        username: state.username,
+        jam: state.jam
     }
 }
 
@@ -58,6 +73,13 @@ export const dispatch_to_props = (dispatch: any) => {
         reset_token: (token: string) => dispatch({
             type: RESET_TOKEN,
             data: token
+        }),
+        joinjam : (jamid : string) => dispatch({
+            type: JOINJAM,
+            data : jamid
+        }),
+        leavejam: () => dispatch({
+            type: LEAVEJAM
         })
     }
 }

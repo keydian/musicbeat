@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import '../../styles/jams/JamsPage.css'
@@ -7,6 +8,10 @@ import JamsPageDisplay from "./JamsPageDisplay";
 
 function JamsPage(Props : FullProps) {
 
+
+    useEffect(() => {
+
+    }, [])
 
     return (
         <div className="JamsPageWrapper">

@@ -1,11 +1,14 @@
 export const LOGIN = "login"
 export const LOGOUT = "logout"
 export const RESET_TOKEN = "reset_token"
+export const JOINJAM = "join_jam"
+export const LEAVEJAM = "leave_jam"
 
 export interface SessionInfo{
     isLogged : boolean;
     username : string;
     token : string;
+    jam : string;
 }
 
 export interface LoginAction{
@@ -22,4 +25,13 @@ export interface Reset_Token_Action{
     data : string
 }
 
-export type SessionActionTypes = LoginAction | LogoutAction | Reset_Token_Action
+export interface JoinJam {
+    type: typeof JOINJAM
+    data : string
+}
+
+export interface LeaveJam {
+    type: typeof LEAVEJAM
+}
+
+export type SessionActionTypes = LoginAction | LogoutAction | Reset_Token_Action | JoinJam | LeaveJam

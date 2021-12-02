@@ -33,7 +33,7 @@ const getHomepageSongs = () =>{
 }
     useEffect(()=>{
         getHomepageSongs()
-    }, Props.isLogged)
+    }, [Props.isLogged])
     
     let navigate = useNavigate();
     

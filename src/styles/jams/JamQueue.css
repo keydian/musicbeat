@@ -1,0 +1,16 @@
+.QueueWrapper {
+    width: 100%;
+    display: flex;
+}
+
+.QueueDisplayLeftArrow {
+    width: 10%;
+}
+
+.QueueDisplayRightArrow {
+    width: 10%;
+}
+
+.SongQueueWrapper {
+    
+}

@@ -21,6 +21,7 @@ import CollectionPage from './components/collection/CollectionPage';
 import MusicPlayer from './components/MusicPlayer';
 import SongPage from './components/songs/SongPage';
 import JamsPage from './components/jams/JamsPage';
+import JamPage from './components/jams/JamPage';
 
 
 function App(Props: FullProps) {
@@ -44,6 +45,12 @@ function App(Props: FullProps) {
   }, [])
 
   let location = useLocation();
+  const inJam = () => {
+    if(!location.pathname.includes("jams") && location.pathname.includes('jam')) {
+      return true;
+    }
+    return false
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,12 +65,13 @@ function App(Props: FullProps) {
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<StartPage />} />
             <Route path="/jams" element={<JamsPage />} />
+            <Route path="/jam/:jamid" element={<JamPage />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/collections/:username" element={<MyCollections />} />
             <Route path="/collection/:collectionid" element={<CollectionPage />} />
             <Route path="/songs/:songid" element={<SongPage />} />
           </Routes>
-          {location.pathname !== '/login' && location.pathname !== '/register' && (location.pathname !== '/' || Props.isLogged) &&
+          {location.pathname !== '/login' && location.pathname !== '/register' && !inJam() && (location.pathname !== '/' || Props.isLogged) &&
             <MusicPlayer />
           }
         </main>

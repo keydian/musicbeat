@@ -18,7 +18,6 @@ function ProfileCollectionDisplay(Props: ProfileCollectionDisplayInterface) {
 
     useEffect(() => {
             if (Props.profileUser) {
-                console.log("AAAAAAAAAAAAAAAA",Props.profileUser)
                 getUserCollections(Props.profileUser, 0, 6).then(
                     res => {
                         setCollections(res.data.content)

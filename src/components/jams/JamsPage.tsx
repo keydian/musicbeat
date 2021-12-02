@@ -9,7 +9,7 @@ function JamsPage(Props : FullProps) {
 
 
     return (
-        <div className="JamPageWrapper">
+        <div className="JamsPageWrapper">
             <div className="JamPageHeader">
                 <Typography variant="h4">Ongoing Jams</Typography>
             </div>

@@ -110,7 +110,7 @@ function JamsPageDisplay(Props: JamPageInterface) {
     ]
 
     useEffect(() => {
-        if (Props.fProps.isLogged && page > 0) {
+        if (Props.fProps.isLogged && page >= 0) {
             console.log("Searching for jams")
             searchJams(page, pageSize).then(
                 res => {
@@ -150,7 +150,7 @@ function JamsPageDisplay(Props: JamPageInterface) {
     return (
         <div className="JamDisplayGridWrapper">
             {
-                jamsTest && (
+                jams && (
                     <>
                         <div className="JamsDisplayLeftArrow">
                             <IconButton size="large" disabled={page === 0} onClick={backwardPage}>
@@ -159,21 +159,20 @@ function JamsPageDisplay(Props: JamPageInterface) {
                         </div>
                         <div className="JamsDisplayMid">
                             {
-                                jamsTest.length > 0 ? (
+                                jams.length > 0 ? (
                                     <Grid container
                                         justifyContent="flex-start"
                                         alignItems="center"
                                         rowSpacing={8}
                                     >
-                                        {jamsTest.map((j, i) => (
+                                        {jams.map((j, i) => (
                                             <>
                                                 <Grid id={j.id + i} item xs={3}>
                                                     <div className="JamItemDiv">
                                                         <img
                                                             src={jamImg(j)}
                                                             alt="jamgridpic"
-                                                            className="jamgridpic Clickable"
-                                                            onClick={() => navigate("/jam/" + j.id)}
+                                                            className="jamgridpic"
                                                         >
                                                         </img>
                                                         <div className="JamImgOverview">
@@ -211,7 +210,7 @@ function JamsPageDisplay(Props: JamPageInterface) {
                             }
                         </div>
                         <div className="JamsDisplayRightArrow">
-                            <IconButton size="large" onClick={forwardPage} disabled={page > 0 && jamsTest?.length === 0}>
+                            <IconButton size="large" onClick={forwardPage} disabled={page > 0 && jams?.length === 0}>
                                 <ArrowForwardIosIcon />
                             </IconButton>
                         </div>

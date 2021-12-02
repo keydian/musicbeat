@@ -5,13 +5,14 @@ import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from "react-router";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { JamWithSong } from "../../types/types";
+import { joinJam } from "../../axios/axios";
 
 interface JoinJamInterface {
     jam: JamWithSong,
     fProps: FullProps
 }
 
-function JoinJam(Props : JoinJamInterface) {
+function JoinJam(Props: JoinJamInterface) {
     let navigate = useNavigate()
 
     const [open, setOpen] = useState<boolean>(false)
@@ -28,11 +29,23 @@ function JoinJam(Props : JoinJamInterface) {
         border: '2px solid #000',
         boxShadow: 24,
         p: 4,
-        borderRadius:"25px"
+        borderRadius: "25px"
     };
 
     const joinAttempt = () => {
-        //send join request, if 200 then go to jam page, otherwise byebye
+        joinJam(Props.jam.id).then(
+            res => {
+                alert("Joined succesfully! Redirecting!")
+                navigate("/jam/"+Props.jam.id)
+            }
+        ).catch(
+            err => {
+                if (err.response) {
+                    console.log(err.response)
+                    alert(err.response.data.message)
+                }
+            }
+        )
     }
 
     return (
@@ -53,11 +66,11 @@ function JoinJam(Props : JoinJamInterface) {
                     <Typography variant="h6">
                         Are you sure you want to join this jam?
                     </Typography>
-                    <div style={{ display: "flex", justifyContent:"center", paddingTop:"2vh" }}>
+                    <div style={{ display: "flex", justifyContent: "center", paddingTop: "2vh" }}>
                         <Button
                             variant="outlined"
                             startIcon={<CancelIcon />}
-                            style={{ borderRadius: "20px", marginRight:"2vw" }}
+                            style={{ borderRadius: "20px", marginRight: "2vw" }}
                             color="error"
                             onClick={handleClose}
                         >

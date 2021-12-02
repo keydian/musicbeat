@@ -125,3 +125,7 @@ export async function getJamSongs(jamid : string) {
 export async function addSongToJam(jamid: string, songid : string) {
   return await axios.put(url.concat(`jams/${jamid}/songs/${songid}`))
 }
+
+export async function joinJam(jamid : string) {
+  return await axios.put(url.concat(`jams/${jamid}`))
+}

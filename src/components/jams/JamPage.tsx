@@ -6,6 +6,7 @@ import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux"
 import { Jam, SongList } from "../../types/types";
 import '../../styles/jams/JamPage.css'
 import { Typography } from "@mui/material";
+import JamQueue from "./JamQueue";
 
 function JamPage(Props: FullProps) {
     const [jam, setJam] = useState<Jam>()
@@ -98,8 +99,8 @@ function JamPage(Props: FullProps) {
                                         <div style={{ display: "flex" }}>
 
                                         </div>
-                                        <Typography variant="body1">BPM: 200</Typography>
-                                        <Typography variant="body1">Key: G Major</Typography>
+                                        <Typography variant="body1">BPM: {currSong.bpm}</Typography>
+                                        <Typography variant="body1">Key: {currSong.key}</Typography>
                                     </div>
 
                                 </div>
@@ -118,7 +119,7 @@ function JamPage(Props: FullProps) {
                                     </div>
                                 </div>
                                 <div className="Queue">
-                                    <p>Queue here</p>
+                                    <JamQueue jamid={jam.id} currSong={currSong}/>
                                 </div>
                             </div>
                         </div>

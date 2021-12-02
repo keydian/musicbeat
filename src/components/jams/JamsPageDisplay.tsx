@@ -22,92 +22,7 @@ function JamsPageDisplay(Props: JamPageInterface) {
     const pageSize = 8;
     let navigate = useNavigate()
 
-    const jamsTest: JamWithSong[] = [
-        {
-            id: "0",
-            name: "Indie chill",
-            host: "Valgreen",
-            participants: ["0", "1", "2", "3", "4"],
-            playlist: ["0"],
-            imageUrl: '',
-            firstSong: {
-                id: "0",
-                name: "What You Know",
-                artist: "Two Door Cinema Club",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-            }
-        },
-        {
-            id: "1",
-            name: "Indie chill",
-            host: "Valgreen",
-            participants: ["0", "1", "2", "3", "4"],
-            playlist: ["0"],
-            imageUrl: '',
-            firstSong: {
-                id: "0",
-                name: "What You Know",
-                artist: "Two Door Cinema Club",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-            }
-        },
-        {
-            id: "2",
-            name: "Indie chill",
-            host: "Valgreen",
-            participants: ["0", "1", "2", "3", "4"],
-            playlist: ["0"],
-            imageUrl: '',
-            firstSong: {
-                id: "0",
-                name: "What You Know",
-                artist: "Two Door Cinema Club",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-            }
-        },
-        {
-            id: "3",
-            name: "Indie chill",
-            host: "Valgreen",
-            participants: ["0", "1", "2", "3", "4"],
-            playlist: ["0"],
-            imageUrl: '',
-            firstSong: {
-                id: "0",
-                name: "What You Know",
-                artist: "Two Door Cinema Club",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-            }
-        },
-        {
-            id: "4",
-            name: "Indie chill",
-            host: "Valgreen",
-            participants: ["0", "1", "2", "3", "4"],
-            playlist: ["0"],
-            imageUrl: '',
-            firstSong: {
-                id: "0",
-                name: "What You Know",
-                artist: "Two Door Cinema Club",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-            }
-        },
-        {
-            id: "5",
-            name: "Indie chill",
-            host: "Valgreen",
-            participants: ["0", "1", "2", "3", "4"],
-            playlist: ["0"],
-            imageUrl: '',
-            firstSong: {
-                id: "0",
-                name: "What You Know",
-                artist: "Two Door Cinema Club",
-                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
-            }
-        }
-    ]
+
 
     useEffect(() => {
         if (Props.fProps.isLogged && page >= 0) {
@@ -222,3 +137,92 @@ function JamsPageDisplay(Props: JamPageInterface) {
 }
 
 export default JamsPageDisplay
+
+    /*
+    const jamsTest: JamWithSong[] = [
+        {
+            id: "0",
+            name: "Indie chill",
+            host: "Valgreen",
+            participants: ["0", "1", "2", "3", "4"],
+            playlist: ["0"],
+            imageUrl: '',
+            firstSong: {
+                id: "0",
+                name: "What You Know",
+                artist: "Two Door Cinema Club",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
+            }
+        },
+        {
+            id: "1",
+            name: "Indie chill",
+            host: "Valgreen",
+            participants: ["0", "1", "2", "3", "4"],
+            playlist: ["0"],
+            imageUrl: '',
+            firstSong: {
+                id: "0",
+                name: "What You Know",
+                artist: "Two Door Cinema Club",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
+            }
+        },
+        {
+            id: "2",
+            name: "Indie chill",
+            host: "Valgreen",
+            participants: ["0", "1", "2", "3", "4"],
+            playlist: ["0"],
+            imageUrl: '',
+            firstSong: {
+                id: "0",
+                name: "What You Know",
+                artist: "Two Door Cinema Club",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
+            }
+        },
+        {
+            id: "3",
+            name: "Indie chill",
+            host: "Valgreen",
+            participants: ["0", "1", "2", "3", "4"],
+            playlist: ["0"],
+            imageUrl: '',
+            firstSong: {
+                id: "0",
+                name: "What You Know",
+                artist: "Two Door Cinema Club",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
+            }
+        },
+        {
+            id: "4",
+            name: "Indie chill",
+            host: "Valgreen",
+            participants: ["0", "1", "2", "3", "4"],
+            playlist: ["0"],
+            imageUrl: '',
+            firstSong: {
+                id: "0",
+                name: "What You Know",
+                artist: "Two Door Cinema Club",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
+            }
+        },
+        {
+            id: "5",
+            name: "Indie chill",
+            host: "Valgreen",
+            participants: ["0", "1", "2", "3", "4"],
+            playlist: ["0"],
+            imageUrl: '',
+            firstSong: {
+                id: "0",
+                name: "What You Know",
+                artist: "Two Door Cinema Club",
+                imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
+            }
+        }
+    ]
+    */

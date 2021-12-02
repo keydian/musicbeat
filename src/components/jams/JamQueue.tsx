@@ -1,12 +1,17 @@
-import { Grid, IconButton } from '@mui/material';
+import { Grid, IconButton, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { getJamSongs } from '../../axios/axios';
 import '../../styles/jams/JamQueue.css'
-import { Song } from '../../types/types';
+import { Song, SongList } from '../../types/types';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-function JamQueue(jamid: string) {
+interface JamQueueInterface {
+    jamid: string,
+    currSong : SongList
+}
+
+function JamQueue(props: JamQueueInterface) {
     const [songs, setSongs] = useState<Song[]>()
     const [page, setPage] = useState<number>(0)
     const pageSize = 3;
@@ -22,15 +27,15 @@ function JamQueue(jamid: string) {
             imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
             length: 190,
             genres: [
-              "Alt",
-              "Rock"
+                "Alt",
+                "Rock"
             ],
             rating: 10.0,
-            raters: [],
+            numRates: [],
             bpm: 150,
             key: "G#"
-          },
-          {
+        },
+        {
             id: "1",
             name: "Undercover Martyn",
             album: "Tourist History",
@@ -39,15 +44,15 @@ function JamQueue(jamid: string) {
             imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
             length: 167,
             genres: [
-              "Alt",
-              "Rock"
+                "Alt",
+                "Rock"
             ],
             rating: 10.0,
-            raters: [],
-            bpm: 150,
+            numRates: [],
+            bpm: 160,
             key: "G#"
-          },
-          {
+        },
+        {
             id: "2",
             name: "I Can Talk",
             album: "Tourist History",
@@ -56,15 +61,16 @@ function JamQueue(jamid: string) {
             imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
             length: 176,
             genres: [
-              "Alt",
-              "Rock"
+                "Alt",
+                "Rock"
             ],
             rating: 10.0,
-            raters: [],
-            bpm: 150,
+            numRates: [],
+            lyrics: "",
+            bpm: 180,
             key: "G#"
-          },
-          {
+        },
+        {
             id: "3",
             name: "Something Good Can Work",
             album: "Tourist History",
@@ -73,14 +79,14 @@ function JamQueue(jamid: string) {
             imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
             length: 167,
             genres: [
-              "Alt",
-              "Rock"
+                "Alt",
+                "Rock"
             ],
             rating: 10.0,
-            raters: [],
-            bpm: 150,
+            numRates: [],
+            bpm: 200,
             key: "G#"
-          }
+        }
     ]
 
     const forwardPage = () => {
@@ -94,8 +100,8 @@ function JamQueue(jamid: string) {
     }
 
     useEffect(() => {
-        if (!songs && jamid) {
-            getJamSongs(jamid).then(
+        if (!songs && props.jamid) {
+            getJamSongs(props.jamid).then(
                 res => {
                     console.log("Jam songs received", res.data)
                     setSongs(res.data)
@@ -108,8 +114,44 @@ function JamQueue(jamid: string) {
                 }
             )
         }
-    }, [songs, jamid])
+    }, [songs, props.jamid])
 
+    const canRender = (i: number) => {
+        let min = page * pageSize;
+        let max = (page + 1) * pageSize
+        return i >= min && i < max
+    }
+
+    const bpmCalc = (bpm : number) => {
+       let diff = Math.abs(bpm - props.currSong.bpm)
+       if(diff <= 10) {
+        //green
+        return "rgba(90, 205, 100, 0.5)"
+       } else if (diff >10 && diff <=30) {
+        //yellow
+        return "rgba(194, 170, 63, 0.5)"
+       } else {
+        //red
+        return "rgba(218, 64, 64, 0.5)"
+       }
+    }
+
+    const bpmIndicator = (bpm : number) => {
+        return (
+            <p style={{backgroundColor:bpmCalc(bpm), borderRadius:"5px",padding:"3px"}}>{bpm}</p>
+        )
+    }
+       
+    
+
+
+    const keyCalc = () => {
+
+    }
+
+    const keyIndicator = () => (
+        <p></p>
+    )
 
     return (
         <div className="QueueWrapper">
@@ -123,19 +165,36 @@ function JamQueue(jamid: string) {
                         </div>
                         <Grid container spacing={2} columns={3}>
                             {
-                                songs.map((s, i) => (
+                                testSongs.map((s, i) => (
                                     <>
-                                        <Grid id={s.id+i} item xs={1}>
-                                            <div className="SongQueueWrapper">
-
-                                            </div>
-                                        </Grid>
+                                        {
+                                            canRender(i) && (
+                                                <Grid id={s.id + i} item xs={1}>
+                                                    <div className="SongQueueWrapper">
+                                                        <img
+                                                            src={s.imageUrl}
+                                                            alt="songqueuepic"
+                                                            className="songqueuepic"
+                                                        >
+                                                        </img>
+                                                        <div className="SongQueueNameArtist">
+                                                            <Typography variant="body1">
+                                                                {s.name} - {s.artist}
+                                                            </Typography>
+                                                        </div>
+                                                        <div className="SongIndicators">
+                                                            {bpmIndicator(s.bpm)}
+                                                        </div>
+                                                    </div>
+                                                </Grid>
+                                            )
+                                        }
                                     </>
                                 ))
                             }
                         </Grid>
                         <div className="QueueDisplayRightArrow">
-                            <IconButton size="large" onClick={forwardPage} disabled={Math.ceil(songs.length / pageSize) === page}>
+                            <IconButton size="large" onClick={forwardPage} disabled={Math.floor(testSongs.length / pageSize) === page}>
                                 <ArrowForwardIosIcon />
                             </IconButton>
                         </div>

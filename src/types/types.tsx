@@ -43,7 +43,9 @@ export interface SongList {
     name: string,
     album:string,
     artist: string,
-    imageUrl: string
+    imageUrl: string,
+    bpm: number,
+    key: string
 }
 
 export interface Song {
@@ -57,14 +59,18 @@ export interface Song {
     imageUrl: string,
     rating: number,
     numRates: number,
-    lyrics: string
+    lyrics: string,
+    bpm: number,
+    key: string
 }
 
 export interface SongMinimal {
     id: string,
     name: string,
     artist: string,
-    imageUrl: string
+    imageUrl: string,
+    bpm: number,
+    key: string
 }
 
 export interface Album {

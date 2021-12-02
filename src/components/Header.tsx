@@ -40,6 +40,7 @@ function Header(Props: FullProps) {
                     className="Clickable"
                 >
                 </img>
+              
                 <Button size="large" variant="outlined" className="Button">
                     Search
                 </Button>

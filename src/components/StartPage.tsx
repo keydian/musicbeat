@@ -7,6 +7,7 @@ import '../styles/StartPage.css';
 import {Song} from "../types/types";
 import {getHomepage} from "../axios/axios";
 import DiscoveryQueue from "../components/trending/DiscoveryQueue"
+import Trending from "../components/trending/Trending"
 
 function StartPage(Props: FullProps) {
 
@@ -60,7 +61,11 @@ const getHomepageSongs = () =>{
             </Typography>
            </div>
            <div className = "Trending">
-
+               <div>
+               {trending !== undefined &&
+                    <Trending songs={trending}/>
+                }
+               </div>
            </div>
         </div>
     )

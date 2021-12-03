@@ -1,0 +1,42 @@
+.gridSongImage{
+    margin-top: 0.6vh;
+    margin-left: 0.7vw;
+    width:  50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.TrendingGrid{
+    width: 100%;
+    display: flex;
+    align-items: left;
+    max-width: 80vw;
+    max-height: 25vh;
+}
+
+.gridItem{
+    display:flex;
+    width: 18vw;
+    height: 8vh;
+    max-width: 20vw;
+    max-height: 12vh;
+    background-color: rgb(106, 90, 205,0.3);
+    border-radius: 15px;
+}
+.SongGridName {
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-left: 5px;
+    width: 70%;
+}
+.SongGridArtist{
+    text-overflow:ellipsis;
+    overflow: hidden;
+}

@@ -1,8 +1,9 @@
-import {dispatch_to_props, FullProps, state_to_props} from "../../redux/redux";
+import {dispatch_to_props, state_to_props} from "../../redux/redux";
 import {connect} from "react-redux";
 import Carousel from "react-material-ui-carousel";
 import { Song } from "../../types/types"
 import '../../styles/DiscoveryQueue.css'
+import { useNavigate } from "react-router";
 interface DiscoveryProps{
     songs: Song[]
 }
@@ -13,13 +14,14 @@ interface ItemProps{
 }
 
 function DiscoveryQueue(Props: DiscoveryProps){
-    
+
     return(
         <div>
             <Carousel
-                className="carousel"
                 indicators={false}
+                className="carousel"
                 autoPlay={false}
+                navButtonsAlwaysVisible={true}
                 animation={"slide"}
                 duration={900}
             >{
@@ -31,13 +33,15 @@ function DiscoveryQueue(Props: DiscoveryProps){
 }
 function Item(props: ItemProps)
 {
+    let navigate = useNavigate();
     return (
-        <div style={{marginTop:"1vh"}}>
-            <img src={props.song.imageUrl} className="songImage">
+        <div style={{marginTop:"2.5vh"}}>
+            <img src={props.song.imageUrl} className="songImage"
+            onClick={()=>navigate("/songs/"+props.song.id)} style={{cursor:"pointer"}}>
             </img>
-            <div className="text">
-            <p>{props.song.name}</p>
-            <p>{props.song.artist}</p>
+            <div>
+            <h2 className="songTitle">{props.song.name}</h2>
+            <h4 className="songArtist">{props.song.artist}</h4>
             </div>
             
         </div>

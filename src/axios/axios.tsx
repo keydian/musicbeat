@@ -27,13 +27,13 @@ axios.interceptors.response.use(
       !config.config.url?.includes("logout")
     ) {
       store.dispatch(reset_token(config.headers["authorization"]));
-      localStorage.setItem("token", config.headers["authorization"]);
+      sessionStorage.setItem("token", config.headers["authorization"]);
     }
     return config;
   },
   function (err) {
     if (err.response.status === 401) {
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       store.dispatch(logout());
     }
     return Promise.reject(err);
@@ -128,4 +128,20 @@ export async function addSongToJam(jamid: string, songid : string) {
 
 export async function joinJam(jamid : string) {
   return await axios.put(url.concat(`jams/${jamid}`))
+}
+
+export async function searchSongs(
+  by : string,
+  val: string,
+  pageNum : number,
+  pageSize : number
+) {
+  return await axios.get(url.concat(`songs/search`), {
+    params: {
+      by : by,
+      val: val,
+      pageNum : pageNum,
+      size : pageSize
+    }
+  })
 }

@@ -59,7 +59,7 @@ function Login(Props: FullProps) {
                         token: tkn,
                         jam:decodedTkn.jam
                     })
-                    localStorage.setItem("token", tkn);
+                    sessionStorage.setItem("token", tkn);
                     setSnacksuc(true)
                     navigate("/home")
                 }

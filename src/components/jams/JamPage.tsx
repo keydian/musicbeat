@@ -8,6 +8,7 @@ import '../../styles/jams/JamPage.css'
 import { Typography } from "@mui/material";
 import JamQueue from "./JamQueue";
 import LikeButtons from "./LikeButtons";
+import MiniSearch from "./MiniSearch";
 
 
 function JamPage(Props: FullProps) {
@@ -109,6 +110,7 @@ function JamPage(Props: FullProps) {
                                     </div>
                                     <div className="SmallSearchTracks">
                                         <p>Small search tracks here here</p>
+                                        <MiniSearch/>
                                     </div>
                                 </div>
                                 <div className="Queue">

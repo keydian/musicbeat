@@ -33,7 +33,7 @@ function App(Props: FullProps) {
   })
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
+    let token = sessionStorage.getItem("token");
     if (!Props.isLogged && token) {
       let decodedTkn = jwtDecode<Token>(token);
       Props.login({

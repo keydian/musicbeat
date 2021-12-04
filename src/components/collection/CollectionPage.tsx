@@ -5,7 +5,7 @@ import { deleteSongFromCol, getFullCollection } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { CollectionFull } from "../../types/types";
 import '../../styles/collection/CollectionPage.css'
-import { Alert, Button, IconButton, List, ListItem, ListItemIcon, ListItemText, Snackbar, Typography } from "@mui/material";
+import { Alert, Button, List, ListItem, ListItemIcon, ListItemText, Snackbar, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';

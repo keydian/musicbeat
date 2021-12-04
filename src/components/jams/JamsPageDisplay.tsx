@@ -1,6 +1,5 @@
 import { Grid, IconButton, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
 import { searchJams } from '../../axios/axios'
 import { FullProps } from '../../redux/redux'
 import '../../styles/jams/JamsPageDisplay.css'
@@ -20,9 +19,6 @@ function JamsPageDisplay(Props: JamPageInterface) {
     const [page, setPage] = useState<number>(0)
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
     const pageSize = 8;
-    let navigate = useNavigate()
-
-
 
     useEffect(() => {
         if (Props.fProps.isLogged && page >= 0) {

@@ -38,6 +38,7 @@ function Item(props: ItemProps)
         <div style={{marginTop:"2.5vh"}}>
             <img src={props.song.imageUrl} className="songImage"
             onClick={()=>navigate("/songs/"+props.song.id)} style={{cursor:"pointer"}}>
+            atl={"songimg"}
             </img>
             <div>
             <h2 className="songTitle">{props.song.name}</h2>

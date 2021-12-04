@@ -2,7 +2,6 @@ import { Typography } from "@mui/material";
 import {useEffect, useState} from 'react'
 import {dispatch_to_props, FullProps, state_to_props} from "../redux/redux";
 import {connect} from "react-redux";
-import { useNavigate } from "react-router";
 import '../styles/StartPage.css';
 import {Song} from "../types/types";
 import {getHomepage} from "../axios/axios";
@@ -35,8 +34,7 @@ const getHomepageSongs = () =>{
     useEffect(()=>{
         getHomepageSongs()
     }, [Props.isLogged])
-    
-    let navigate = useNavigate();
+
     
     return (
         <div className = "StartPage">

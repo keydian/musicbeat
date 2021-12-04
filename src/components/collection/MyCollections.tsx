@@ -1,14 +1,13 @@
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import '../../styles/collection/MyCollections.css'
 import MyCollectionsDisplay from "./MyCollectionsDisplay";
 
 
 function MyCollections(Props: FullProps) {
-    let navigate = useNavigate()
     let usernamePath = useParams().username
     const [username, setUsername] = useState<string>('')
 

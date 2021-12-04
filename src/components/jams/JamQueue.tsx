@@ -1,5 +1,5 @@
 import { Grid, IconButton, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import '../../styles/jams/JamQueue.css'
 import { Song, SongList } from '../../types/types';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';

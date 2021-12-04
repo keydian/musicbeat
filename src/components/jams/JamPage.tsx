@@ -165,20 +165,21 @@ function JamPage(Props: FullProps) {
                             </div>
                             <Typography style={{ textAlign: "left", paddingTop: "1vh" }} variant="h6">Track Selection</Typography>
                             <div className="JamPageTrackSelection">
-                                {
-                                    Props.username === jam.host && (
-                                        <div className="SuggestedAndSearch">
-                                            <div className="SuggestedGridWrapper">
-                                                <SuggestedGrid addCallback={addToQueueCallback} jamid={jam.id}/>
-                                            </div>
+                                <div className="SuggestedAndSearch">
+                                    <div className="SuggestedGridWrapper">
+                                        <Typography variant="h6" style={{ paddingLeft: "6vw", textAlign: "left" }}>Suggested</Typography>
+                                        <SuggestedGrid addCallback={addToQueueCallback} jamid={jam.id} currSong={currSong} isHost={Props.username === jam.host} />
+                                    </div>
+                                    {
+                                        Props.username === jam.host && (
                                             <div className="SmallSearchTracks">
                                                 <MiniSearch addCallback={addToQueueCallback} />
                                             </div>
-                                        </div>
-                                    )
-                                }
+                                        )
+                                    }
+                                </div>
                                 <div className="Queue">
-                                    <Typography style={{ paddingLeft: "6vw", textAlign: "left", paddingBottom: "1vh" }} variant="h6">Queue</Typography>
+                                    <Typography style={{ paddingLeft: "6vw", textAlign: "left" }} variant="h6">Queue</Typography>
                                     {
                                         songs && (
                                             <JamQueue

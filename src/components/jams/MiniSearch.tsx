@@ -73,7 +73,7 @@ function MiniSearch(props : MiniSearchInterface) {
                             bgcolor: 'rgb(106, 90, 205,0.5)',
                             position: 'relative',
                             alignItems: 'center',
-                            maxHeight: 100,
+                            maxHeight: 140,
                             overflow: 'auto',
                             padding: "0",
                             borderRadius:"0px 0px 0px 10px"

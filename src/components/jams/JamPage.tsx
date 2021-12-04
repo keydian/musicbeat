@@ -74,19 +74,19 @@ function JamPage(Props: FullProps) {
                                 </div>
                                 <div className="MusicDisplayerMid">
                                     <div className="SongDetails">
-                                        <Typography 
-                                        variant="h6"
-                                        style={{color:"rgb(129, 103, 184)"}}
+                                        <Typography
+                                            variant="h6"
+                                            style={{ color: "rgb(129, 103, 184)" }}
                                         >
                                             Now playing:
-                                            </Typography>
+                                        </Typography>
                                         <Typography variant="h6">{currSong.name} - {currSong.artist}</Typography>
                                         <div style={{ display: "flex", alignItems: "center" }}>
-                                            <Typography style={{color:"rgb(129, 103, 184)", fontWeight:"900",paddingRight:"5px"}} variant="body1">BPM:</Typography>
+                                            <Typography style={{ color: "rgb(129, 103, 184)", fontWeight: "900", paddingRight: "5px" }} variant="body1">BPM:</Typography>
                                             <Typography variant="subtitle1">{currSong.bpm}</Typography>
                                         </div>
                                         <div style={{ display: "flex", alignItems: "center" }}>
-                                            <Typography style={{color:"rgb(129, 103, 184)", fontWeight:"900",paddingRight:"5px"}} variant="body1">Key:</Typography>
+                                            <Typography style={{ color: "rgb(129, 103, 184)", fontWeight: "900", paddingRight: "5px" }} variant="body1">Key:</Typography>
                                             <Typography variant="subtitle1">{currSong.key}</Typography>
                                         </div>
                                     </div>
@@ -112,6 +112,7 @@ function JamPage(Props: FullProps) {
                                     </div>
                                 </div>
                                 <div className="Queue">
+                                    <Typography style={{paddingLeft: "6vw", textAlign: "left",paddingBottom:"1vh"}} variant="h6">Queue</Typography>
                                     <JamQueue jamid={jam.id} currSong={currSong} />
                                 </div>
                             </div>

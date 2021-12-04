@@ -16,6 +16,151 @@ function JamQueue(props: JamQueueInterface) {
     const [page, setPage] = useState<number>(0)
     const pageSize = 3;
 
+    const forwardPage = () => {
+        setPage((page) => page + 1)
+    }
+
+    const backwardPage = () => {
+        if (page > 0) {
+            setPage((page) => page - 1)
+        }
+    }
+
+    useEffect(() => {
+        console.log("SONG QUEUE", songs)
+        if (!songs && props.jamid) {
+            getJamSongs(props.jamid).then(
+                res => {
+                    setSongs(res.data.slice(1, res.data.length))
+                }
+            ).catch(
+                err => {
+                    if (err.response) {
+                        console.log(err.response)
+                    }
+                }
+            )
+        }
+    }, [songs, props.jamid])
+
+
+    const canRender = (i: number) => {
+        let min = page * pageSize;
+        let max = (page + 1) * pageSize
+        return i >= min && i < max
+    }
+
+    const goForward = () => {
+        if (songs) {
+            return Math.floor((songs.length - 1) / pageSize) === page
+        } else {
+            return false
+        }
+    }
+
+    const bpmCalc = (bpm: number) => {
+        let diff = Math.abs(bpm - props.currSong.bpm)
+        if (diff <= 10) {
+            //green
+            return "rgba(90, 205, 100, 0.5)"
+        } else if (diff > 10 && diff <= 30) {
+            //yellow
+            return "rgba(194, 170, 63, 0.5)"
+        } else {
+            //red
+            return "rgba(218, 64, 64, 0.5)"
+        }
+    }
+
+    const bpmIndicator = (bpm: number) => {
+        return (
+            <Typography
+                style={{ backgroundColor: bpmCalc(bpm), borderRadius: "5px", border: "1px solid black", marginBottom: "5px" }}>
+                {bpm}
+            </Typography>
+        )
+    }
+
+
+    const keyCalc = (key: string) => {
+        if (key === props.currSong.key) {
+            return "rgba(90, 205, 100, 0.5)"
+        }
+        let val = Math.random()
+        if (val <= 0.3) {
+            return "rgba(90, 205, 100, 0.5)"
+        } else if (val > 0.3 && val <= 0.6) {
+            return "rgba(194, 170, 63, 0.5)"
+        } else {
+            return "rgba(218, 64, 64, 0.5)"
+        }
+    }
+
+    const keyIndicator = (key: string) => {
+        return (
+            <Typography
+                style={{ backgroundColor: keyCalc(key), borderRadius: "5px", border: "1px solid black" }}
+            >{key}</Typography>
+        )
+    }
+
+    return (
+        <div className="QueueWrapper">
+            {
+                songs && (
+                    <>
+                        <div className="QueueDisplayLeftArrow">
+                            <IconButton size="large" disabled={page === 0} onClick={backwardPage}>
+                                <ArrowBackIosIcon />
+                            </IconButton>
+                        </div>
+                        <Grid container spacing={2} columns={3}>
+                            {
+                                songs.map((s, i) => (
+                                    <>
+                                        {
+                                            canRender(i) && (
+                                                <Grid id={s.id + i} item xs={1}>
+                                                    <div className="SongQueueWrapper">
+                                                        <img
+                                                            src={s.imageUrl}
+                                                            alt="songqueuepic"
+                                                            className="songqueuepic"
+                                                        >
+                                                        </img>
+                                                        <div className="SongQueueNameArtist">
+                                                            <Typography variant="body1">
+                                                                {s.name} - {s.artist}
+                                                            </Typography>
+                                                        </div>
+                                                        <div className="SongIndicators">
+                                                            {bpmIndicator(s.bpm)}
+                                                            {keyIndicator(s.key)}
+                                                        </div>
+                                                    </div>
+                                                </Grid>
+                                            )
+                                        }
+                                    </>
+                                ))
+                            }
+                        </Grid>
+                        <div className="QueueDisplayRightArrow">
+                            <IconButton size="large" onClick={forwardPage} disabled={goForward()}>
+                                <ArrowForwardIosIcon />
+                            </IconButton>
+                        </div>
+                    </>
+                )
+            }
+        </div>
+    )
+}
+
+export default JamQueue;
+
+/*
+
 
     const testSongs = [
         {
@@ -106,145 +251,4 @@ function JamQueue(props: JamQueueInterface) {
         }
     ]
 
-    const forwardPage = () => {
-        setPage((page) => page + 1)
-    }
-
-    const backwardPage = () => {
-        if (page > 0) {
-            setPage((page) => page - 1)
-        }
-    }
-
-    useEffect(() => {
-        console.log("SONG QUEUE",songs)
-        if (!songs && props.jamid) {
-            getJamSongs(props.jamid).then(
-                res => {
-                    setSongs(res.data.slice(1,res.data.length))
-                }
-            ).catch(
-                err => {
-                    if (err.response) {
-                        console.log(err.response)
-                    }
-                }
-            )
-        }
-    }, [songs, props.jamid])
-
-
-    const canRender = (i: number) => {
-        let min = page * pageSize;
-        let max = (page + 1) * pageSize
-        return i >= min && i < max
-    }
-
-    const goForward = () => {
-        if(songs) {
-            return Math.floor((songs.length-1) / pageSize) === page
-        } else {
-            return false
-        }
-    }
-
-    const bpmCalc = (bpm: number) => {
-        let diff = Math.abs(bpm - props.currSong.bpm)
-        if (diff <= 10) {
-            //green
-            return "rgba(90, 205, 100, 0.5)"
-        } else if (diff > 10 && diff <= 30) {
-            //yellow
-            return "rgba(194, 170, 63, 0.5)"
-        } else {
-            //red
-            return "rgba(218, 64, 64, 0.5)"
-        }
-    }
-
-    const bpmIndicator = (bpm: number) => {
-        return (
-            <Typography
-                style={{ backgroundColor: bpmCalc(bpm), borderRadius: "5px", border:"1px solid black", marginBottom:"5px"}}>
-                {bpm}
-            </Typography>
-        )
-    }
-
-
-    const keyCalc = (key: string) => {
-        if (key === props.currSong.key) {
-            return "rgba(90, 205, 100, 0.5)"
-        }
-        let val = Math.random()
-        if (val <= 0.3) {
-            return "rgba(90, 205, 100, 0.5)"
-        } else if (val > 0.3 && val <= 0.6) {
-            return "rgba(194, 170, 63, 0.5)"
-        } else {
-            return "rgba(218, 64, 64, 0.5)"
-        }
-    }
-
-    const keyIndicator = (key: string) => {
-        return (
-            <Typography
-                style={{ backgroundColor: keyCalc(key), borderRadius: "5px", border:"1px solid black" }}
-            >{key}</Typography>
-        )
-    }
-
-    return (
-        <div className="QueueWrapper">
-            {
-                songs && (
-                    <>
-                        <div className="QueueDisplayLeftArrow">
-                            <IconButton size="large" disabled={page === 0} onClick={backwardPage}>
-                                <ArrowBackIosIcon />
-                            </IconButton>
-                        </div>
-                        <Grid container spacing={2} columns={3}>
-                            {
-                                songs.map((s, i) => (
-                                    <>
-                                        {
-                                            canRender(i) && (
-                                                <Grid id={s.id + i} item xs={1}>
-                                                    <div className="SongQueueWrapper">
-                                                        <img
-                                                            src={s.imageUrl}
-                                                            alt="songqueuepic"
-                                                            className="songqueuepic"
-                                                        >
-                                                        </img>
-                                                        <div className="SongQueueNameArtist">
-                                                            <Typography variant="body1">
-                                                                {s.name} - {s.artist}
-                                                            </Typography>
-                                                        </div>
-                                                        <div className="SongIndicators">
-                                                            {bpmIndicator(s.bpm)}
-                                                            {keyIndicator(s.key)}
-                                                        </div>
-                                                    </div>
-                                                </Grid>
-                                            )
-                                        }
-                                    </>
-                                ))
-                            }
-                        </Grid>
-                        <div className="QueueDisplayRightArrow">
-                            <IconButton size="large" onClick={forwardPage} disabled={goForward()}>
-                                <ArrowForwardIosIcon />
-                            </IconButton>
-                        </div>
-                    </>
-                )
-            }
-        </div>
-    )
-}
-
-export default JamQueue;
+*/

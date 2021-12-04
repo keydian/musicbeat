@@ -86,6 +86,23 @@ function JamQueue(props: JamQueueInterface) {
             numRates: [],
             bpm: 200,
             key: "B"
+        },
+        {
+            id: "4",
+            name: "Something Good Can Work 2",
+            album: "Tourist History",
+            artist: "Two Door Cinema Club",
+            info: "other-info-here",
+            imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/b2/Two_Door_Cinema_Club_-_Tourist_History.png",
+            length: 167,
+            genres: [
+                "Alt",
+                "Rock"
+            ],
+            rating: 10.0,
+            numRates: [],
+            bpm: 200,
+            key: "B"
         }
     ]
 
@@ -100,11 +117,11 @@ function JamQueue(props: JamQueueInterface) {
     }
 
     useEffect(() => {
+        console.log("SONG QUEUE",songs)
         if (!songs && props.jamid) {
             getJamSongs(props.jamid).then(
                 res => {
-                    console.log("Jam songs received", res.data)
-                    setSongs(res.data)
+                    setSongs(res.data.slice(1,res.data.length))
                 }
             ).catch(
                 err => {
@@ -116,10 +133,19 @@ function JamQueue(props: JamQueueInterface) {
         }
     }, [songs, props.jamid])
 
+
     const canRender = (i: number) => {
         let min = page * pageSize;
         let max = (page + 1) * pageSize
         return i >= min && i < max
+    }
+
+    const goForward = () => {
+        if(songs) {
+            return Math.floor((songs.length-1) / pageSize) === page
+        } else {
+            return false
+        }
     }
 
     const bpmCalc = (bpm: number) => {
@@ -180,7 +206,7 @@ function JamQueue(props: JamQueueInterface) {
                         </div>
                         <Grid container spacing={2} columns={3}>
                             {
-                                testSongs.map((s, i) => (
+                                songs.map((s, i) => (
                                     <>
                                         {
                                             canRender(i) && (
@@ -210,7 +236,7 @@ function JamQueue(props: JamQueueInterface) {
                             }
                         </Grid>
                         <div className="QueueDisplayRightArrow">
-                            <IconButton size="large" onClick={forwardPage} disabled={Math.floor(testSongs.length / pageSize) === page}>
+                            <IconButton size="large" onClick={forwardPage} disabled={goForward()}>
                                 <ArrowForwardIosIcon />
                             </IconButton>
                         </div>

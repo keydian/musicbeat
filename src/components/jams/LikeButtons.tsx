@@ -30,13 +30,27 @@ function LikeButtons() {
         }
     }
 
+    const likedColor = () => {
+        if (liked) {
+            return 'rgb(159, 78, 162)'
+        }
+        return 'white'
+    }
+
+    const dislikedColor = () => {
+        if (disliked) {
+            return 'rgb(159, 78, 162)'
+        }
+        return 'white'
+    }
+
     return (
         <div className="MusicLikes">
-            <div style={{marginLeft:"auto", paddingRight:"2vw"}}>
+            <div style={{ marginLeft: "auto", paddingRight: "2vw" }}>
                 <Button
                     variant="contained"
                     startIcon={<ThumbUpIcon />}
-                    style={{ backgroundColor: "rgb(106, 90, 205,0.5)" }}
+                    style={{ backgroundColor: "rgb(106, 90, 205,0.5)", color:likedColor() }}
                     onClick={like}
                 >
                     {likes}
@@ -44,7 +58,7 @@ function LikeButtons() {
                 <Button
                     variant="contained"
                     startIcon={<ThumbDownIcon />}
-                    style={{ backgroundColor: "rgb(106, 90, 205,0.5)", marginLeft:"1vw" }}
+                    style={{ backgroundColor: "rgb(106, 90, 205,0.5)", marginLeft: "1vw", color:dislikedColor() }}
                     onClick={dislike}
                 >
                     {dislikes}

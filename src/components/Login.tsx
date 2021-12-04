@@ -45,6 +45,8 @@ function Login(Props: FullProps) {
     };
 
     const submitLogin = () => {
+        setSnackerr(false)
+        setSnacksuc(false)
         if (login.username === null || login.username.trim() === '' ||
             login.pwd === null || login.pwd.trim() === '') {
             setError(true)
@@ -98,12 +100,12 @@ function Login(Props: FullProps) {
     return (
         <div className="LoginWrapper">
             <Snackbar open={snackSuc} autoHideDuration={3000} onClose={handleCloseSuc}>
-                <Alert onClose={handleCloseSuc} severity="success" sx={{ width: '100%' }}>
+                <Alert variant="filled" onClose={handleCloseSuc} severity="success" sx={{ width: '100%' }}>
                     Login succesfull!
                 </Alert>
             </Snackbar>
             <Snackbar open={snackErr} autoHideDuration={3000} onClose={handleCloseErr}>
-                <Alert onClose={handleCloseErr} severity="error" sx={{ width: '100%' }}>
+                <Alert variant="filled" onClose={handleCloseErr} severity="error" sx={{ width: '100%' }}>
                     {errMsg}
                 </Alert>
             </Snackbar>

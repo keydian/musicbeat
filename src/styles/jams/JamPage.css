@@ -66,6 +66,8 @@
 
 .SmallSearchTracks {
     width: 20%;
+    padding-right: 2vw;
+    padding-top: 2vh;
 }
 
 .Queue {

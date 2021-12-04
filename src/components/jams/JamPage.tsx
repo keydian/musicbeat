@@ -1,21 +1,48 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
-import { getJam, getSong } from "../../axios/axios";
+import { addSongToJam, getJam, getJamSongs, getSong } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
-import { Jam, SongList } from "../../types/types";
+import { Jam, Song, SongList } from "../../types/types";
 import '../../styles/jams/JamPage.css'
-import { Typography } from "@mui/material";
+import { Alert, Snackbar, Typography } from "@mui/material";
 import JamQueue from "./JamQueue";
 import LikeButtons from "./LikeButtons";
 import MiniSearch from "./MiniSearch";
+import SuggestedGrid from "./SuggestedGrid";
 
 
 function JamPage(Props: FullProps) {
     const [jam, setJam] = useState<Jam>()
     const [currSong, setCurrsong] = useState<SongList>()
+    const [songs, setSongs] = useState<Song[]>([])
+    const [sucOpen, setSuc] = useState<boolean>(false)
+    const [errOpen, setErr] = useState<boolean>(false)
+    const [errMsg, setErrMsg] = useState<string>()
     let jamid = useParams().jamid;
     const songwave = process.env.PUBLIC_URL + "/other/songwave.png";
+
+    const addToQueueCallback = useCallback((s: Song) => {
+        if (jam) {
+            setErrMsg(undefined)
+            setErr(false)
+            setSuc(false)
+            addSongToJam(jam.id, s.id).then(
+                res => {
+                    setSuc(true)
+                    console.log("added song", res.data)
+                    setSongs([...songs, s])
+                }
+            ).catch(
+                err => {
+                    if (err.response) {
+                        console.log(err.response)
+                        setErrMsg(err.response.data.message)
+                    }
+                }
+            )
+        }
+    }, [songs])
 
     useEffect(() => {
         if (jamid && Props.isLogged) {
@@ -34,13 +61,29 @@ function JamPage(Props: FullProps) {
         }
     }, [Props.isLogged, jamid])
 
+    useEffect(() => {
+        if (errMsg) {
+            setErr(true)
+        }
+    }, [errMsg])
+
 
     useEffect(() => {
         if (jam) {
             getSong(jam.playlist[0]).then(
                 res => {
-                    console.log("Next song", res.data)
                     setCurrsong(res.data)
+                }
+            ).catch(
+                err => {
+                    if (err.response) {
+                        console.log(err.response)
+                    }
+                }
+            )
+            getJamSongs(jam.id).then(
+                res => {
+                    setSongs(res.data.slice(1, res.data.length))
                 }
             ).catch(
                 err => {
@@ -52,11 +95,29 @@ function JamPage(Props: FullProps) {
         }
     }, [Props.isLogged, jam])
 
+    const closeSuc = () => {
+        setSuc(false)
+    }
+
+    const closeErr = () => {
+        setErr(false)
+    }
+
     return (
         <div className="JamPageWrapper">
             {
                 jam && currSong && (
                     <>
+                        <Snackbar open={sucOpen} autoHideDuration={3000} onClose={closeSuc}>
+                            <Alert variant="filled" onClose={closeSuc} severity="success" sx={{ width: '100%' }}>
+                                Song added to queue!
+                            </Alert>
+                        </Snackbar>
+                        <Snackbar open={errOpen} autoHideDuration={3000} onClose={closeErr}>
+                            <Alert variant="filled" onClose={closeErr} severity="error" sx={{ width: '100%' }}>
+                                {errMsg}
+                            </Alert>
+                        </Snackbar>
                         <div className="JamPageLeft">
                             <Typography
                                 variant="h6"
@@ -104,18 +165,28 @@ function JamPage(Props: FullProps) {
                             </div>
                             <Typography style={{ textAlign: "left", paddingTop: "1vh" }} variant="h6">Track Selection</Typography>
                             <div className="JamPageTrackSelection">
-                                <div className="SuggestedAndSearch">
-                                    <div className="SuggestedGridWrapper">
-                                        <p>Suggested grid here</p>
-                                    </div>
-                                    <div className="SmallSearchTracks">
-                                        <p>Small search tracks here here</p>
-                                        <MiniSearch/>
-                                    </div>
-                                </div>
+                                {
+                                    Props.username === jam.host && (
+                                        <div className="SuggestedAndSearch">
+                                            <div className="SuggestedGridWrapper">
+                                                <SuggestedGrid addCallback={addToQueueCallback} jamid={jam.id}/>
+                                            </div>
+                                            <div className="SmallSearchTracks">
+                                                <MiniSearch addCallback={addToQueueCallback} />
+                                            </div>
+                                        </div>
+                                    )
+                                }
                                 <div className="Queue">
-                                    <Typography style={{paddingLeft: "6vw", textAlign: "left",paddingBottom:"1vh"}} variant="h6">Queue</Typography>
-                                    <JamQueue jamid={jam.id} currSong={currSong} />
+                                    <Typography style={{ paddingLeft: "6vw", textAlign: "left", paddingBottom: "1vh" }} variant="h6">Queue</Typography>
+                                    {
+                                        songs && (
+                                            <JamQueue
+                                                jamid={jam.id}
+                                                currSong={currSong}
+                                                songs={songs} />
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>

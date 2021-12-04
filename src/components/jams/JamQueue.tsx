@@ -1,6 +1,5 @@
 import { Grid, IconButton, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { getJamSongs } from '../../axios/axios';
 import '../../styles/jams/JamQueue.css'
 import { Song, SongList } from '../../types/types';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -8,11 +7,11 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 interface JamQueueInterface {
     jamid: string,
-    currSong: SongList
+    currSong: SongList,
+    songs : Song[]
 }
 
 function JamQueue(props: JamQueueInterface) {
-    const [songs, setSongs] = useState<Song[]>()
     const [page, setPage] = useState<number>(0)
     const pageSize = 3;
 
@@ -26,24 +25,6 @@ function JamQueue(props: JamQueueInterface) {
         }
     }
 
-    useEffect(() => {
-        console.log("SONG QUEUE", songs)
-        if (!songs && props.jamid) {
-            getJamSongs(props.jamid).then(
-                res => {
-                    setSongs(res.data.slice(1, res.data.length))
-                }
-            ).catch(
-                err => {
-                    if (err.response) {
-                        console.log(err.response)
-                    }
-                }
-            )
-        }
-    }, [songs, props.jamid])
-
-
     const canRender = (i: number) => {
         let min = page * pageSize;
         let max = (page + 1) * pageSize
@@ -51,8 +32,8 @@ function JamQueue(props: JamQueueInterface) {
     }
 
     const goForward = () => {
-        if (songs) {
-            return Math.floor((songs.length - 1) / pageSize) === page
+        if (props.songs) {
+            return Math.floor((props.songs.length - 1) / pageSize) === page
         } else {
             return false
         }
@@ -107,7 +88,7 @@ function JamQueue(props: JamQueueInterface) {
     return (
         <div className="QueueWrapper">
             {
-                songs && (
+                props.songs.length > 0 && (
                     <>
                         <div className="QueueDisplayLeftArrow">
                             <IconButton size="large" disabled={page === 0} onClick={backwardPage}>
@@ -116,7 +97,7 @@ function JamQueue(props: JamQueueInterface) {
                         </div>
                         <Grid container spacing={2} columns={3}>
                             {
-                                songs.map((s, i) => (
+                                props.songs.map((s, i) => (
                                     <>
                                         {
                                             canRender(i) && (

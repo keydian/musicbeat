@@ -5,11 +5,12 @@ import { addSongToJam, getJam, getJamSongs, getSong, removeSonFromJam } from "..
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { Jam, Song, SongList } from "../../types/types";
 import '../../styles/jams/JamPage.css'
-import { Alert, Snackbar, Typography } from "@mui/material";
+import { Alert, Button, Snackbar, Typography } from "@mui/material";
 import JamQueue from "./JamQueue";
 import LikeButtons from "./LikeButtons";
 import MiniSearch from "./MiniSearch";
 import SuggestedGrid from "./SuggestedGrid";
+import JamChat from "./JamChat";
 
 
 function JamPage(Props: FullProps) {
@@ -43,12 +44,12 @@ function JamPage(Props: FullProps) {
         }
     }, [songs])
 
-    const removeFromQueueCallback = useCallback((s:Song) => {
-        if(jam) {
+    const removeFromQueueCallback = useCallback((s: Song) => {
+        if (jam) {
             resetSnackbars()
             removeSonFromJam(jam.id, s.id).then(
                 res => {
-                    console.log("removed song",res.data)
+                    console.log("removed song", res.data)
                     removeFromSongs(s)
                     setSuc2(true)
                 }
@@ -63,7 +64,7 @@ function JamPage(Props: FullProps) {
         }
     }, [songs])
 
-    const removeFromSongs = (s : Song) => {
+    const removeFromSongs = (s: Song) => {
         let filteredArray = songs.filter(item => item.id !== s.id)
         setSongs(filteredArray)
     }
@@ -228,13 +229,26 @@ function JamPage(Props: FullProps) {
                                 </div>
                             </div>
                         </div>
-                        <div className="JamPageChat">
-
+                        <div className="JamPageRight">
+                            <JamChat fProps={Props} participants={jam.participants}/>
+                            <Button 
+                            color="error" 
+                            variant="contained" 
+                            style={{width:"70%", borderRadius:"25px", marginTop:"2vh"}}
+                            onClick={() => {}}
+                            >
+                               {
+                                   Props.username === jam.host ? (
+                                        <Typography variant="h6">End jam</Typography>
+                                   ) : (
+                                        <Typography variant="h6">Leave jam</Typography>
+                                   )
+                               }
+                            </Button>
                         </div>
                     </>
                 )
             }
-
         </div>
     )
 }

@@ -79,3 +79,9 @@
     max-height: 25vh;
     padding-top: 10vh;
 }
+
+.JamPageRight {
+    width: 30%;
+    height: 100%;
+    margin-top: 3vh;
+}

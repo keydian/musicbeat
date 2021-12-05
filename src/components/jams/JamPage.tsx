@@ -11,7 +11,7 @@ import LikeButtons from "./LikeButtons";
 import MiniSearch from "./MiniSearch";
 import SuggestedGrid from "./SuggestedGrid";
 import JamChat from "./JamChat";
-
+import Particles from "react-tsparticles";
 
 function JamPage(Props: FullProps) {
     const [jam, setJam] = useState<Jam>()

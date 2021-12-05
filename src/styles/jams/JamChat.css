@@ -4,6 +4,13 @@
     background-color:rgb(255, 255, 255, 0.5);
     margin: auto;
     margin-top: 2vh;
+    padding-bottom: 1vh;
+}
+
+.JamChatHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .InnerChat {

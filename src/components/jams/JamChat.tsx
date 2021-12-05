@@ -4,6 +4,7 @@ import { FullProps } from '../../redux/redux'
 import '../../styles/jams/JamChat.css'
 import * as faker from 'faker';
 import MoodIcon from '@mui/icons-material/Mood';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 interface Message {
     author: string,
@@ -50,7 +51,6 @@ function JamChat(Props: JamChatInterface) {
 
 
     useEffect(() => {
-        console.log(messages)
         if (messages.length > 0 && messages[messages.length - 1].author === Props.fProps.username) {
             genFakeMsg()
         }
@@ -58,7 +58,14 @@ function JamChat(Props: JamChatInterface) {
 
     return (
         <div className="JamChat">
-            <Typography variant="h6">Chat</Typography>
+            <div className="JamChatHeader">
+                <Typography variant="h4">Chat</Typography>
+                <div style={{display:"flex",paddingLeft:"1vw"}}>
+                    <PeopleAltIcon fontSize="large"/>
+                    <Typography variant="body1">{Props.participants.length}</Typography>
+                </div>
+            </div>
+
             <div className="InnerChat">
                 <>
                     {
@@ -94,21 +101,22 @@ function JamChat(Props: JamChatInterface) {
                     }
                 </>
             </div>
-            <div style={{ display: "flex", alignItems:"center", marginLeft:"auto", justifyContent:"center" }}>
+            <div style={{ display: "flex", alignItems: "center", marginLeft: "auto", justifyContent: "center" }}>
                 <TextField
                     id="msgcontent"
                     value={content}
                     type="content"
                     className="MsgInput"
                     label="Text..."
-                    variant="filled"
+                    variant="outlined"
+                    size="small"
                     onKeyPress={(e) => {
                         sendMsg(e)
                     }}
                     onChange={(e) => {
                         changeContent(e)
                     }} />
-                <MoodIcon fontSize="medium" className="EmojiIcon"/>
+                <MoodIcon fontSize="medium" className="EmojiIcon" />
             </div>
 
         </div>

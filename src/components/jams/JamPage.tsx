@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router";
-import { addSongToJam, getJam, getJamSongs, getSong, removeSonFromJam } from "../../axios/axios";
+import { useNavigate, useParams } from "react-router";
+import { addSongToJam, getJam, getJamSongs, getSong, leaveJam, removeSonFromJam } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { Jam, Song, SongList } from "../../types/types";
 import '../../styles/jams/JamPage.css'
@@ -21,6 +21,7 @@ function JamPage(Props: FullProps) {
     const [sucOpen2, setSuc2] = useState<boolean>(false)
     const [errOpen, setErr] = useState<boolean>(false)
     const [errMsg, setErrMsg] = useState<string>()
+    let navigate = useNavigate()
     let jamid = useParams().jamid;
     const songwave = process.env.PUBLIC_URL + "/other/songwave.png";
 
@@ -119,6 +120,25 @@ function JamPage(Props: FullProps) {
             )
         }
     }, [Props.isLogged, jam])
+
+    const leaveJamRequest = () => {
+        if(jam) {
+            leaveJam(jam.id).then(
+                res => {
+                    Props.leavejam()
+                    navigate("/jams")
+                }
+            ).catch(
+                err => {
+                    if (err.response) {
+                        //Should never happen
+                        console.log(err.response)
+                        alert(err.response.data.message)
+                    }
+                }
+            )
+        }
+    }
 
     const closeSuc = () => {
         setSuc(false)
@@ -235,7 +255,7 @@ function JamPage(Props: FullProps) {
                             color="error" 
                             variant="contained" 
                             style={{width:"70%", borderRadius:"25px", marginTop:"2vh"}}
-                            onClick={() => {}}
+                            onClick={leaveJamRequest}
                             >
                                {
                                    Props.username === jam.host ? (

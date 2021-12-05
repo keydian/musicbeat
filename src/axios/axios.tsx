@@ -2,8 +2,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import store, { logout, reset_token } from "../redux/redux";
 import { CreateCollection, LoginCreds, RegisterCreds } from "../types/types";
 
-const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
-//const url = "http://localhost:8080/rest/"
+//const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
+const url = "http://localhost:8080/rest/"
 
 axios.interceptors.request.use(
   function (config: AxiosRequestConfig) {
@@ -135,6 +135,10 @@ export async function removeSonFromJam(jamid: string, songid : string) {
 
 export async function joinJam(jamid : string) {
   return await axios.put(url.concat(`jams/${jamid}`))
+}
+
+export async function leaveJam(jamid : string) {
+  return await axios.delete(url.concat(`jams/${jamid}`))
 }
 
 export async function getJamSuggested(jamid : string) {

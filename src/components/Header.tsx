@@ -19,7 +19,6 @@ function Header(Props: FullProps) {
       };
     
       const logout = () => {
-        console.log("BLABLA")
         logoutUser().then(
           (response) => {
             handleLogout();
@@ -76,7 +75,7 @@ function Header(Props: FullProps) {
                     FAQ
                 </Button>
                 <Avatar className={"Avatar Clickable"} sx={{ marginTop: "1vw" }} onClick={()=> navigate('/profile/'+Props.username)}/>
-                <LogoutIcon className={"Logout Clickable"} sx={{ marginTop: "1vw" }} onClick={()=> logout}/>
+                <LogoutIcon className={"Logout Clickable"} sx={{ marginTop: "1vw" }} onClick={()=> logout()}/>
             </div>
 
         </div>

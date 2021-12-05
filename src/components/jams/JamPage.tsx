@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
-import { addSongToJam, getJam, getJamSongs, getSong } from "../../axios/axios";
+import { addSongToJam, getJam, getJamSongs, getSong, removeSonFromJam } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { Jam, Song, SongList } from "../../types/types";
 import '../../styles/jams/JamPage.css'
@@ -17,6 +17,7 @@ function JamPage(Props: FullProps) {
     const [currSong, setCurrsong] = useState<SongList>()
     const [songs, setSongs] = useState<Song[]>([])
     const [sucOpen, setSuc] = useState<boolean>(false)
+    const [sucOpen2, setSuc2] = useState<boolean>(false)
     const [errOpen, setErr] = useState<boolean>(false)
     const [errMsg, setErrMsg] = useState<string>()
     let jamid = useParams().jamid;
@@ -24,9 +25,7 @@ function JamPage(Props: FullProps) {
 
     const addToQueueCallback = useCallback((s: Song) => {
         if (jam) {
-            setErrMsg(undefined)
-            setErr(false)
-            setSuc(false)
+            resetSnackbars()
             addSongToJam(jam.id, s.id).then(
                 res => {
                     setSuc(true)
@@ -43,6 +42,31 @@ function JamPage(Props: FullProps) {
             )
         }
     }, [songs])
+
+    const removeFromQueueCallback = useCallback((s:Song) => {
+        if(jam) {
+            resetSnackbars()
+            removeSonFromJam(jam.id, s.id).then(
+                res => {
+                    console.log("removed song",res.data)
+                    removeFromSongs(s)
+                    setSuc2(true)
+                }
+            ).catch(
+                err => {
+                    if (err.response) {
+                        console.log(err.response)
+                        setErrMsg(err.response.data.message)
+                    }
+                }
+            )
+        }
+    }, [songs])
+
+    const removeFromSongs = (s : Song) => {
+        let filteredArray = songs.filter(item => item.id !== s.id)
+        setSongs(filteredArray)
+    }
 
     useEffect(() => {
         if (jamid && Props.isLogged) {
@@ -99,8 +123,19 @@ function JamPage(Props: FullProps) {
         setSuc(false)
     }
 
+    const closeSuc2 = () => {
+        setSuc(false)
+    }
+
     const closeErr = () => {
         setErr(false)
+    }
+
+    const resetSnackbars = () => {
+        setErrMsg(undefined)
+        setErr(false)
+        setSuc(false)
+        setSuc2(false)
     }
 
     return (
@@ -111,6 +146,11 @@ function JamPage(Props: FullProps) {
                         <Snackbar open={sucOpen} autoHideDuration={3000} onClose={closeSuc}>
                             <Alert variant="filled" onClose={closeSuc} severity="success" sx={{ width: '100%' }}>
                                 Song added to queue!
+                            </Alert>
+                        </Snackbar>
+                        <Snackbar open={sucOpen2} autoHideDuration={3000} onClose={closeSuc2}>
+                            <Alert variant="filled" onClose={closeSuc2} severity="success" sx={{ width: '100%' }}>
+                                Song removed from queue!
                             </Alert>
                         </Snackbar>
                         <Snackbar open={errOpen} autoHideDuration={3000} onClose={closeErr}>
@@ -170,13 +210,9 @@ function JamPage(Props: FullProps) {
                                         <Typography variant="h6" style={{ paddingLeft: "6vw", textAlign: "left" }}>Suggested</Typography>
                                         <SuggestedGrid addCallback={addToQueueCallback} jamid={jam.id} currSong={currSong} isHost={Props.username === jam.host} />
                                     </div>
-                                    {
-                                        Props.username === jam.host && (
-                                            <div className="SmallSearchTracks">
-                                                <MiniSearch addCallback={addToQueueCallback} />
-                                            </div>
-                                        )
-                                    }
+                                    <div className="SmallSearchTracks">
+                                        <MiniSearch isHost={Props.username === jam.host} addCallback={addToQueueCallback} />
+                                    </div>
                                 </div>
                                 <div className="Queue">
                                     <Typography style={{ paddingLeft: "6vw", textAlign: "left" }} variant="h6">Queue</Typography>
@@ -185,7 +221,8 @@ function JamPage(Props: FullProps) {
                                             <JamQueue
                                                 jamid={jam.id}
                                                 currSong={currSong}
-                                                songs={songs} />
+                                                songs={songs}
+                                                delCallback={removeFromQueueCallback} />
                                         )
                                     }
                                 </div>

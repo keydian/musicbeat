@@ -7,10 +7,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 
 interface MiniSearchInterface {
-    addCallback : Function
+    addCallback: Function,
+    isHost: boolean
 }
 
-function MiniSearch(props : MiniSearchInterface) {
+function MiniSearch(props: MiniSearchInterface) {
     const [search, setSearch] = useState<string>()
     const [subSearch, setSubsearch] = useState<number>(0)
     const [results, setResults] = useState<Song[]>([])
@@ -41,7 +42,7 @@ function MiniSearch(props : MiniSearchInterface) {
     const changeInput = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const value = event.currentTarget.value;
         setSearch(value)
-        if(value === '' && value.trim() === '') {
+        if (value === '' && value.trim() === '') {
             setResults([])
         }
     }
@@ -59,8 +60,8 @@ function MiniSearch(props : MiniSearchInterface) {
                     }}
                     onChange={(e) => {
                         changeInput(e)
-                    }} 
-                    sx={{backgroundColor:"rgb(255, 255, 255, 0.5)"}}/>
+                    }}
+                    sx={{ backgroundColor: "rgb(255, 255, 255, 0.5)" }} />
                 <IconButton onClick={(e) => { setSubsearch((subSearch) => subSearch + 1); }}>
                     <SearchIcon />
                 </IconButton>
@@ -76,7 +77,7 @@ function MiniSearch(props : MiniSearchInterface) {
                             maxHeight: 140,
                             overflow: 'auto',
                             padding: "0",
-                            borderRadius:"0px 0px 0px 10px"
+                            borderRadius: "0px 0px 0px 10px"
                         }}
                     >
                         {results.map((s, i) => (
@@ -84,11 +85,15 @@ function MiniSearch(props : MiniSearchInterface) {
                                 <div className="MiniSearchSongInfo">
                                     <Typography variant="subtitle1">{s.name} - {s.artist}</Typography>
                                 </div>
-                                <IconButton onClick={() => {
-                                    props.addCallback(s)
-                                }}>
-                                    <AddIcon />
-                                </IconButton>
+                                {
+                                    props.isHost && (
+                                        <IconButton onClick={() => {
+                                            props.addCallback(s)
+                                        }}>
+                                            <AddIcon />
+                                        </IconButton>
+                                    )
+                                }
                                 {
                                     i < results.length - 1 && (
                                         <Divider />

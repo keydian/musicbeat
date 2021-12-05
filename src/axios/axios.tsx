@@ -126,6 +126,10 @@ export async function addSongToJam(jamid: string, songid : string) {
   return await axios.put(url.concat(`jams/${jamid}/add/${songid}`))
 }
 
+export async function removeSonFromJam(jamid: string, songid : string) {
+  return await axios.delete(url.concat(`jams/${jamid}/del/${songid}`))
+}
+
 export async function joinJam(jamid : string) {
   return await axios.put(url.concat(`jams/${jamid}`))
 }

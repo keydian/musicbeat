@@ -4,11 +4,13 @@ import '../../styles/jams/JamQueue.css'
 import { Song, SongList } from '../../types/types';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 interface JamQueueInterface {
     jamid: string,
     currSong: SongList,
-    songs : Song[]
+    songs: Song[],
+    delCallback: Function
 }
 
 function JamQueue(props: JamQueueInterface) {
@@ -118,6 +120,9 @@ function JamQueue(props: JamQueueInterface) {
                                                             {bpmIndicator(s.bpm)}
                                                             {keyIndicator(s.key)}
                                                         </div>
+                                                        <IconButton onClick={() => { props.delCallback(s) }}>
+                                                            <DeleteOutlineIcon />
+                                                        </IconButton>
                                                     </div>
                                                 </Grid>
                                             )

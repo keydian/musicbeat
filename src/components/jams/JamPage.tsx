@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router";
-import { addSongToJam, getJam, getJamSongs, getSong, removeSonFromJam } from "../../axios/axios";
+import { useNavigate, useParams } from "react-router";
+import { addSongToJam, getJam, getJamSongs, getSong, leaveJam, removeSonFromJam } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { Jam, Song, SongList } from "../../types/types";
 import '../../styles/jams/JamPage.css'
-import { Alert, Snackbar, Typography } from "@mui/material";
+import { Alert, Button, Snackbar, Typography } from "@mui/material";
 import JamQueue from "./JamQueue";
 import LikeButtons from "./LikeButtons";
 import MiniSearch from "./MiniSearch";
 import SuggestedGrid from "./SuggestedGrid";
+import JamChat from "./JamChat";
 
 
 function JamPage(Props: FullProps) {
@@ -20,6 +21,7 @@ function JamPage(Props: FullProps) {
     const [sucOpen2, setSuc2] = useState<boolean>(false)
     const [errOpen, setErr] = useState<boolean>(false)
     const [errMsg, setErrMsg] = useState<string>()
+    let navigate = useNavigate()
     let jamid = useParams().jamid;
     const songwave = process.env.PUBLIC_URL + "/other/songwave.png";
 
@@ -43,12 +45,12 @@ function JamPage(Props: FullProps) {
         }
     }, [songs])
 
-    const removeFromQueueCallback = useCallback((s:Song) => {
-        if(jam) {
+    const removeFromQueueCallback = useCallback((s: Song) => {
+        if (jam) {
             resetSnackbars()
             removeSonFromJam(jam.id, s.id).then(
                 res => {
-                    console.log("removed song",res.data)
+                    console.log("removed song", res.data)
                     removeFromSongs(s)
                     setSuc2(true)
                 }
@@ -63,7 +65,7 @@ function JamPage(Props: FullProps) {
         }
     }, [songs])
 
-    const removeFromSongs = (s : Song) => {
+    const removeFromSongs = (s: Song) => {
         let filteredArray = songs.filter(item => item.id !== s.id)
         setSongs(filteredArray)
     }
@@ -118,6 +120,25 @@ function JamPage(Props: FullProps) {
             )
         }
     }, [Props.isLogged, jam])
+
+    const leaveJamRequest = () => {
+        if(jam) {
+            leaveJam(jam.id).then(
+                res => {
+                    Props.leavejam()
+                    navigate("/jams")
+                }
+            ).catch(
+                err => {
+                    if (err.response) {
+                        //Should never happen
+                        console.log(err.response)
+                        alert(err.response.data.message)
+                    }
+                }
+            )
+        }
+    }
 
     const closeSuc = () => {
         setSuc(false)
@@ -228,13 +249,26 @@ function JamPage(Props: FullProps) {
                                 </div>
                             </div>
                         </div>
-                        <div className="JamPageChat">
-
+                        <div className="JamPageRight">
+                            <JamChat fProps={Props} participants={jam.participants}/>
+                            <Button 
+                            color="error" 
+                            variant="contained" 
+                            style={{width:"70%", borderRadius:"25px", marginTop:"2vh"}}
+                            onClick={leaveJamRequest}
+                            >
+                               {
+                                   Props.username === jam.host ? (
+                                        <Typography variant="h6">End jam</Typography>
+                                   ) : (
+                                        <Typography variant="h6">Leave jam</Typography>
+                                   )
+                               }
+                            </Button>
                         </div>
                     </>
                 )
             }
-
         </div>
     )
 }

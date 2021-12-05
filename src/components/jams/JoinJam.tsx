@@ -37,6 +37,7 @@ function JoinJam(Props: JoinJamInterface) {
             res => {
                 alert("Joined succesfully! Redirecting!")
                 navigate("/jam/"+Props.jam.id)
+                Props.fProps.joinjam(Props.jam.id)
             }
         ).catch(
             err => {

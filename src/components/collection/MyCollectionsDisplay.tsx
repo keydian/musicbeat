@@ -106,7 +106,7 @@ function MyCollectionsDisplay(Props: MyColInterface) {
                                         ))}
                                         {
                                             Props.fProps.username === Props.targetUser && (
-                                                <Grid id={"addcolgrid"+Props.targetUser} item xs={3}>
+                                                <Grid id={"addcolgrid" + Props.targetUser} item xs={3}>
                                                     <div className="GridItemDiv">
                                                         <CreateCollection mode={"icon"} />
                                                     </div>
@@ -119,12 +119,12 @@ function MyCollectionsDisplay(Props: MyColInterface) {
                                         {
                                             page === 0 ? (
                                                 <>
-                                                <Typography variant="h6">No collections yet!</Typography>
-                                                {
-                                                    Props.fProps.username === Props.targetUser && (
-                                                        <CreateCollection mode={"icon"} />
-                                                    )
-                                                }
+                                                    <Typography variant="h6">No collections yet!</Typography>
+                                                    {
+                                                        Props.fProps.username === Props.targetUser && (
+                                                            <CreateCollection mode={"icon"} />
+                                                        )
+                                                    }
                                                 </>
                                             ) : (
                                                 <>
@@ -149,7 +149,6 @@ function MyCollectionsDisplay(Props: MyColInterface) {
                     </>
                 )
             }
-
         </div>
     )
 }

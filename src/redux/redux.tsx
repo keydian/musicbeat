@@ -48,7 +48,7 @@ export function  leavejam(data : string): LeaveJam {
 //STORE
 const store = createStore(session_reducer)
 store.subscribe(() => {
-    console.log("ReduxSub -> Store changed -> Curr. Jam", store.getState().jam)
+    console.log("Redux Store", store.getState())
 })
 export default store
 

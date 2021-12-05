@@ -118,7 +118,14 @@ function MyCollectionsDisplay(Props: MyColInterface) {
                                     <>
                                         {
                                             page === 0 ? (
-                                                <p>No collections yet!</p>
+                                                <>
+                                                <Typography variant="h6">No collections yet!</Typography>
+                                                {
+                                                    Props.fProps.username === Props.targetUser && (
+                                                        <CreateCollection mode={"icon"} />
+                                                    )
+                                                }
+                                                </>
                                             ) : (
                                                 <>
                                                     <Typography variant="h6">No more collections!</Typography>

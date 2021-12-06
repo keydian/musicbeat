@@ -101,11 +101,6 @@ export interface Album {
     year: string,
     label: string
 }
-export interface CreateJam {
-    name: string,
-    collectionId: string,
-    imageURL: string
-}
 
 export interface Jam {
     id : string,

@@ -2,12 +2,12 @@ import { Typography } from "@mui/material"
 import { connect } from "react-redux"
 import { dispatch_to_props, state_to_props } from "../../redux/redux"
 import '../../styles/songs/SongTabDisplay.css'
-import { Song } from "../../types/types"
+import { Album } from "../../types/types"
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 interface SongTabDisplayInt {
     tabval: number,
-    song: Song
+    album: Album
 }
 
 const reviews = [
@@ -74,23 +74,7 @@ function SongTabDisplay(props: SongTabDisplayInt) {
             {
                 props.tabval === 1 && (
                     <div className="LyricsAndInfoDisplay">
-                        {
-                            (props.song.lyrics !== undefined && props.song.lyrics.trim() !== '') ? (
-                                <>
-                                    <Typography gutterBottom={true} variant="h6">Lyrics:</Typography>
-                                    <Typography variant="body1">{props.song.lyrics}</Typography>
-                                </>
-                            ) : (
-                                <Typography variant="h6">No lyrics for this song yet!</Typography>
-                            )
-                        }
-                    </div>
-                )
-            }
-            {
-                props.tabval === 2 && (
-                    <div className="LyricsAndInfoDisplay">
-                        <Typography style={{textAlign:"left"}} variant="body1">{props.song.info}</Typography>
+                        <Typography style={{textAlign:"left"}} variant="body1">other-info-here</Typography>
                     </div>
                 )
             }

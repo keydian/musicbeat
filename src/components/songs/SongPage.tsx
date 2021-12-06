@@ -7,6 +7,7 @@ import { Song } from "../../types/types";
 import '../../styles/songs/SongPage.css'
 import { Button, styled, Tab, Tabs, Typography } from "@mui/material";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SongTabDisplay from "./SongTabDisplay";
 import SmallJamDisplay from "./SmallJamDisplay";
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
@@ -135,14 +136,13 @@ function SongPage(Props: FullProps) {
                                             {calcTimeMin(song.length)}:{calcTimeSec(song.length)} Min
                                         </Typography>
                                     </div>
-
                                     <div style={{ paddingTop: "3%" }}>
                                         <Typography variant="h6">Genres</Typography>
                                         <Typography variant="overline">{song.genres.join(', ')}</Typography>
                                     </div>
                                 </div>
                                 <div className="SongRatesWrapper">
-                                    <Typography variant="h6">{song.rating.toFixed(1)}/10 Beats</Typography>
+                                    <Typography variant="h6">{song.rating.toFixed(1)}/10<MusicNoteIcon/>Beats</Typography>
                                     <Typography variant="subtitle1">{song.numRates} Ratings</Typography>
                                     <Button style={{color:"rgb(106, 90, 205)", border:"1px solid rgb(106, 90, 205)"}} size="small" variant="outlined" startIcon={<AudiotrackIcon />}>
                                         Rate

@@ -2,8 +2,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import store, { logout, reset_token } from "../redux/redux";
 import { CreateCollection, LoginCreds, RegisterCreds } from "../types/types";
 
-//const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
-const url = "http://localhost:8080/rest/"
+const url = "https://ipm2122appwesteurope55310.azurewebsites.net/rest/";
+//const url = "http://localhost:8080/rest/"
 
 axios.interceptors.request.use(
   function (config: AxiosRequestConfig) {
@@ -99,6 +99,33 @@ export async function addSongToCol(colid: string, songid : string) {
 
 export async function getSong(songid : string) {
   return await axios.get(url.concat(`songs/${songid}`))
+}
+
+export async function getAlbum(albumid : string) {
+  return await axios.get(url.concat(`albums/${albumid}`))
+}
+
+export async function getAlbumByName(albumname : string) {
+  return await axios.get(url.concat(`albums/name/${albumname}`))
+}
+export async function searchAlbumSongs(
+  by : string,
+  val : string,
+  pageNum: number,
+  size: number
+){
+  return await axios.get(url.concat(`albums/search`),{
+    params: {
+      by : by,
+      val: val,
+      pageNum : pageNum,
+      size : size
+    }})
+}
+
+
+export async function getAlbumSongs(albumName : string) {
+  return await axios.get(url.concat(`albums/${albumName}/songs`))
 }
 
 export async function searchJams(

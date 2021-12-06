@@ -20,6 +20,7 @@ import MyCollections from './components/collection/MyCollections';
 import CollectionPage from './components/collection/CollectionPage';
 import MusicPlayer from './components/MusicPlayer';
 import SongPage from './components/songs/SongPage';
+import AlbumPage from './components/albums/AlbumPage';
 import JamsPage from './components/jams/JamsPage';
 import JamPage from './components/jams/JamPage';
 
@@ -71,6 +72,7 @@ function App(Props: FullProps) {
             <Route path="/collections/:username" element={<MyCollections />} />
             <Route path="/collection/:collectionid" element={<CollectionPage />} />
             <Route path="/songs/:songid" element={<SongPage />} />
+            <Route path="/albums/:albumname" element={<AlbumPage />} />
           </Routes>
           {location.pathname !== '/login' && location.pathname !== '/register' && !inJam() && (location.pathname !== '/' || Props.isLogged) &&
             <MusicPlayer />

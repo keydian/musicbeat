@@ -1,0 +1,57 @@
+.AlbumTabDisplayWrapper {
+    padding-left: 1vw;
+    padding-top: 3vh;
+    height: 100%;
+    width: 100%;
+    border-radius: 25px;
+}
+
+.LyricsAndInfoDisplay {
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    height: 100%;
+    width: 90%;
+    background-color:  rgba(215, 223, 217, 0.377);
+    border-radius: 25px;
+}
+
+.CriticsDisplay {
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    text-align: left;
+    height: 100%;
+}
+
+.ReviewWrapper{
+    height: 100%;
+    width: 90%;
+    background-color:  rgba(215, 223, 217, 0.377);
+    border-radius: 25px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin-bottom: 2vh;
+}
+
+.ReviewHeader {
+    display: flex;
+}
+
+.ReviewAuthorTitle {
+    text-align: left;
+}
+
+.ReviewContentWrapper {
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    color: rgb(32, 32, 32);
+}

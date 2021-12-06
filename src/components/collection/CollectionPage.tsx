@@ -207,8 +207,8 @@ function CollectionPage(Props: FullProps) {
                                                     </Typography>}
                                                 />
                                                 <Typography
-                                                    sx={{ color: "rgb(71, 71, 71)" }}
-                                                    className="Clickable"
+                                                  
+                                                    className="ColPageSongList Clickable"
                                                     onClick={() => navigate('/albums/' + s.album)}
                                                 >{s.album}
                                                 </Typography>

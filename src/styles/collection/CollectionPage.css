@@ -66,3 +66,11 @@
     border: 1px solid black;
     margin-right: 4vw;
 }
+
+.ColPageSongList {
+    color: rgb(71, 71, 71) !important;
+}
+
+.ColPageSongList:hover {
+    color: black !important;
+}

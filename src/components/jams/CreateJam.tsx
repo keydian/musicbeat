@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { uploadPicture } from '../../axios/axios';
 import '../../styles/jams/CreateJam.css'
@@ -7,6 +7,7 @@ import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp';
 import ImageIcon from '@mui/icons-material/Image';
 import { Alert, Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from '@mui/material';
 import { FullProps } from '../../redux/redux';
+import SelectCollection from '../collection/SelectCollection';
 
 interface CreateJamInterface {
     fProps: FullProps
@@ -27,6 +28,10 @@ function CreateJamModal(props: CreateJamInterface) {
         setOpensnack(false)
     }
     const handleCloseSnack = () => setOpensnack(false);
+    
+    const setPlaylist = useCallback((collectionId : string) => {
+        setCreate({ ...create, collectionId: collectionId })
+    }, [create])
 
 
     const style = {
@@ -131,6 +136,7 @@ function CreateJamModal(props: CreateJamInterface) {
                             <div className="CreateJamLower">
                                 <div className="CreateJamPlayPick">
                                     <Typography variant="h6">Choose a collection to play!</Typography>
+                                    <SelectCollection setPlaylist={setPlaylist} fProps={props.fProps}/>
                                 </div>
                                 <div className="CreateJamUploadWrapper">
                                     <input
@@ -154,7 +160,7 @@ function CreateJamModal(props: CreateJamInterface) {
                                                 </>
                                             )
                                         }
-                                        <Typography variant="h6">Upload Here</Typography>
+                                        <Typography variant="h6">Upload</Typography>
                                         <IconButton aria-label="Upload Picture" component="span">
                                             <ImageIcon fontSize="large" />
                                         </IconButton>

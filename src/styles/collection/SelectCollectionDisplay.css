@@ -1,0 +1,38 @@
+.SelColDisplayWrapper {
+    display: flex;
+    align-items: center;
+    background-color:rgb(255, 255, 255, 0.5);
+    border-radius: 25px;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    overflow: hidden;
+    min-height: 100%;
+}
+
+.SCD-GridItem {
+    position: relative;
+    text-align: center;
+}
+
+.SCD-GridItem:hover {
+    opacity: 0.8;
+}
+
+.SCDmycollectionpic {
+    width:  180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20%;
+    border: 1px solid black;
+}
+
+.SCDmycolname {
+    background-color: rgb(149, 162, 241, 0.7);
+    border-radius: 20px;
+    padding-right: 5px;
+    padding-left: 5px;
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translate(-50%, -50%);
+}

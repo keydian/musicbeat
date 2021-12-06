@@ -12,6 +12,7 @@ export interface Collection {
     songs: string[],
     imageUrl: string
 }
+
 export interface CreateJam {
     name : string,
     collectionId : string,

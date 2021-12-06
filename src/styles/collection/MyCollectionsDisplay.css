@@ -44,6 +44,10 @@
     border: 1px solid black;
 }
 
+.mycollectionpic:hover {
+    opacity: 0.7;
+}
+
 .mycolname {
     background-color: rgb(149, 162, 241, 0.7);
     border-radius: 200px;

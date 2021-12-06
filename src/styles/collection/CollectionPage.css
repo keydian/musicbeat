@@ -50,6 +50,10 @@
     border-bottom: 1px solid grey;
 }
 
+.SongListItem:hover {
+    background-color: rgba(118, 133, 230, 0.63);
+}
+
 .ColPageLower {
     margin-left: 2vw;
     margin-right: 2vw;

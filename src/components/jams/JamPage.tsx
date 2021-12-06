@@ -12,7 +12,6 @@ import MiniSearch from "./MiniSearch";
 import SuggestedGrid from "./SuggestedGrid";
 import JamChat from "./JamChat";
 
-
 function JamPage(Props: FullProps) {
     const [jam, setJam] = useState<Jam>()
     const [currSong, setCurrsong] = useState<SongList>()

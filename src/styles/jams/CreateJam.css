@@ -1,0 +1,37 @@
+.createJamButton {
+    background-color: rgba(222, 226, 223, 1) !important;
+    color: black !important;
+}
+
+.cjpic {
+    width:  180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20%;
+    border: 1px solid black;
+}
+
+.CreateJamLower {
+    border: 1px solid black;
+    border-radius: 15px;
+    display: flex;
+    justify-items: center;
+    width: 100%;
+    margin-bottom: 1vh;
+}
+
+.CreateJamPlayPick {
+    width: 50%;
+    text-align: center;
+}
+
+.CreateJamUploadWrapper {
+    margin: auto;
+    text-align: center;
+    width: 50%;
+}
+
+.CJInputWrapper {
+    text-align: center;
+    margin-bottom: 1vh;
+}

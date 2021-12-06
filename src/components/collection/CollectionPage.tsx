@@ -209,7 +209,7 @@ function CollectionPage(Props: FullProps) {
                                                 <Typography
                                                     sx={{ color: "rgb(71, 71, 71)" }}
                                                     className="Clickable"
-                                                    onClick={() => navigate('/album/' + s.album)}
+                                                    onClick={() => navigate('/albums/' + s.album)}
                                                 >{s.album}
                                                 </Typography>
                                                 <DeleteIcon onClick={() => delSong(s.id)} className="Clickable" fontSize="large" style={{ marginLeft: "60%" }} />

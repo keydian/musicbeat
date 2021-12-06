@@ -57,8 +57,8 @@ function SelectCollectionDisplay(Props: SelColDisInterface) {
         }
     }
 
-    const chooseCollection = (colId : string) => {
-        Props.setPlaylist(colId)
+    const chooseCollection = (col: Collection) => {
+        Props.setPlaylist(col)
         Props.closeModal()
     }
 
@@ -84,7 +84,7 @@ function SelectCollectionDisplay(Props: SelColDisInterface) {
                                         >
                                             {
                                                 collections.map((c, i) => (
-                                                    <Grid onClick={() => chooseCollection(c.id)} id={c.id + i} item xs={1}>
+                                                    <Grid onClick={() => chooseCollection(c)} id={c.id + i} item xs={1}>
                                                         <div className="SCD-GridItem">
                                                             <img
                                                                 src={colImg(c)}

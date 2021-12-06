@@ -14,11 +14,12 @@
 .CreateJamLower {
     border: 1px solid black;
     border-radius: 15px;
-    display: flex;
+    text-align: center;
     justify-items: center;
     width: 100%;
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
     align-items: center;
+    padding: 10px;
 }
 
 .CreateJamPlayPick {

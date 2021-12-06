@@ -1,8 +1,8 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { uploadPicture } from '../../axios/axios';
 import '../../styles/jams/CreateJam.css'
-import { CreateJam } from '../../types/types';
+import { Collection, CreateJam } from '../../types/types';
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp';
 import ImageIcon from '@mui/icons-material/Image';
 import { Alert, Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from '@mui/material';
@@ -16,6 +16,7 @@ interface CreateJamInterface {
 function CreateJamModal(props: CreateJamInterface) {
     let navigate = useNavigate();
     const [create, setCreate] = useState<CreateJam>({ name: "", collectionId: "", imageUrl: "" })
+    const [selCol, setSelCol] = useState<Collection>()
     const [open, setOpen] = useState<boolean>(false)
     const [opensnack, setOpensnack] = useState<boolean>(false)
     const [error, setError] = useState<boolean>(false)
@@ -24,13 +25,15 @@ function CreateJamModal(props: CreateJamInterface) {
     const handleClose = () => {
         setOpen(false);
         setCreate({ name: "", collectionId: "", imageUrl: "" })
+        setSelCol(undefined)
         setError(false)
         setOpensnack(false)
     }
     const handleCloseSnack = () => setOpensnack(false);
-    
-    const setPlaylist = useCallback((collectionId : string) => {
-        setCreate({ ...create, collectionId: collectionId })
+
+    const setPlaylist = useCallback((c: Collection) => {
+        setCreate({ ...create, collectionId: c.id })
+        setSelCol(c)
     }, [create])
 
 
@@ -81,9 +84,9 @@ function CreateJamModal(props: CreateJamInterface) {
     }
 
     const canCreate = () => {
-        if (create.name === undefined || 
-            create.name.trim() === '' || 
-            create.collectionId === undefined || 
+        if (create.name === undefined ||
+            create.name.trim() === '' ||
+            create.collectionId === undefined ||
             create.collectionId.trim() === '') {
             return false;
         }
@@ -134,39 +137,33 @@ function CreateJamModal(props: CreateJamInterface) {
                                 />
                             </div>
                             <div className="CreateJamLower">
-                                <div className="CreateJamPlayPick">
+                                <div>
                                     <Typography variant="h6">Choose a collection to play!</Typography>
-                                    <SelectCollection setPlaylist={setPlaylist} fProps={props.fProps}/>
+                                    <SelectCollection setPlaylist={setPlaylist} fProps={props.fProps} />
                                 </div>
-                                <div className="CreateJamUploadWrapper">
-                                    <input
-                                        id="file"
-                                        name="file"
-                                        style={{ display: 'none' }}
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={uploadFile}
-                                    ></input>
-                                    <label htmlFor="file">
-                                        {
-                                            create.imageUrl !== '' && create.imageUrl !== undefined && (
-                                                <>
-                                                    <img
-                                                        src={create.imageUrl}
-                                                        alt="cjpic"
-                                                        className="cjpic"
-                                                    >
-                                                    </img>
-                                                </>
-                                            )
-                                        }
-                                        <Typography variant="h6">Upload</Typography>
-                                        <IconButton aria-label="Upload Picture" component="span">
-                                            <ImageIcon fontSize="large" />
-                                        </IconButton>
-
-                                    </label>
-                                </div>
+                                {
+                                    selCol && (
+                                        <div style={{}}>
+                                            <Typography variant="h6">Chosen collection:</Typography>
+                                            <div className="SCD-GridItem">
+                                                <img
+                                                    src={selCol.imageUrl}
+                                                    alt="collectionpic"
+                                                    className="SCDmycollectionpic Clickable"
+                                                >
+                                                </img>
+                                                <Typography
+                                                    align="center"
+                                                    noWrap={true}
+                                                    className="SCDmycolname Clickable"
+                                                    variant="h6"
+                                                >
+                                                    {selCol.name}
+                                                </Typography>
+                                            </div>
+                                        </div>
+                                    )
+                                }
                             </div>
                             <div className="InputButtonsWrapper">
                                 <Button
@@ -175,7 +172,7 @@ function CreateJamModal(props: CreateJamInterface) {
                                     color="error"
                                     disableElevation={true}
                                     onClick={handleClose}
-                                    style={{marginRight:"1vw"}}
+                                    style={{ marginRight: "1vw" }}
                                 >
                                     <Typography variant="button">Cancel</Typography>
                                 </Button>

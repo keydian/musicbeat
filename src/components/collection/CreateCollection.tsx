@@ -172,7 +172,6 @@ function CreateCollectionModal(Props: CreateColInterface) {
                                         <ImageIcon fontSize="large" />
                                     </IconButton>
                                 </label>
-
                             </div>
                             <div className="InputWrapper">
                                 <Typography variant="h6">Your collection's name</Typography>

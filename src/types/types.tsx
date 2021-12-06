@@ -4,6 +4,12 @@ export interface Token {
     jam: string
 }
 
+export interface CreateJam {
+    name : string,
+    collectionId : string,
+    imageUrl : string
+}
+
 export interface CollectionFull {
     id: string,
     name: string,

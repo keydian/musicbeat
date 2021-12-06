@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import '../../styles/jams/JamsPage.css'
+import CreateJam from "./CreateJam";
 import JamsPageDisplay from "./JamsPageDisplay";
 
 
@@ -20,10 +21,10 @@ function JamsPage(Props: FullProps) {
     */
 
     useEffect(() => {
-        if(redirect) {
-            navigate("/jam/"+Props.jam)
+        if (redirect) {
+            navigate("/jam/" + Props.jam)
         }
-        if(Props.jam !== undefined && Props.jam.trim() !== "") {
+        if (Props.jam !== undefined && Props.jam.trim() !== "") {
             setRedirect(true)
         }
     }, [redirect, Props])
@@ -34,7 +35,8 @@ function JamsPage(Props: FullProps) {
                 !redirect && (
                     <>
                         <div className="JamPageHeader">
-                            <Typography variant="h4">Ongoing Jams</Typography>
+                            <Typography style={{paddingRight:"2vw"}} variant="h4">Ongoing Jams</Typography>
+                            <CreateJam fProps={Props} />
                         </div>
                         <div className="JamDisplayWrapper">
                             <JamsPageDisplay fProps={Props} />

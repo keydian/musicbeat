@@ -8,7 +8,10 @@
     width: 100%;
     text-align: left;
     padding-left: 6vw;
+    padding-right: 6vw;
     padding-top: 2vh;
+    display: flex;
+    align-items: center;
 }
 
 .JamDisplayWrapper {

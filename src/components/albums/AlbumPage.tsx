@@ -181,8 +181,7 @@ function AlbumPage(Props: FullProps) {
                                 <StyledTabs
                                     value={tabval}
                                     onChange={handleTabChange}
-                                    aria-label="styled tabs example"
-                                >
+                                    aria-label="styled tabs example">
                                     <StyledTab label="Critics" />
                                     <StyledTab label="Info" />
                                 </StyledTabs>

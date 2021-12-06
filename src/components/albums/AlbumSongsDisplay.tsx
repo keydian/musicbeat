@@ -30,8 +30,11 @@ function  AlbumSongsDisplay(props:  AlbumSongsDisplayInterface) {
                         <List
                             sx={{
                                 width: '100%',
-                                bgcolor: 'rgba(255, 255, 255, 0.637)',
+                                position: 'relative',
+                                alignItems: 'center',
                                 maxHeight: "30vh",
+                                overflow: 'auto',
+                                bgcolor: 'rgba(255, 255, 255, 0.637)',
                                 borderRadius: '25px',
                                 border: '1px solid black'
                             }}
@@ -49,7 +52,8 @@ function  AlbumSongsDisplay(props:  AlbumSongsDisplayInterface) {
                                                 src={songImg(s.imageUrl)}
                                                 />
                                             </ListItemAvatar>
-                                            <ListItemText primary={s.name} secondary={s.artist} style={{paddingLeft:"1vw"}}/>
+                                            <ListItemText primary={s.name} secondary={s.artist}
+                                             style={{paddingLeft:"1vw"}}/>
                                             <div style={{ marginRight: "auto", display: "flex" }}>
                                                 <Typography variant="subtitle1">{s.rating}/10</Typography>
                                                 <MusicNoteIcon />

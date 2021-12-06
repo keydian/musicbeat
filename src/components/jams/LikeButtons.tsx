@@ -11,22 +11,32 @@ function LikeButtons() {
     const [disliked, setDisliked] = useState<boolean>(false)
 
     const like = () => {
-        if (!liked && !disliked) {
-            setLikes((likes) => likes + 1)
-            setLiked(true)
-        } else if (liked) {
+        if (liked) {
             setLikes(12)
             setLiked(false)
+        } else if (disliked) {
+            setDisliked(false)
+            setLiked(true)
+            setLikes((likes) => likes + 1)
+            setDislikes((likes) => likes - 1)
+        } else{
+            setLikes((likes) => likes + 1)
+            setLiked(true)
         }
     }
 
     const dislike = () => {
-        if (!liked && !disliked) {
-            setDislikes((dislikes) => dislikes + 1)
-            setDisliked(true)
-        } else if (disliked) {
+        if (disliked) {
             setDislikes(4)
             setDisliked(false)
+        } else if (liked) {
+            setDisliked(true)
+            setLiked(false)
+            setLikes((likes) => likes - 1)
+            setDislikes((likes) => likes + 1)
+        }else{
+            setDislikes((dislikes) => dislikes + 1)
+            setDisliked(true)
         }
     }
 

@@ -19,8 +19,6 @@ function JamPlayer (Props : JamPlayer) {
     const [loaded, setLoaded] = useState<boolean>(false)
 
     useEffect(() => {
-        console.log("Jam player songs",songs)
-        console.log("Passed songs",Props)
         if(songs.length === 0 && Props) {
             setSongs([...songs, {
                 name:Props.currSong.name, 

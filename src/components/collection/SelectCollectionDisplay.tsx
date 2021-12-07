@@ -1,4 +1,4 @@
-import { Grid, IconButton, Typography } from "@mui/material";
+import { Alert, Grid, IconButton, Snackbar, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { getUserCollections } from "../../axios/axios";
@@ -10,16 +10,20 @@ import '../../styles/collection/SelectCollectionDisplay.css'
 
 interface SelColDisInterface {
     fProps: FullProps,
-    setPlaylist : Function,
-    closeModal : Function
+    setPlaylist: Function,
+    closeModal: Function
 }
 
 function SelectCollectionDisplay(Props: SelColDisInterface) {
     let navigate = useNavigate()
     const [collections, setCollections] = useState<Collection[]>()
     const [page, setPage] = useState<number>(0)
+    const [snack, setSnack] = useState<boolean>(false)
     const pageSize = 6;
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
+
+    const handleCloseSnack = () => setSnack(false)
+    const handleOpenSnack =() => setSnack(true)
 
     useEffect(() => {
         if (Props.fProps.username && page >= 0) {
@@ -58,8 +62,13 @@ function SelectCollectionDisplay(Props: SelColDisInterface) {
     }
 
     const chooseCollection = (col: Collection) => {
-        Props.setPlaylist(col)
-        Props.closeModal()
+        if(col.songs.length > 0) {
+            Props.setPlaylist(col)
+            Props.closeModal()
+        } else {
+            handleOpenSnack()
+        }
+
     }
 
     return (
@@ -67,6 +76,11 @@ function SelectCollectionDisplay(Props: SelColDisInterface) {
             {
                 collections && (
                     <>
+                        <Snackbar anchorOrigin={{ vertical: "bottom", horizontal: "right" }} open={snack} autoHideDuration={3000} onClose={handleCloseSnack}>
+                            <Alert variant="filled" onClose={handleCloseSnack} severity="error" sx={{ width: '100%' }}>
+                                Collection has no songs!
+                            </Alert>
+                        </Snackbar>
                         <div className="MyColLeftArrow">
                             <IconButton size="large" disabled={page === 0} onClick={backwardPage}>
                                 <ArrowBackIosIcon />
@@ -108,7 +122,7 @@ function SelectCollectionDisplay(Props: SelColDisInterface) {
                                     </>
                                 ) : (
                                     <>
-                                    <Typography variant="h6">No collections here!</Typography>
+                                        <Typography variant="h6">No collections here!</Typography>
                                     </>
                                 )
                             }

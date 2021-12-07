@@ -1,11 +1,10 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { uploadPicture } from '../../axios/axios';
+import { createJam } from '../../axios/axios';
 import '../../styles/jams/CreateJam.css'
 import { Collection, CreateJam } from '../../types/types';
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp';
-import ImageIcon from '@mui/icons-material/Image';
-import { Alert, Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Modal, Snackbar, TextField, Typography } from '@mui/material';
 import { FullProps } from '../../redux/redux';
 import SelectCollection from '../collection/SelectCollection';
 
@@ -65,24 +64,6 @@ function CreateJamModal(props: CreateJamInterface) {
         setCreate({ ...create, name: value })
     }
 
-    const uploadFile = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files) {
-            uploadPicture(event.target.files[0]).then(
-                res => {
-                    setCreate({ ...create, imageUrl: res.data })
-                    setOpensnack(true)
-                }
-            ).catch(
-                err => {
-                    event.target.files = null
-                    if (err.response) {
-                        console.log(err.response)
-                    }
-                }
-            );
-        }
-    }
-
     const canCreate = () => {
         if (create.name === undefined ||
             create.name.trim() === '' ||
@@ -95,7 +76,18 @@ function CreateJamModal(props: CreateJamInterface) {
 
     const createJamRequest = () => {
         if (canCreate()) {
-            //send request
+            createJam(create).then(
+                res => {
+                    navigate("/jam/"+res.data.id)
+                    props.fProps.joinjam(res.data.id)
+                }
+            ).catch(
+                err => {
+                    if(err.response){
+                        console.log(err.response.data)
+                    }
+                }
+            )
         } else {
             setError(true)
         }

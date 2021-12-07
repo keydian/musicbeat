@@ -22,10 +22,8 @@ function JamsPageDisplay(Props: JamPageInterface) {
 
     useEffect(() => {
         if (Props.fProps.isLogged && page >= 0) {
-            console.log("Searching for jams")
             searchJams(page, pageSize).then(
                 res => {
-                    console.log(res.data)
                     setJams(res.data.content)
                 }
             ).catch(

@@ -17,8 +17,8 @@
     background-color:rgb(255, 255, 255, 0.5);
     border-radius: 25px;
     padding-left: 2vw;
-    padding-top: 4vh;
-    padding-bottom: 4vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 }
 
 .MusicDisplayerLeft {
@@ -38,8 +38,8 @@
 }
 
 .songimagejam {
-    max-width: 35vw !important;
-    max-height: 35vh !important;
+    max-width: 25vw !important;
+    max-height: 25vh !important;
     border-radius: 20px;
     border: 1px solid black;
 }
@@ -75,9 +75,9 @@
 }
 
 .songwave {
-    max-width: 30vw;
-    max-height: 25vh;
-    padding-top: 10vh;
+    max-width: 25vw;
+    max-height: 20vh;
+    padding-top: 5vh;
 }
 
 .JamPageRight {

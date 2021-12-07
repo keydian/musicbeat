@@ -51,7 +51,7 @@ function JamChat(Props: JamChatInterface) {
 
 
     useEffect(() => {
-        if (messages.length > 0 && messages[messages.length - 1].author === Props.fProps.username) {
+        if (Props.participants.length > 0 && messages.length > 0 && messages[messages.length - 1].author === Props.fProps.username) {
             genFakeMsg()
         }
     }, [messages])

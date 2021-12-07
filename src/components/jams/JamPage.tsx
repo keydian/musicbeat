@@ -230,7 +230,6 @@ function JamPage(Props: FullProps) {
                             <div className="JamPageTrackSelection">
                                 <div className="SuggestedAndSearch">
                                     <div className="SuggestedGridWrapper">
-                                        <Typography variant="h6" style={{ paddingLeft: "6vw", textAlign: "left" }}>Suggested</Typography>
                                         <SuggestedGrid addCallback={addToQueueCallback} jamid={jam.id} currSong={currSong} isHost={Props.username === jam.host} />
                                     </div>
                                     <div className="SmallSearchTracks">

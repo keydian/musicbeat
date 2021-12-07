@@ -1,11 +1,10 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { createJam, uploadPicture } from '../../axios/axios';
+import { createJam } from '../../axios/axios';
 import '../../styles/jams/CreateJam.css'
 import { Collection, CreateJam } from '../../types/types';
 import AddBoxSharpIcon from '@mui/icons-material/AddBoxSharp';
-import ImageIcon from '@mui/icons-material/Image';
-import { Alert, Box, Button, IconButton, Modal, Snackbar, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, Modal, Snackbar, TextField, Typography } from '@mui/material';
 import { FullProps } from '../../redux/redux';
 import SelectCollection from '../collection/SelectCollection';
 

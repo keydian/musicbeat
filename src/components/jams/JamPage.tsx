@@ -11,6 +11,7 @@ import LikeButtons from "./LikeButtons";
 import MiniSearch from "./MiniSearch";
 import SuggestedGrid from "./SuggestedGrid";
 import JamChat from "./JamChat";
+import JamPlayer from "../musicplayer/JamPlayer";
 
 function JamPage(Props: FullProps) {
     const [jam, setJam] = useState<Jam>()
@@ -63,6 +64,7 @@ function JamPage(Props: FullProps) {
             )
         }
     }, [songs])
+
 
     const removeFromSongs = (s: Song) => {
         let filteredArray = songs.filter(item => item.id !== s.id)
@@ -121,7 +123,7 @@ function JamPage(Props: FullProps) {
     }, [Props.isLogged, jam])
 
     const leaveJamRequest = () => {
-        if(jam) {
+        if (jam) {
             leaveJam(jam.id).then(
                 res => {
                     Props.leavejam()
@@ -157,6 +159,7 @@ function JamPage(Props: FullProps) {
         setSuc(false)
         setSuc2(false)
     }
+
 
     return (
         <div className="JamPageWrapper">
@@ -249,22 +252,28 @@ function JamPage(Props: FullProps) {
                             </div>
                         </div>
                         <div className="JamPageRight">
-                            <JamChat fProps={Props} participants={jam.participants}/>
-                            <Button 
-                            color="error" 
-                            variant="contained" 
-                            style={{width:"70%", borderRadius:"25px", marginTop:"2vh"}}
-                            onClick={leaveJamRequest}
+                            <JamChat fProps={Props} participants={jam.participants} />
+                            <Button
+                                color="error"
+                                variant="contained"
+                                style={{ width: "70%", borderRadius: "25px", marginTop: "2vh" }}
+                                onClick={leaveJamRequest}
                             >
-                               {
-                                   Props.username === jam.host ? (
+                                {
+                                    Props.username === jam.host ? (
                                         <Typography variant="h6">End jam</Typography>
-                                   ) : (
+                                    ) : (
                                         <Typography variant="h6">Leave jam</Typography>
-                                   )
-                               }
+                                    )
+                                }
                             </Button>
                         </div>
+                        {
+                            currSong && (
+                                <JamPlayer currSong={currSong}/>
+                            )
+                        }
+
                     </>
                 )
             }

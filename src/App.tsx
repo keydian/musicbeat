@@ -18,13 +18,13 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import Profile from './components/profile/Profile';
 import MyCollections from './components/collection/MyCollections';
 import CollectionPage from './components/collection/CollectionPage';
-import MusicPlayer from './components/MusicPlayer';
 import SongPage from './components/songs/SongPage';
 import AlbumPage from './components/albums/AlbumPage';
 import JamsPage from './components/jams/JamsPage';
 import JamPage from './components/jams/JamPage';
 import FAQPage from './components/FAQPage';
 import SearchPage from './components/search/SearchPage'
+import MusicPlayer from './components/MusicPlayer';
 
 
 function App(Props: FullProps) {

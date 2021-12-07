@@ -24,6 +24,7 @@ import AlbumPage from './components/albums/AlbumPage';
 import JamsPage from './components/jams/JamsPage';
 import JamPage from './components/jams/JamPage';
 import FAQPage from './components/FAQPage';
+import SearchPage from './components/search/SearchPage'
 
 
 function App(Props: FullProps) {
@@ -75,6 +76,7 @@ function App(Props: FullProps) {
             <Route path="/songs/:songid" element={<SongPage />} />
             <Route path="/albums/:albumname" element={<AlbumPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/search" element={<SearchPage/>}/>
           </Routes>
           {location.pathname !== '/login' && location.pathname !== '/register' && !inJam() && (location.pathname !== '/' || Props.isLogged) &&
             <MusicPlayer />

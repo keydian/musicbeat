@@ -101,10 +101,8 @@ function SuggestedGrid(Props: SuggestedGridInterface) {
                                         </div>
                                         {
                                             Props.isHost && (
-                                                <IconButton onClick={() => {
-                                                    Props.addCallback(s)
-                                                }}>
-                                                    <AddIcon />
+                                                <IconButton onClick={() => { Props.addCallback(s) }}>
+                                                    <AddIcon/>
                                                 </IconButton>
                                             )
                                         }

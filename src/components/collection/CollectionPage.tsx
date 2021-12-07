@@ -219,7 +219,16 @@ function CollectionPage(Props: FullProps) {
                                 </>
                             ) : (
                                 <>
-                                    <Typography variant="h2">No songs yet :(</Typography>
+                                    <Typography variant="h2">No songs yet , search for a song?</Typography>
+                                    
+                                    <Button 
+                                        variant="contained"
+                                        size="large"
+                                        startIcon={<SearchIcon />}
+                                        onClick={() => navigate("/search")}
+                                        style={{ fontSize: "large", maxWidth: '30em', maxHeight: '10em', minWidth: '12em', minHeight: '4em', marginLeft:"auto",backgroundColor:"transparent",color:"rgb(0, 0, 0)",border:"1px solid rgb(0, 0, 0)"}}>
+                                            More songs!
+                                        </Button>
                                 </>
                             )}
 

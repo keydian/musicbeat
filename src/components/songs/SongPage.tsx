@@ -11,7 +11,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SongTabDisplay from "./SongTabDisplay";
 import SmallJamDisplay from "./SmallJamDisplay";
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
-
+import AddIcon from '@mui/icons-material/Add';
 
 function SongPage(Props: FullProps) {
     const [song, setSong] = useState<Song>()
@@ -50,7 +50,7 @@ function SongPage(Props: FullProps) {
     const calcTimeSec = (time: number) => {
         return time % 60
     }
-
+    
 
     //FOR TABS
     interface StyledTabsProps {
@@ -144,9 +144,10 @@ function SongPage(Props: FullProps) {
                                 <div className="SongRatesWrapper">
                                     <Typography variant="h6">{song.rating.toFixed(1)}/10<MusicNoteIcon/>Beats</Typography>
                                     <Typography variant="subtitle1">{song.numRates} Ratings</Typography>
-                                    <Button style={{color:"rgb(106, 90, 205)", border:"1px solid rgb(106, 90, 205)"}} size="small" variant="outlined" startIcon={<AudiotrackIcon />}>
+                                    <Button style={{color:"rgb(106, 90, 205)", border:"1px solid rgb(106, 90, 205)"}} size="medium" variant="outlined" startIcon={<AudiotrackIcon />}>
                                         Rate
                                     </Button>
+                                    <Button startIcon={ <AddIcon/> } onClick={ calcTimeMin } > </Button>
                                 </div>
                             </div>
                             <div className="SongPageUpperTabs">

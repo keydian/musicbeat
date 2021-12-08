@@ -101,7 +101,7 @@ function CreateCollectionModal(Props: CreateColInterface) {
             createCollection(createCol).then(
                 res => {
                     console.log("Collection created")
-                    navigate("/mycollections")
+                    navigate("/collection/"+res.data.id)
                 }
             ).catch(
                 err => {

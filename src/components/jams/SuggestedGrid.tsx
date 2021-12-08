@@ -19,19 +19,24 @@ function SuggestedGrid(Props: SuggestedGridInterface) {
 
     useEffect(() => {
         if (!suggested) {
-            getJamSuggested(Props.jamid).then(
-                res => {
-                    setSuggested(res.data)
-                }
-            ).catch(
-                err => {
-                    if (err.response) {
-                        console.log(err.response)
-                    }
-                }
-            )
+            getJamSuggestedRequest()
         }
     }, [suggested])
+
+    const getJamSuggestedRequest = () => {
+        getJamSuggested(Props.jamid).then(
+            res => {
+                console.log(res.data)
+                setSuggested(res.data)
+            }
+        ).catch(
+            err => {
+                if (err.response) {
+                    console.log(err.response)
+                }
+            }
+        )
+    }
 
     const bpmCalc = (bpm: number) => {
         let diff = Math.abs(bpm - Props.currSong.bpm)
@@ -81,6 +86,14 @@ function SuggestedGrid(Props: SuggestedGridInterface) {
 
     return (
         <div className="SuggestedGridWrapper">
+            <>
+            <div style={{display:"flex"}}>
+            <Typography variant="h6" style={{ textAlign: "left", alignItems:"center",padding:"2px" }}>Suggested</Typography>
+            <IconButton onClick={getJamSuggestedRequest}>
+                <RefreshIcon/>
+            </IconButton>
+            </div>
+            
             {
                 suggested && suggested.length > 0 ? (
                     <>
@@ -119,6 +132,7 @@ function SuggestedGrid(Props: SuggestedGridInterface) {
                     <Typography variant="h6">We couldn't find similar songs!</Typography>
                 )
             }
+            </>
         </div>
     )
 }

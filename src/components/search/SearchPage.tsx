@@ -3,12 +3,16 @@ import { connect } from "react-redux";
 import { useState } from "react";
 import SearchIcon from '@mui/icons-material/Search'
 import { FormControl, InputLabel, NativeSelect, FormHelperText, TextField, InputAdornment } from "@mui/material";
+import SearchUsers from "../search/SearchUsers";
 
 
 
 //TODO: SEPARATE LISTING COMPONENTS, PAGINATION
 function SearchPage(Props: FullProps) {
+    
+    
     const [searchBy, setBy] = useState<string>("Song");
+    const [constraint, setConstraint] = useState<string>();
     const [search, setSearch] = useState<number>(0);
     const [val, setVal] = useState<string>("");
 
@@ -20,12 +24,18 @@ function SearchPage(Props: FullProps) {
     }
         ;
 
+    const setSearchConstraint = (
+        eventReact: React.ChangeEvent<unknown>,
+        searchConstraint: string) =>{
+        setConstraint(searchConstraint);
+    }
+
     const submitSearch = () => {
         setSearch((search) => search + 1)
     }
-        ;
+    ;
 
-    return (
+    return (Props.isLogged &&
         <div className="searchPage">
             <div className="searchBody">
                 <FormControl className="selectForm">
@@ -43,12 +53,31 @@ function SearchPage(Props: FullProps) {
                         <option value={"Songs"}>Songs</option>
                         <option value={"Album"}>Album</option>
                         <option value={"Users"}>Users</option>
-                        <option value={"Collections"}>Collections</option>
                     </NativeSelect>
                     <FormHelperText>
                         Select your preferred search method:
                     </FormHelperText>
                 </FormControl>
+                {searchBy === "Song" &&
+                        <FormControl className="selectForm">
+                        <InputLabel htmlFor="by-helper">
+                            Genre:
+                        </InputLabel>
+                        <NativeSelect
+                            value={constraint}
+                            onChange={(e) => setSearchConstraint(e, e.target.value)}
+                            inputProps={{
+                                name: "Genre:",
+                                id: "constraint-helper"
+                            }}
+                        >
+                            <option value={"Indie"}>Indie</option>
+                            <option value={"EDM"}>EDM</option>
+                            <option value={"Rock"}>Rock</option>
+                            <option value={"Rap"}>Rap</option>
+                        </NativeSelect>
+                        </FormControl>
+                }
             </div>
             <div>
                 <TextField
@@ -78,6 +107,18 @@ function SearchPage(Props: FullProps) {
                     }}
                 />
             </div>
+            {searchBy==="Users"&&
+                <div>
+                    <SearchUsers
+                    val={val}
+                    />
+                </div>
+            }
+            {searchBy==="Songs"&&
+                <div>
+                
+                </div>
+            }
         </div>
     )
 }

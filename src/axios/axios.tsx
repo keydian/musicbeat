@@ -191,3 +191,17 @@ export async function searchSongs(
     }
   })
 }
+
+export async function getUsersPage(
+  val: string,
+  pageNum: number,
+  pageSize: number
+){
+  return await axios.get(url.concat(`users`),{
+    params: {
+      val: val,
+      pageNum: pageNum,
+      size: pageSize
+    }
+  })
+}

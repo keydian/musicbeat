@@ -1,6 +1,7 @@
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
 import { connect } from "react-redux";
-import { useState } from "react";
+import React, { useState } from "react";
+import '../../styles/search/SearchPage.css'
 import SearchIcon from '@mui/icons-material/Search'
 import { FormControl, InputLabel, NativeSelect, FormHelperText, TextField, InputAdornment } from "@mui/material";
 import SearchUsers from "../search/SearchUsers";
@@ -83,14 +84,15 @@ function SearchPage(Props: FullProps) {
                     className="searchTextField"
                     id="searchbar"
                     type="search"
-                    style={{ textAlign: "center" }}
+                    style={{ textAlign: "center"}}
                     inputProps={{
                         startAdornment: (
-                            <InputAdornment position="start">
+                            <InputAdornment position="end">
                                 <SearchIcon
                                     style={{ cursor: "pointer" }}
                                     onClick={() => {
                                         submitSearch();
+                                        console.log('do validate1')
                                     }}
                                 />
                             </InputAdornment>
@@ -102,6 +104,7 @@ function SearchPage(Props: FullProps) {
                     onKeyPress={(e) => {
                         if (e.key === "Enter") {
                             submitSearch();
+                            console.log('do validate2')
                         }
                     }}
                 />

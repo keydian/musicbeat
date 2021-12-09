@@ -81,7 +81,7 @@ function Header(Props: FullProps) {
                     onClose={closeSnack}
                     message="This feature is not yet implemented. Sorry!"
                 >
-                    <MuiAlert onClose={closeSnack} severity="error" sx={{ width: '100%' }}>
+                    <MuiAlert variant="filled" onClose={closeSnack} severity="error" sx={{ width: '100%' }}>
                         This feature is not yet implemented. Sorry!
                     </MuiAlert>
                 </Snackbar>

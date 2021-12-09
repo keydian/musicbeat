@@ -11,7 +11,8 @@ import '../../styles/collection/SelectCollectionDisplay.css'
 interface SelColDisInterface {
     fProps: FullProps,
     setPlaylist: Function,
-    closeModal: Function
+    closeModal: Function,
+    mode: string
 }
 
 function SelectCollectionDisplay(Props: SelColDisInterface) {
@@ -23,7 +24,7 @@ function SelectCollectionDisplay(Props: SelColDisInterface) {
     const defaultImg = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png"
 
     const handleCloseSnack = () => setSnack(false)
-    const handleOpenSnack =() => setSnack(true)
+    const handleOpenSnack = () => setSnack(true)
 
     useEffect(() => {
         if (Props.fProps.username && page >= 0) {
@@ -62,13 +63,17 @@ function SelectCollectionDisplay(Props: SelColDisInterface) {
     }
 
     const chooseCollection = (col: Collection) => {
-        if(col.songs.length > 0) {
+        if (Props.mode === 'createjam') {
+            if (col.songs.length > 0) {
+                Props.setPlaylist(col)
+                Props.closeModal()
+            } else {
+                handleOpenSnack()
+            }
+        } else {
             Props.setPlaylist(col)
             Props.closeModal()
-        } else {
-            handleOpenSnack()
         }
-
     }
 
     return (

@@ -31,7 +31,6 @@ function CollectionPage(Props: FullProps) {
         if (collectionid && Props.isLogged) {
             getFullCollection(collectionid).then(
                 res => {
-                    console.log(res.data)
                     setCollection(res.data)
                 }
             ).catch(

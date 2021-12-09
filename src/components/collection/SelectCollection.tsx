@@ -53,7 +53,7 @@ function SelectCollection(props: SelectColInterface) {
                 onClose={handleClose}
             >
                 <Box sx={style}>
-                    <SelectCollectionDisplay closeModal={closeCallback} setPlaylist={props.setPlaylist} fProps={props.fProps} />
+                    <SelectCollectionDisplay mode={"createjam"} closeModal={closeCallback} setPlaylist={props.setPlaylist} fProps={props.fProps} />
                 </Box>
             </Modal>
         </div>

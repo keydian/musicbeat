@@ -52,7 +52,7 @@ export interface UpdatePasswordCreds{
 }
 export interface User {
     id: string,
-    username: string,
+    name: string,
     email: string,
     collections: string[],
     jams: string[]

@@ -43,6 +43,7 @@ function SearchUsers(sProps: SearchProps) {
   useEffect(() => {
     getUsersPage(sProps.by, sProps.val, page, usersPerPage).then(
       (response) => {
+        console.log(response.data.content)
         setUsers(response.data.content);
         setTotalPages(calcTotalPages(response.data.total, usersPerPage));
       },
@@ -52,20 +53,19 @@ function SearchUsers(sProps: SearchProps) {
     );
   }, [page]);
 
-
   return (
     <div>
       <List dense={dense}>
         {users.map((user) => (
           <>
-            <ListItem key={user.username}>
-              <ListItemAvatar className="avatar-holder" key={user.username + "-avatar"}>
-                <Avatar className={"Avatar Clickable"} sx={{ marginTop: "1vw" }} onClick={() => navigate('/profile/' + user.username)} />
+            <ListItem key={user.name}>
+              <ListItemAvatar className="avatar-holder" key={user.name + "-avatar"}>
+                <Avatar className={"Avatar Clickable"} sx={{ marginTop: "1vw" }} onClick={() => navigate('/profile/' + user.name)} />
               </ListItemAvatar>
               <ListItemText
-                key={user.username + "-text"}
+                key={user.name + "-text"}
                 style={{ marginLeft: "2vh" }}
-                primary={user.username}
+                primary={user.name}
               />
             </ListItem>
             <Divider />

@@ -22,8 +22,7 @@ function SearchPage(Props: FullProps) {
         eventReact: React.ChangeEvent<unknown>,
         newBy: string) => {
         setBy(newBy);
-    }
-        ;
+    };
 
     const setSearchConstraint = (
         eventReact: React.ChangeEvent<unknown>,
@@ -33,8 +32,7 @@ function SearchPage(Props: FullProps) {
 
     const submitSearch = () => {
         setSearch((search) => search + 1)
-    }
-        ;
+    };
 
     return (
         <div className="searchPage">

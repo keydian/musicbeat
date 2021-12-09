@@ -204,7 +204,7 @@ export async function getUsersPage(
       by: by,
       val: val,
       pageNum: pageNum,
-      size: pageSize
+      pageSize: pageSize
     }
   })
 }

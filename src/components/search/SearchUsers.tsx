@@ -19,7 +19,7 @@ import Pagination from '@mui/material/Pagination';
 interface SearchProps {
   Props: FullProps,
   by: string,
-  val: string
+  valForChild: string
 }
 
 function SearchUsers(sProps: SearchProps) {
@@ -41,7 +41,8 @@ function SearchUsers(sProps: SearchProps) {
   };
 
   useEffect(() => {
-    getUsersPage(sProps.by, sProps.val, page, usersPerPage).then(
+    console.log("Request done")
+    getUsersPage(sProps.by, sProps.valForChild, page, usersPerPage).then(
       (response) => {
         setUsers(response.data.content);
         setTotalPages(calcTotalPages(response.data.total, usersPerPage));
@@ -50,7 +51,7 @@ function SearchUsers(sProps: SearchProps) {
         console.log(error);
       }
     );
-  }, [page]);
+  }, [page, sProps.valForChild]);
 
 
   return (

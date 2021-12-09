@@ -14,8 +14,9 @@ function SearchPage(Props: FullProps) {
 
     const [searchBy, setBy] = useState<string>("Songs");
     const [constraint, setConstraint] = useState<string>("all");
-    const [search, setSearch] = useState<number>(0);
+    //const [search, setSearch] = useState<number>(0);
     const [val, setVal] = useState<string>("");
+    const [valForChild, setValForChild] = useState<string>("");
 
 
     const setSearchBy = (
@@ -32,9 +33,10 @@ function SearchPage(Props: FullProps) {
     }
 
     const submitSearch = () => {
-        setSearch((search) => search + 1)
-    }
-        ;
+        setValForChild(val)
+        console.log('do validate2 ' + val)
+        //setSearch((search) => search + 1)
+    };
 
     return (
         <div className="searchPage">
@@ -91,7 +93,7 @@ function SearchPage(Props: FullProps) {
                                 <SearchIcon
                                     style={{ cursor: "pointer" }}
                                     onClick={() => {
-                                        submitSearch();
+                                        //submitSearch(e.target.value);
                                         console.log('do validate1')
                                     }}
                                 />
@@ -104,7 +106,6 @@ function SearchPage(Props: FullProps) {
                     onKeyPress={(e) => {
                         if (e.key === "Enter") {
                             submitSearch();
-                            console.log('do validate2')
                         }
                     }}
                 />
@@ -113,7 +114,7 @@ function SearchPage(Props: FullProps) {
                 <div>
                     <SearchUsers
                         by={"all"}
-                        val={val}
+                        valForChild={valForChild}
                         Props={Props}
                     />
                 </div>
@@ -123,7 +124,7 @@ function SearchPage(Props: FullProps) {
                     <SearchSongs
                         Props={Props}
                         by={constraint}
-                        val={val}
+                        valForChild={valForChild}
                     />
                 </div>
             }

@@ -17,7 +17,7 @@ import "../../styles/search/SearchPage.css";
 interface SearchProps {
     Props: FullProps,
     by: string,
-    val: string
+    valForChild: string
 }
 
 function SearchSongs(sProps: SearchProps) {
@@ -39,7 +39,7 @@ function SearchSongs(sProps: SearchProps) {
 
     useEffect(() => {
         console.log("pedido pog")
-        searchSongs(sProps.by, sProps.val, page - 1, songsPerPage).then(
+        searchSongs(sProps.by, sProps.valForChild, page - 1, songsPerPage).then(
             (response) => {
                 setSongs(response.data.content);
                 setTotalPages(calcTotalPages(response.data.total, songsPerPage));
@@ -48,7 +48,7 @@ function SearchSongs(sProps: SearchProps) {
                 console.log(error);
             }
         );
-    }, [page]);
+    }, [page, sProps.valForChild]);
 
 
     return (

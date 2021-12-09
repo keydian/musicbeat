@@ -51,20 +51,20 @@ export async function registerUser(creds: RegisterCreds) {
   return await axios.post(url.concat("users"), creds);
 }
 
-export async function getUser(username : string) {
+export async function getUser(username: string) {
   return await axios.get(url.concat(`users/${username}`))
 }
 
 export async function getUserCollections(
-  username : string,
-  pageNum : number,
-  pageSize : number
+  username: string,
+  pageNum: number,
+  pageSize: number
 ) {
   return await axios.get(url.concat(`collections/search`), {
     params: {
-      username : username,
-      pageNum : pageNum,
-      size : pageSize
+      username: username,
+      pageNum: pageNum,
+      size: pageSize
     }
   })
 }
@@ -72,16 +72,16 @@ export async function getUserCollections(
 export async function uploadPicture(
   image: File
 ) {
-    let formData = new FormData();
-    formData.append("file", image);
-    return await axios.post(url.concat(`media`), formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      }
-    });
+  let formData = new FormData();
+  formData.append("file", image);
+  return await axios.post(url.concat(`media`), formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    }
+  });
 }
 
-export async function createCollection(cc : CreateCollection) {
+export async function createCollection(cc: CreateCollection) {
   return await axios.post(url.concat('collections'), cc)
 }
 
@@ -89,105 +89,122 @@ export async function getFullCollection(collectionid: string) {
   return await axios.get(url.concat(`collections/${collectionid}/full`))
 }
 
-export async function deleteSongFromCol(colid: string, songid : string) {
+export async function deleteSongFromCol(colid: string, songid: string) {
   return await axios.delete(url.concat(`collections/${colid}/songs/${songid}`))
 }
 
-export async function addSongToCol(colid: string, songid : string) {
+export async function addSongToCol(colid: string, songid: string) {
   return await axios.put(url.concat(`collections/${colid}/songs/${songid}`))
 }
 
-export async function getSong(songid : string) {
+export async function getSong(songid: string) {
   return await axios.get(url.concat(`songs/${songid}`))
 }
 
-export async function getAlbum(albumid : string) {
+export async function getAlbum(albumid: string) {
   return await axios.get(url.concat(`albums/${albumid}`))
 }
 
-export async function getAlbumByName(albumname : string) {
+export async function getAlbumByName(albumname: string) {
   return await axios.get(url.concat(`albums/name/${albumname}`))
 }
 export async function searchAlbumSongs(
-  by : string,
-  val : string,
+  by: string,
+  val: string,
   pageNum: number,
   size: number
-){
-  return await axios.get(url.concat(`albums/search`),{
-    params: {
-      by : by,
-      val: val,
-      pageNum : pageNum,
-      size : size
-    }})
-}
-
-
-export async function getAlbumSongs(albumName : string) {
-  return await axios.get(url.concat(`albums/${albumName}/songs`))
-}
-
-export async function searchJams(
-  pageNum : number,
-  pageSize : number
 ) {
-  return await axios.get(url.concat(`jams/search`), {
+  return await axios.get(url.concat(`albums/search`), {
     params: {
-      pageNum : pageNum,
-      size : pageSize
+      by: by,
+      val: val,
+      pageNum: pageNum,
+      size: size
     }
   })
 }
 
-export async function getHomepage(){
-    return await axios.get(url.concat(`songs/homepage`))
+
+export async function getAlbumSongs(albumName: string) {
+  return await axios.get(url.concat(`albums/${albumName}/songs`))
 }
 
-export async function getJam(jamid : string) {
+export async function searchJams(
+  pageNum: number,
+  pageSize: number
+) {
+  return await axios.get(url.concat(`jams/search`), {
+    params: {
+      pageNum: pageNum,
+      size: pageSize
+    }
+  })
+}
+
+export async function getHomepage() {
+  return await axios.get(url.concat(`songs/homepage`))
+}
+
+export async function getJam(jamid: string) {
   return await axios.get(url.concat(`jams/${jamid}`))
 }
 
-export async function getJamSongs(jamid : string) {
+export async function getJamSongs(jamid: string) {
   return await axios.get(url.concat(`jams/${jamid}/songs`))
 }
 
-export async function addSongToJam(jamid: string, songid : string) {
+export async function addSongToJam(jamid: string, songid: string) {
   return await axios.put(url.concat(`jams/${jamid}/add/${songid}`))
 }
 
-export async function removeSonFromJam(jamid: string, songid : string) {
+export async function removeSonFromJam(jamid: string, songid: string) {
   return await axios.delete(url.concat(`jams/${jamid}/del/${songid}`))
 }
 
-export async function joinJam(jamid : string) {
+export async function joinJam(jamid: string) {
   return await axios.put(url.concat(`jams/${jamid}`))
 }
 
-export async function leaveJam(jamid : string) {
+export async function leaveJam(jamid: string) {
   return await axios.delete(url.concat(`jams/${jamid}`))
 }
 
-export async function getJamSuggested(jamid : string) {
+export async function getJamSuggested(jamid: string) {
   return await axios.get(url.concat(`jams/suggested/${jamid}`))
 }
 
-export async function createJam(cj : CreateJam) {
+export async function createJam(cj: CreateJam) {
   return await axios.post(url.concat('jams'), cj)
 }
 
 export async function searchSongs(
-  by : string,
+  by: string,
   val: string,
-  pageNum : number,
-  pageSize : number
+  pageNum: number,
+  pageSize: number
 ) {
   return await axios.get(url.concat(`songs/search`), {
     params: {
-      by : by,
+      by: by,
       val: val,
-      pageNum : pageNum,
-      size : pageSize
+      pageNum: pageNum,
+      size: pageSize
+    }
+  })
+}
+
+export async function getUsersPage(
+  by: string,
+  val: string,
+  pageNum: number,
+  pageSize: number
+) {
+  return await axios.get(url.concat(`users`), {
+    params: {
+      by: by,
+      val: val,
+      pageNum: pageNum,
+      size: pageSize
     }
   })
 }

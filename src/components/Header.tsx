@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import '../styles/Header.css'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -20,9 +20,9 @@ function Header(Props: FullProps) {
         sessionStorage.removeItem("token");
         Props.logout();
         navigate('');
-      };
-    
-      const logout = () => {
+    };
+
+    const logout = () => {
         logoutUser().then(
             (response) => {
                 handleLogout();
@@ -36,8 +36,8 @@ function Header(Props: FullProps) {
 
     const snackError = () => {
         setOpen(true);
-      };
-    
+    };
+
     const closeSnack = () => {
         setOpen(false);
     };
@@ -50,7 +50,7 @@ function Header(Props: FullProps) {
                 }
             }
         } else {
-            if(loc.pathname === '/') {
+            if (loc.pathname === '/') {
                 navigate("/home")
             }
         }
@@ -75,18 +75,18 @@ function Header(Props: FullProps) {
                 >
                 </img>
                 <Snackbar
-                anchorOrigin= {{horizontal: 'center', vertical: 'top'}}
-                open={open}
-                autoHideDuration={2000}
-                onClose={closeSnack}
-                message="This feature is not yet implemented. Sorry!"
+                    anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+                    open={open}
+                    autoHideDuration={2000}
+                    onClose={closeSnack}
+                    message="This feature is not yet implemented. Sorry!"
                 >
                     <MuiAlert onClose={closeSnack} severity="error" sx={{ width: '100%' }}>
-                    This feature is not yet implemented. Sorry!
-                 </MuiAlert>
+                        This feature is not yet implemented. Sorry!
+                    </MuiAlert>
                 </Snackbar>
 
-                <Button size="large" variant="outlined" className="Button">
+                <Button size="large" variant="outlined" className="Button" onClick={() => { navigate("/search") }}>
                     Search
                 </Button>
                 <Button variant="outlined" size="large" className="Button" onClick={snackError}>
@@ -101,8 +101,8 @@ function Header(Props: FullProps) {
                 <Button variant="outlined" size="large" className="Button" onClick={() => navigate('/faq')}>
                     FAQ
                 </Button>
-                <Avatar className={"Avatar Clickable"} sx={{ marginTop: "1vw" }} onClick={()=> navigate('/profile/'+Props.username)}/>
-                <LogoutIcon className={"Logout Clickable"} sx={{ marginTop: "1vw" }} onClick={()=> logout()}/>
+                <Avatar className={"Avatar Clickable"} sx={{ marginTop: "1vw" }} onClick={() => navigate('/profile/' + Props.username)} />
+                <LogoutIcon className={"Logout Clickable"} sx={{ marginTop: "1vw" }} onClick={() => logout()} />
             </div>
 
         </div>

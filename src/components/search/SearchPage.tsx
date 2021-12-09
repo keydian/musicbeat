@@ -12,7 +12,7 @@ function SearchPage(Props: FullProps) {
 
 
     const [searchBy, setBy] = useState<string>("Songs");
-    const [constraint, setConstraint] = useState<string>("All");
+    const [constraint, setConstraint] = useState<string>("all");
     const [search, setSearch] = useState<number>(0);
     const [val, setVal] = useState<string>("");
 
@@ -109,7 +109,7 @@ function SearchPage(Props: FullProps) {
             {searchBy === "Users" &&
                 <div>
                     <SearchUsers
-                        by={"name"}
+                        by={"all"}
                         val={val}
                         Props={Props}
                     />

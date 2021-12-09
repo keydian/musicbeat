@@ -41,18 +41,16 @@ function SearchUsers(sProps: SearchProps) {
   };
 
   useEffect(() => {
-    if (sProps.Props.isLogged) {
-      getUsersPage(sProps.by, sProps.val, page - 1, usersPerPage).then(
-        (response) => {
-          setUsers(response.data.content);
-          setTotalPages(calcTotalPages(response.data.total, usersPerPage));
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
-  }, [sProps.Props.isLogged, page]);
+    getUsersPage(sProps.by, sProps.val, page, usersPerPage).then(
+      (response) => {
+        setUsers(response.data.content);
+        setTotalPages(calcTotalPages(response.data.total, usersPerPage));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, [page]);
 
 
   return (

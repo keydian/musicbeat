@@ -3,11 +3,8 @@ import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux"
 import { connect } from "react-redux";
 import {
     ListItemText,
-    ListItemSecondaryAction,
-    ListItemAvatar,
     ListItem,
     Divider,
-    Avatar,
     List
 } from "@mui/material"
 import { useEffect, useState } from "react";
@@ -15,6 +12,7 @@ import { useNavigate } from "react-router";
 import { Song } from "../../types/types";
 import Pagination from '@mui/material/Pagination';
 import { searchSongs } from "../../axios/axios"
+import "../../styles/search/SearchPage.css";
 
 interface SearchProps {
     Props: FullProps,
@@ -40,18 +38,17 @@ function SearchSongs(sProps: SearchProps) {
     };
 
     useEffect(() => {
-        if (sProps.Props.isLogged) {
-            searchSongs(sProps.by, sProps.val, page - 1, songsPerPage).then(
-                (response) => {
-                    setSongs(response.data.content);
-                    setTotalPages(calcTotalPages(response.data.total, songsPerPage));
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
-        }
-    }, [sProps.Props.isLogged, page]);
+        console.log("pedido pog")
+        searchSongs(sProps.by, sProps.val, page - 1, songsPerPage).then(
+            (response) => {
+                setSongs(response.data.content);
+                setTotalPages(calcTotalPages(response.data.total, songsPerPage));
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }, [page]);
 
 
     return (
@@ -60,7 +57,9 @@ function SearchSongs(sProps: SearchProps) {
                 {songs.map((song) => (
                     <>
                         <ListItem key={song.id}>
-                            <img src={song.imageUrl}>
+                            <img src={song.imageUrl} className="songqueuepic"
+                                onClick={() => { navigate("/songs/" + song.id) }}
+                                style={{ cursor: "pointer" }}>
                             </img>
                             <ListItemText
                                 key={song.id + "-text"}
@@ -78,7 +77,7 @@ function SearchSongs(sProps: SearchProps) {
                     count={totalPages}
                     page={page}
                     onChange={changePage}
-                    style={{ marginLeft: "auto", marginRight: "auto" }}
+                    className="page-sel"
                 />
             </div>
         </div>

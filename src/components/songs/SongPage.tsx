@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { getSong } from "../../axios/axios";
 import { dispatch_to_props, FullProps, state_to_props } from "../../redux/redux";
-import { Song, Collection, CreateJam  } from "../../types/types";
+import { Song } from "../../types/types";
 import '../../styles/songs/SongPage.css'
 import { Button, styled, Tab, Tabs, Typography } from "@mui/material";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -11,8 +11,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SongTabDisplay from "./SongTabDisplay";
 import SmallJamDisplay from "./SmallJamDisplay";
 import AudiotrackIcon from '@mui/icons-material/Audiotrack';
-import AddIcon from '@mui/icons-material/Add';
-import SelectCollectionDisplay from "../collection/SelectCollectionDisplay";
+import AddSongToCol from "./AddSongToCol";
 
 function SongPage(Props: FullProps) {
     const [song, setSong] = useState<Song>()
@@ -30,7 +29,6 @@ function SongPage(Props: FullProps) {
             getSong(songId).then(
                 res => {
                     setSong(res.data)
-                    console.log(res.data)
                     setImageurl(res.data.imageUrl)
                 }
             ).catch(
@@ -44,37 +42,6 @@ function SongPage(Props: FullProps) {
         }
     }
 
-    const handleOpen = () => {
-        setOpen(true);
-    }
-
-    //CallBack for SelectCol Logic
-    const [create, setCreate] = useState<CreateJam>({ name: "", collectionId: "", imageUrl: "" })
-    const [selCol, setSelCol] = useState<Collection>()
-    const [open, setOpen] = useState<boolean>(false)
-    const [snack, setSnack] = useState<boolean>(false)
-    const [opensnack, setOpensnack] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
-    
-    const handleClose = () => {
-        setOpen(false);
-        setCreate({ name: "", collectionId: "", imageUrl: "" })
-        setSelCol(undefined)
-        setError(false)
-        setOpensnack(false)
-    }
-    const setPlaylist = useCallback((c: Collection) => {
-        setCreate({ ...create, collectionId: c.id })
-        setSelCol(c)
-    }, [create])
-
-    const handleCloseCallback = () => setOpen(false);
-    const handleOpenSnack =() => setSnack(true)
-
-    const closeCallback = useCallback(() => {
-        handleCloseCallback()
-        handleOpenSnack()
-    }, [open])
     //Song Time display calcs
     const calcTimeMin = (time: number) => {
         return Math.floor(time / 60)
@@ -179,35 +146,7 @@ function SongPage(Props: FullProps) {
                                     <Button style={{color:"rgb(106, 90, 205)", border:"1px solid rgb(106, 90, 205)"}} size="medium" variant="outlined" startIcon={<AudiotrackIcon />}>
                                         Rate
                                     </Button>
-                                    <Button variant="outlined" style={{color:"rgb(106, 90, 205)", border:"1px solid rgb(106, 90, 205)"}} startIcon={<AddIcon />} >
-                                        Add to Collection
-                                    </Button>
-                                    {
-                                    selCol && (
-                                        <div style={{}}>
-                                            
-                                    <SelectCollectionDisplay closeModal={closeCallback} setPlaylist={setPlaylist} fProps={Props}/>
-                                            <Typography variant="h6">Chosen collection:</Typography>
-                                            <div className="SCD-GridItem">
-                                                <img
-                                                    src={selCol.imageUrl}
-                                                    alt="collectionpic"
-                                                    className="SCDmycollectionpic Clickable"
-                                                >
-                                                </img>
-                                                <Typography
-                                                    align="center"
-                                                    noWrap={true}
-                                                    className="SCDmycolname Clickable"
-                                                    variant="h6"
-                                                >
-                                                    {selCol.name}
-                                                </Typography>
-                                            </div>
-                                        </div>
-                                        
-                                    )
-                                    }
+                                    <AddSongToCol fProps={Props} songId={song.id}/>
                                 </div>
                             </div>
                             <div className="SongPageUpperTabs">

@@ -12,19 +12,19 @@ interface SongTabDisplayInt {
 
 const reviews = [
     {
-        title: "A great song",
+        title: "A great album",
         author: "author-here",
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent augue neque, pulvinar et tortor nec, blandit finibus metus. Curabitur eros magna, feugiat a varius ut, facilisis dignissim tellus. Suspendisse potenti. Maecenas imperdiet ac enim at suscipit. Cras tempus et ex quis faucibus. Quisque bibendum mattis sapien vel consectetur. In hac habitasse platea dictumst. Donec id justo orci. Suspendisse elementum odio quis imperdiet mollis. Nam vulputate magna a nibh dictum lacinia. In commodo nec enim eget venenatis. Aenean blandit lacus aliquam, ornare purus quis, pretium nulla. Aliquam imperdiet justo a elit volutpat, at sodales odio fringilla. In hac habitasse platea dictumst. Etiam mollis quam euismod neque volutpat dapibus. ",
         rating: 8.0
     },
     {
-        title: "A great song 2",
+        title: "A terrible album",
         author: "author-here",
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent augue neque, pulvinar et tortor nec, blandit finibus metus. Curabitur eros magna, feugiat a varius ut, facilisis dignissim tellus. Suspendisse potenti. Maecenas imperdiet ac enim at suscipit. Cras tempus et ex quis faucibus. Quisque bibendum mattis sapien vel consectetur. In hac habitasse platea dictumst. Donec id justo orci. Suspendisse elementum odio quis imperdiet mollis. Nam vulputate magna a nibh dictum lacinia. In commodo nec enim eget venenatis. Aenean blandit lacus aliquam, ornare purus quis, pretium nulla. Aliquam imperdiet justo a elit volutpat, at sodales odio fringilla. In hac habitasse platea dictumst. Etiam mollis quam euismod neque volutpat dapibus. ",
         rating: 2.0
     },
     {
-        title: "A great song 3",
+        title: "An average album",
         author: "author-here",
         content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent augue neque, pulvinar et tortor nec, blandit finibus metus. Curabitur eros magna, feugiat a varius ut, facilisis dignissim tellus. Suspendisse potenti. Maecenas imperdiet ac enim at suscipit. Cras tempus et ex quis faucibus. Quisque bibendum mattis sapien vel consectetur. In hac habitasse platea dictumst. Donec id justo orci. Suspendisse elementum odio quis imperdiet mollis. Nam vulputate magna a nibh dictum lacinia. In commodo nec enim eget venenatis. Aenean blandit lacus aliquam, ornare purus quis, pretium nulla. Aliquam imperdiet justo a elit volutpat, at sodales odio fringilla. In hac habitasse platea dictumst. Etiam mollis quam euismod neque volutpat dapibus. ",
         rating: 5.0

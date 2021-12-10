@@ -135,15 +135,9 @@ function CreateJamModal(props: CreateJamInterface) {
                                 </div>
                                 {
                                     selCol && (
-                                        <div style={{}}>
+                                        <div>
                                             <Typography variant="h6">Chosen collection:</Typography>
                                             <div className="SCD-GridItem">
-                                                <img
-                                                    src={selCol.imageUrl}
-                                                    alt="collectionpic"
-                                                    className="SCDmycollectionpic Clickable"
-                                                >
-                                                </img>
                                                 <Typography
                                                     align="center"
                                                     noWrap={true}
@@ -152,6 +146,12 @@ function CreateJamModal(props: CreateJamInterface) {
                                                 >
                                                     {selCol.name}
                                                 </Typography>
+                                                <img
+                                                    src={selCol.imageUrl}
+                                                    alt="collectionpic"
+                                                    className="SCDmycollectionpic Clickable"
+                                                >
+                                                </img>
                                             </div>
                                         </div>
                                     )

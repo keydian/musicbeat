@@ -31,8 +31,5 @@
     border-radius: 20px;
     padding-right: 5px;
     padding-left: 5px;
-    position: absolute;
-    left: 50%;
     bottom: -10px;
-    transform: translate(-50%, -50%);
 }

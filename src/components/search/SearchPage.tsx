@@ -46,7 +46,7 @@ function SearchPage(Props: FullProps) {
                     </InputLabel>
                     <NativeSelect
                         value={searchBy}
-                        onChange={(e) => setSearchBy(e, e.target.value)}
+                        onChange={(e) => {setSearchBy(e, e.target.value), setValForChild("")}}
                         inputProps={{
                             name: "Search by:",
                             id: "by-helper"
@@ -81,6 +81,7 @@ function SearchPage(Props: FullProps) {
                 }
             </div>
             <div>
+                {constraint !== "all" && 
                 <TextField
                     className="searchTextField"
                     id="searchbar"
@@ -108,6 +109,7 @@ function SearchPage(Props: FullProps) {
                         }
                     }}
                 />
+}
             </div>
             {searchBy === "Users" &&
                 <div>

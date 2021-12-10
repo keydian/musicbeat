@@ -48,7 +48,7 @@ function SearchSongs(sProps: SearchProps) {
                 console.log(error);
             }
         );
-    }, [page, sProps.valForChild]);
+    }, [page, sProps.valForChild, sProps.by === "all"]);
 
 
     return (

@@ -46,7 +46,7 @@ function SearchPage(Props: FullProps) {
                     </InputLabel>
                     <NativeSelect
                         value={searchBy}
-                        onChange={(e) => {setSearchBy(e, e.target.value), setValForChild("")}}
+                        onChange={(e) => {setSearchBy(e, e.target.value); setValForChild("")}}
                         inputProps={{
                             name: "Search by:",
                             id: "by-helper"

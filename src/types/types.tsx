@@ -5,7 +5,7 @@ export interface Token {
 }
 
 export interface Collection {
-    id : string,
+    id: string,
     name: string,
     description: string,
     creator: string,
@@ -14,9 +14,9 @@ export interface Collection {
 }
 
 export interface CreateJam {
-    name : string,
-    collectionId : string,
-    imageUrl : string
+    name: string,
+    collectionId: string,
+    imageUrl: string
 }
 
 export interface CollectionFull {
@@ -45,7 +45,7 @@ export interface RegisterCreds {
     pwd: string,
     confirmPwd: string
 }
-export interface UpdatePasswordCreds{
+export interface UpdatePasswordCreds {
     oldPwd: string,
     newPwd: string,
     confirmPwd: string
@@ -61,7 +61,7 @@ export interface User {
 export interface SongList {
     id: string,
     name: string,
-    album:string,
+    album: string,
     artist: string,
     imageUrl: string,
     bpm: number,
@@ -69,8 +69,8 @@ export interface SongList {
 }
 
 export interface Song {
-    id : string,
-    name : string,
+    id: string,
+    name: string,
     album: string,
     artist: string,
     length: number,
@@ -94,16 +94,16 @@ export interface SongMinimal {
 }
 
 export interface Album {
-    id : string,
+    id: string,
     name: string,
     artist: string,
-    imageURL: string,
+    imageUrl: string,
     year: string,
     label: string
 }
 
 export interface Jam {
-    id : string,
+    id: string,
     name: string,
     host: string,
     participants: string[],
@@ -112,18 +112,18 @@ export interface Jam {
 }
 
 export interface JamWithSong {
-    id : string,
+    id: string,
     name: string,
     host: string,
     participants: string[],
     playlist: string[],
     imageUrl: string,
-    firstSong : SongMinimal
+    firstSong: SongMinimal
 }
 
 
 export interface Reviews {
-    id : string,
+    id: string,
     title: string,
     author: string,
     song: string,

@@ -208,3 +208,20 @@ export async function getUsersPage(
     }
   })
 }
+
+export async function searchAlbums(
+  by: string,
+  val: string,
+  pageNum: number,
+  pageSize: number
+) {
+  return await axios.get(url.concat(`albums/search`), {
+    params: {
+      by: by,
+      val: val,
+      pageNum: pageNum,
+      pageSize: pageSize
+    }
+  })
+}
+

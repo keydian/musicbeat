@@ -46,21 +46,18 @@ function SearchPage(Props: FullProps) {
                     </InputLabel>
                     <NativeSelect
                         value={searchBy}
-                        onChange={(e) => {setSearchBy(e, e.target.value); setValForChild("")}}
+                        onChange={(e) => { setSearchBy(e, e.target.value); setValForChild(""); setConstraint("all") }}
                         inputProps={{
                             name: "Search by:",
                             id: "by-helper"
                         }}
                     >
                         <option value={"Songs"}>Songs</option>
-                        <option value={"Album"}>Album</option>
+                        <option value={"Albums"}>Album</option>
                         <option value={"Users"}>Users</option>
                     </NativeSelect>
-                    <FormHelperText>
-                        Select your preferred search method:
-                    </FormHelperText>
                 </FormControl>
-                {searchBy === "Songs" &&
+                {searchBy !== "Users" &&
                     <FormControl className="selectForm">
                         <InputLabel htmlFor="by-helper">
                             Search By:
@@ -81,35 +78,35 @@ function SearchPage(Props: FullProps) {
                 }
             </div>
             <div>
-                {constraint !== "all" && 
-                <TextField
-                    className="searchTextField"
-                    id="searchbar"
-                    type="search"
-                    style={{ textAlign: "center"}}
-                    inputProps={{
-                        startAdornment: (
-                            <InputAdornment position="end">
-                                <SearchIcon
-                                    style={{ cursor: "pointer" }}
-                                    onClick={() => {
-                                        //submitSearch(e.target.value);
-                                        console.log('do validate1')
-                                    }}
-                                />
-                            </InputAdornment>
-                        ),
-                    }}
-                    onChange={(e) => {
-                        setVal(e.target.value);
-                    }}
-                    onKeyPress={(e) => {
-                        if (e.key === "Enter") {
-                            submitSearch();
-                        }
-                    }}
-                />
-}
+                {constraint !== "all" &&
+                    <TextField
+                        className="searchTextField"
+                        id="searchbar"
+                        type="search"
+                        style={{ textAlign: "center" }}
+                        inputProps={{
+                            startAdornment: (
+                                <InputAdornment position="end">
+                                    <SearchIcon
+                                        style={{ cursor: "pointer" }}
+                                        onClick={() => {
+                                            //submitSearch(e.target.value);
+                                            console.log('do validate1')
+                                        }}
+                                    />
+                                </InputAdornment>
+                            ),
+                        }}
+                        onChange={(e) => {
+                            setVal(e.target.value);
+                        }}
+                        onKeyPress={(e) => {
+                            if (e.key === "Enter") {
+                                submitSearch();
+                            }
+                        }}
+                    />
+                }
             </div>
             {searchBy === "Users" &&
                 <div>
@@ -132,7 +129,9 @@ function SearchPage(Props: FullProps) {
             {searchBy === "Albums" &&
                 <div>
                     <SearchAlbums
-
+                        Props={Props}
+                        by={constraint}
+                        valForChild={valForChild}
                     />
                 </div>
             }

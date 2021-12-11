@@ -11,13 +11,11 @@ import SearchAlbums from "../search/SearchAlbums";
 
 function SearchPage(Props: FullProps) {
 
-
     const [searchBy, setBy] = useState<string>("Songs");
     const [constraint, setConstraint] = useState<string>("all");
     //const [search, setSearch] = useState<number>(0);
     const [val, setVal] = useState<string>("");
     const [valForChild, setValForChild] = useState<string>("");
-
 
     const setSearchBy = (
         eventReact: React.ChangeEvent<unknown>,
@@ -79,6 +77,7 @@ function SearchPage(Props: FullProps) {
                                 </InputLabel>
                                 <NativeSelect
                                     value={searchBy}
+                                    style={{ marginLeft: "3vh"}}
                                     onChange={(e) => { setSearchBy(e, e.target.value); setValForChild(""); setConstraint("all") }}
                                     inputProps={{
                                         name: "Search by:",
@@ -89,7 +88,7 @@ function SearchPage(Props: FullProps) {
                                     <option value={"Albums"}>Album</option>
                                     <option value={"Users"}>Users</option>
                                 </NativeSelect>
-                            </FormControl>
+                            </FormControl >
                             {searchBy !== "Users" &&
                                 <FormControl className="selectForm">
                                     <InputLabel htmlFor="by-helper">
@@ -97,6 +96,7 @@ function SearchPage(Props: FullProps) {
                                     </InputLabel>
                                     <NativeSelect
                                         value={constraint}
+                                        style={{ marginLeft: "3vh"}}
                                         onChange={(e) => setSearchConstraint(e, e.target.value)}
                                         inputProps={{
                                             name: "Search by:",

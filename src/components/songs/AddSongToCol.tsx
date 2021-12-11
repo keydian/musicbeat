@@ -97,7 +97,7 @@ function AddSongToCol(Props: AddSongToColInterface) {
                 </Alert>
             </Snackbar>
             {Props.iconMode ? (
-                <IconButton  onClick={handleOpen}>
+                <IconButton  onClick={handleOpen} style={{ color: 'black' }} >
                     <AddIcon/>
                 </IconButton>
             ) : (

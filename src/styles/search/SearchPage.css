@@ -3,9 +3,6 @@ display:flex;
   margin-left: auto;
   margin-right: auto;
 }
-.searchBody{
-  padding-top: 40px
-}
 .searchResults{
   margin: auto;
   width: 85%;
@@ -17,11 +14,9 @@ display:flex;
 
 .selectForm{
   margin-left: 3vh;
-  padding: 3vh;
 }
 
 .searchTextField{
-  margin: 3vh;
   background-color:rgb(255, 255, 255, 0.75);
 }
 

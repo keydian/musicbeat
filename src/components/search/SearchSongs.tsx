@@ -86,8 +86,4 @@ function SearchSongs(sProps: SearchProps) {
     )
 }
 
-<<<<<<< HEAD
 export default connect(state_to_props, dispatch_to_props)(SearchSongs);
-=======
-export default SearchSongs;
->>>>>>> f0de4f110c06cff3fbadb2d3a0a74bb1881510dd

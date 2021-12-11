@@ -39,104 +39,111 @@ function SearchPage(Props: FullProps) {
 
     return (
         <div className="searchPage">
-            <div className="searchBody">
-                <FormControl className="selectForm">
-                    <InputLabel htmlFor="by-helper">
-                        Search By:
-                    </InputLabel>
-                    <NativeSelect
-                        value={searchBy}
-                        onChange={(e) => { setSearchBy(e, e.target.value); setValForChild(""); setConstraint("all") }}
-                        inputProps={{
-                            name: "Search by:",
-                            id: "by-helper"
-                        }}
-                    >
-                        <option value={"Songs"}>Songs</option>
-                        <option value={"Albums"}>Album</option>
-                        <option value={"Users"}>Users</option>
-                    </NativeSelect>
-                </FormControl>
-                {searchBy !== "Users" &&
-                    <FormControl className="selectForm">
-                        <InputLabel htmlFor="by-helper">
-                            Search By:
-                        </InputLabel>
-                        <NativeSelect
-                            value={constraint}
-                            onChange={(e) => setSearchConstraint(e, e.target.value)}
-                            inputProps={{
-                                name: "Search by:",
-                                id: "constraint-helper"
-                            }}
-                        >
-                            <option value={"all"}>All</option>
-                            <option value={"artist"}>Artist</option>
-                            <option value={"name"}>Name</option>
-                        </NativeSelect>
-                    </FormControl>
-                }
-            </div>
-            <div>
-                {constraint !== "all" &&
-                    <TextField
-                        className="searchTextField"
-                        id="searchbar"
-                        type="search"
-                        style={{ textAlign: "center" }}
-                        inputProps={{
-                            startAdornment: (
-                                <InputAdornment position="end">
-                                    <SearchIcon
-                                        style={{ cursor: "pointer" }}
-                                        onClick={() => {
-                                            //submitSearch(e.target.value);
-                                            console.log('do validate1')
+            {
+                Props.isLogged && (
+                    <>
+                        <div className="searchBody">
+                            <FormControl className="selectForm">
+                                <InputLabel htmlFor="by-helper">
+                                    Search By:
+                                </InputLabel>
+                                <NativeSelect
+                                    value={searchBy}
+                                    onChange={(e) => { setSearchBy(e, e.target.value); setValForChild(""); setConstraint("all") }}
+                                    inputProps={{
+                                        name: "Search by:",
+                                        id: "by-helper"
+                                    }}
+                                >
+                                    <option value={"Songs"}>Songs</option>
+                                    <option value={"Albums"}>Album</option>
+                                    <option value={"Users"}>Users</option>
+                                </NativeSelect>
+                            </FormControl>
+                            {searchBy !== "Users" &&
+                                <FormControl className="selectForm">
+                                    <InputLabel htmlFor="by-helper">
+                                        Search By:
+                                    </InputLabel>
+                                    <NativeSelect
+                                        value={constraint}
+                                        onChange={(e) => setSearchConstraint(e, e.target.value)}
+                                        inputProps={{
+                                            name: "Search by:",
+                                            id: "constraint-helper"
                                         }}
-                                    />
-                                </InputAdornment>
-                            ),
-                        }}
-                        onChange={(e) => {
-                            setVal(e.target.value);
-                        }}
-                        onKeyPress={(e) => {
-                            if (e.key === "Enter") {
-                                submitSearch();
+                                    >
+                                        <option value={"all"}>All</option>
+                                        <option value={"artist"}>Artist</option>
+                                        <option value={"name"}>Name</option>
+                                    </NativeSelect>
+                                </FormControl>
                             }
-                        }}
-                    />
-                }
-            </div>
-            {searchBy === "Users" &&
-                <div>
-                    <SearchUsers
-                        by={"all"}
-                        valForChild={valForChild}
-                        Props={Props}
-                    />
-                </div>
+                        </div>
+                        <div>
+                            {constraint !== "all" &&
+                                <TextField
+                                    className="searchTextField"
+                                    id="searchbar"
+                                    type="search"
+                                    style={{ textAlign: "center" }}
+                                    inputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="end">
+                                                <SearchIcon
+                                                    style={{ cursor: "pointer" }}
+                                                    onClick={() => {
+                                                        //submitSearch(e.target.value);
+                                                        console.log('do validate1')
+                                                    }}
+                                                />
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                    onChange={(e) => {
+                                        setVal(e.target.value);
+                                    }}
+                                    onKeyPress={(e) => {
+                                        if (e.key === "Enter") {
+                                            submitSearch();
+                                        }
+                                    }}
+                                />
+                            }
+                        </div>
+                        {searchBy === "Users" &&
+                            <div>
+                                <SearchUsers
+                                    by={"all"}
+                                    valForChild={valForChild}
+                                    Props={Props}
+                                />
+                            </div>
+                        }
+                        {searchBy === "Songs" &&
+                            <div>
+                                <SearchSongs
+                                    Props={Props}
+                                    by={constraint}
+                                    valForChild={valForChild}
+                                />
+                            </div>
+                        }
+                        {searchBy === "Albums" &&
+                            <div>
+                                <SearchAlbums
+                                    Props={Props}
+                                    by={constraint}
+                                    valForChild={valForChild}
+                                />
+                            </div>
+                        }
+                    </>
+                )
             }
-            {searchBy === "Songs" &&
-                <div>
-                    <SearchSongs
-                        Props={Props}
-                        by={constraint}
-                        valForChild={valForChild}
-                    />
-                </div>
-            }
-            {searchBy === "Albums" &&
-                <div>
-                    <SearchAlbums
-                        Props={Props}
-                        by={constraint}
-                        valForChild={valForChild}
-                    />
-                </div>
-            }
+
         </div>
     )
 }
 
-export default connect(dispatch_to_props, state_to_props)(SearchPage);
+export default connect(state_to_props, dispatch_to_props)(SearchPage);

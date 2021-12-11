@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Modal, Snackbar } from "@mui/material"
+import { Alert, Box, Button, IconButton, Modal, Snackbar } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add';
 import { useCallback, useEffect, useState } from "react";
 import { Collection } from "../../types/types";
@@ -8,7 +8,8 @@ import { addSongToCol } from "../../axios/axios";
 
 interface AddSongToColInterface {
     fProps: FullProps,
-    songId: string
+    songId: string,
+    iconMode: boolean
 }
 
 const style = {
@@ -32,7 +33,7 @@ function AddSongToCol(Props: AddSongToColInterface) {
     const [err, setErr] = useState<string>()
 
     //Snackbars & modal handlers
-    const handleOpen = () => {setOpen(true); }
+    const handleOpen = () => { setOpen(true); }
     const handleClose = () => {
         setOpen(false);
     }
@@ -95,13 +96,20 @@ function AddSongToCol(Props: AddSongToColInterface) {
                     {err}
                 </Alert>
             </Snackbar>
-            <Button
-                onClick={handleOpen}
-                variant="outlined"
-                style={{ color: "rgb(106, 90, 205)", border: "1px solid rgb(106, 90, 205)" }}
-                startIcon={<AddIcon />} >
-                Add to Collection
-            </Button>
+            {Props.iconMode ? (
+                <IconButton  onClick={handleOpen}>
+                    <AddIcon/>
+                </IconButton>
+            ) : (
+                <Button
+                    onClick={handleOpen}
+                    variant="outlined"
+                    style={{ color: "rgb(106, 90, 205)", border: "1px solid rgb(106, 90, 205)" }}
+                    startIcon={<AddIcon />} >
+                    Add to Collection
+                </Button>
+            )
+            }
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -110,7 +118,7 @@ function AddSongToCol(Props: AddSongToColInterface) {
                     <SelectCollectionDisplay mode={"addToCol"} closeModal={closeCallback} setPlaylist={setPlaylist} fProps={Props.fProps} />
                 </Box>
             </Modal>
-        </div>
+        </div >
     )
 }
 

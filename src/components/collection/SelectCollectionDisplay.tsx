@@ -27,7 +27,7 @@ function SelectCollectionDisplay(Props: SelColDisInterface) {
     const handleOpenSnack = () => setSnack(true)
 
     useEffect(() => {
-        if (Props.fProps.username && page >= 0) {
+        if (Props.fProps.username && page >= 0) {  
             getUserCollections(Props.fProps.username, page, pageSize).then(
                 res => {
                     setCollections(res.data.content)

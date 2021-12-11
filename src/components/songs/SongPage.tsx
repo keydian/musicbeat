@@ -146,7 +146,7 @@ function SongPage(Props: FullProps) {
                                     <Button style={{color:"rgb(106, 90, 205)", border:"1px solid rgb(106, 90, 205)"}} size="medium" variant="outlined" startIcon={<AudiotrackIcon />}>
                                         Rate
                                     </Button>
-                                    <AddSongToCol fProps={Props} songId={song.id}/>
+                                    <AddSongToCol iconMode={false} fProps={Props} songId={song.id}/>
                                 </div>
                             </div>
                             <div className="SongPageUpperTabs">

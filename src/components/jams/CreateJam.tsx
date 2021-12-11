@@ -100,7 +100,7 @@ function CreateJamModal(props: CreateJamInterface) {
                 variant="contained"
                 className="createJamButton"
                 onClick={handleOpen}>
-                Collection
+                Start Jam
             </Button>
             <Modal
                 open={open}

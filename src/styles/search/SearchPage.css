@@ -6,3 +6,31 @@ display:flex;
 .searchBody{
   padding-top: 40px
 }
+.searchResults{
+  margin: auto;
+  width: 85%;
+  padding-top: 40px;
+  margin-top: 3vh;
+  border-radius: 5px;
+  background-color:rgb(255, 255, 255, 0.65);
+}
+
+.selectForm{
+  margin-left: 3vh;
+  padding: 3vh;
+}
+
+.searchTextField{
+  margin: 3vh;
+  background-color:rgb(255, 255, 255, 0.75);
+}
+
+.searchPageWrapper{
+  align-items: center;
+  background-color:rgb(255, 255, 255, 0.65);
+  border-radius: 20px;
+  padding: 3vh;
+  margin: 8vh 8vh 0 8vh;
+  overflow: hidden;
+  min-height: 100%;
+}

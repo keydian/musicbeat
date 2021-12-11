@@ -38,17 +38,48 @@ function SearchPage(Props: FullProps) {
     };
 
     return (
-        <div className="searchPage">
+        <div className="searchPageWrapper">
             {
                 Props.isLogged && (
                     <>
                         <div className="searchBody">
+                            
+                            {constraint !== "all" &&
+                                <TextField
+                                    className="searchTextField"
+                                    id="searchbar"
+                                    type="search"
+                                    style={{ textAlign: "center" }}
+                                    inputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="end">
+                                                <SearchIcon
+                                                    style={{ cursor: "pointer" }}
+                                                    onClick={() => {
+                                                        //submitSearch(e.target.value);
+                                                        console.log('do validate1')
+                                                    }}
+                                                />
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                    onChange={(e) => {
+                                        setVal(e.target.value);
+                                    }}
+                                    onKeyPress={(e) => {
+                                        if (e.key === "Enter") {
+                                            submitSearch();
+                                        }
+                                    }}
+                                />
+                            }
                             <FormControl className="selectForm">
                                 <InputLabel htmlFor="by-helper">
                                     Search By:
                                 </InputLabel>
                                 <NativeSelect
                                     value={searchBy}
+                                    
                                     onChange={(e) => { setSearchBy(e, e.target.value); setValForChild(""); setConstraint("all") }}
                                     inputProps={{
                                         name: "Search by:",
@@ -80,39 +111,9 @@ function SearchPage(Props: FullProps) {
                                 </FormControl>
                             }
                         </div>
-                        <div>
-                            {constraint !== "all" &&
-                                <TextField
-                                    className="searchTextField"
-                                    id="searchbar"
-                                    type="search"
-                                    style={{ textAlign: "center" }}
-                                    inputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="end">
-                                                <SearchIcon
-                                                    style={{ cursor: "pointer" }}
-                                                    onClick={() => {
-                                                        //submitSearch(e.target.value);
-                                                        console.log('do validate1')
-                                                    }}
-                                                />
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                    onChange={(e) => {
-                                        setVal(e.target.value);
-                                    }}
-                                    onKeyPress={(e) => {
-                                        if (e.key === "Enter") {
-                                            submitSearch();
-                                        }
-                                    }}
-                                />
-                            }
-                        </div>
+                        
                         {searchBy === "Users" &&
-                            <div>
+                            <div className="searchResults">
                                 <SearchUsers
                                     by={"all"}
                                     valForChild={valForChild}
@@ -121,7 +122,7 @@ function SearchPage(Props: FullProps) {
                             </div>
                         }
                         {searchBy === "Songs" &&
-                            <div>
+                            <div className="searchResults">
                                 <SearchSongs
                                     Props={Props}
                                     by={constraint}
@@ -130,7 +131,7 @@ function SearchPage(Props: FullProps) {
                             </div>
                         }
                         {searchBy === "Albums" &&
-                            <div>
+                            <div className="searchResults">
                                 <SearchAlbums
                                     Props={Props}
                                     by={constraint}

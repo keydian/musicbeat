@@ -13,7 +13,7 @@ import { Album } from "../../types/types";
 import Pagination from '@mui/material/Pagination';
 import { searchAlbums } from "../../axios/axios"
 import "../../styles/search/SearchPage.css";
-
+import '../../styles/search/SearchPageChild.css'
 interface SearchProps {
     Props: FullProps,
     by: string,
@@ -38,7 +38,7 @@ function SearchAlbums(sProps: SearchProps) {
     };
 
     useEffect(() => {
-        console.log("pedido pog")
+        console.log("pedido")
         searchAlbums(sProps.by, sProps.valForChild, page - 1, albumsPerPage).then(
             (response) => {
                 setAlbums(response.data.content);

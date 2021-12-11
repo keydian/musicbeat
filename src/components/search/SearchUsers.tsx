@@ -85,4 +85,4 @@ function SearchUsers(sProps: SearchProps) {
   )
 }
 
-export default connect(dispatch_to_props, state_to_props)(SearchUsers);
+export default connect(state_to_props, dispatch_to_props)(SearchUsers);

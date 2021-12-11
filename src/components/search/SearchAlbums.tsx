@@ -84,4 +84,4 @@ function SearchAlbums(sProps: SearchProps) {
     )
 }
 
-export default connect(dispatch_to_props, state_to_props)(SearchAlbums);
+export default connect(state_to_props, dispatch_to_props)(SearchAlbums);

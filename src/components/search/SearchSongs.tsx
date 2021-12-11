@@ -7,6 +7,7 @@ import {
     Divider,
     List
 } from "@mui/material"
+import '../../styles/search/SearchPageChild.css'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Song } from "../../types/types";

@@ -14,6 +14,7 @@ import {
   Avatar,
   List
 } from "@mui/material"
+import '../../styles/search/SearchPageChild.css'
 import Pagination from '@mui/material/Pagination';
 
 interface SearchProps {

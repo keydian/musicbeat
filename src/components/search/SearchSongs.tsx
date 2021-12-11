@@ -13,6 +13,7 @@ import { Song } from "../../types/types";
 import Pagination from '@mui/material/Pagination';
 import { searchSongs } from "../../axios/axios"
 import "../../styles/search/SearchPage.css";
+import AddSongToCol from "../songs/AddSongToCol";
 
 interface SearchProps {
     Props: FullProps,
@@ -50,7 +51,6 @@ function SearchSongs(sProps: SearchProps) {
         );
     }, [page, sProps.valForChild, sProps.by === "all"]);
 
-
     return (
         <div>
             <List dense={dense}>
@@ -59,7 +59,8 @@ function SearchSongs(sProps: SearchProps) {
                         <ListItem key={song.id}>
                             <img src={song.imageUrl} className="songqueuepic"
                                 onClick={() => { navigate("/songs/" + song.id) }}
-                                style={{ cursor: "pointer" }}>
+                                style={{ cursor: "pointer" }}
+                                alt="song-img">
                             </img>
                             <ListItemText
                                 key={song.id + "-text"}
@@ -67,6 +68,7 @@ function SearchSongs(sProps: SearchProps) {
                                 primary={song.name}
                                 secondary={song.artist}
                             />
+                            <AddSongToCol fProps={sProps.Props} songId={song.id} iconMode={true} />
                         </ListItem>
                         <Divider />
                     </>
@@ -84,4 +86,8 @@ function SearchSongs(sProps: SearchProps) {
     )
 }
 
+<<<<<<< HEAD
 export default connect(state_to_props, dispatch_to_props)(SearchSongs);
+=======
+export default SearchSongs;
+>>>>>>> f0de4f110c06cff3fbadb2d3a0a74bb1881510dd

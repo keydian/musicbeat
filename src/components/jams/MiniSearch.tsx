@@ -5,6 +5,8 @@ import '../../styles/jams/MiniSearch.css'
 import { Song } from '../../types/types'
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
+import InputAdornment from '@mui/material/InputAdornment';
 
 interface MiniSearchInterface {
     addCallback: Function,
@@ -32,7 +34,10 @@ function MiniSearch(props: MiniSearchInterface) {
         }
     }, [subSearch])
 
-
+    const clearSearch = () => {
+        setSearch("");
+        setResults([]);
+      }
     const submitSearch = (e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.key === 'Enter') {
             setSubsearch((subSearch) => subSearch + 1);
@@ -55,13 +60,24 @@ function MiniSearch(props: MiniSearchInterface) {
                     className="Minisearchinput"
                     label="Songs (case sensitive)"
                     variant="filled"
+                    value={search}
                     onKeyPress={(e) => {
                         submitSearch(e)
                     }}
                     onChange={(e) => {
                         changeInput(e)
                     }}
-                    sx={{ backgroundColor: "rgb(255, 255, 255, 0.5)" }} />
+                    sx={{ backgroundColor: "rgb(255, 255, 255, 0.5)",}}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={clearSearch}
+                                edge="end">
+                                {(search !== "") ? <ClearIcon/> : <div></div>}
+                            </IconButton>
+                             </InputAdornment>,}}
+                         />
                 <IconButton onClick={(e) => { setSubsearch((subSearch) => subSearch + 1); }}>
                     <SearchIcon />
                 </IconButton>

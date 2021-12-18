@@ -73,7 +73,7 @@ function SearchPage(Props: FullProps) {
                             }
                             <FormControl className="selectForm">
                                 <InputLabel htmlFor="by-helper">
-                                    Search By:
+                                    Search For:
                                 </InputLabel>
                                 <NativeSelect
                                     value={searchBy}
@@ -92,7 +92,7 @@ function SearchPage(Props: FullProps) {
                             {searchBy !== "Users" &&
                                 <FormControl className="selectForm">
                                     <InputLabel htmlFor="by-helper">
-                                        Search By:
+                                        By:
                                     </InputLabel>
                                     <NativeSelect
                                         value={constraint}

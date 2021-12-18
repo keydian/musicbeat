@@ -25,6 +25,7 @@ function MusicPlayer () {
             showThemeSwitch ={false}
             showDownload = {false}
             remove={false}
+            bounds={100}
             />
         </div>
     )

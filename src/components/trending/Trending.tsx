@@ -24,7 +24,6 @@ function Trending(Props: TrendingProps){
             ))
             } 
         </Grid>
-        
     )
 }
 
@@ -36,19 +35,12 @@ function Item(props: ItemProps){
             <img src={props.song.imageUrl} className="gridSongImage"
             onClick={()=>navigate("/songs/"+props.song.id)} style={{cursor:"pointer"}}>
             </img>
-            <Typography className="SongGridName" style={{marginTop:"0.8vh", marginLeft:"0.4vw"}}>
+            <Typography className="SongGridName" >
             {props.song.name}
+            </Typography>
             <Typography className="SongGridArtist">
             {props.song.artist}
             </Typography>
-            </Typography>
-            
-            
-            
-            
-            
-
-            
         </div>
     )
 }

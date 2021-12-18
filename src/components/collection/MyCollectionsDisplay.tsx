@@ -142,7 +142,7 @@ function MyCollectionsDisplay(Props: MyColInterface) {
                             }
                         </div>
                         <div className="MyColRightArrow">
-                            <IconButton size="large" onClick={forwardPage} disabled={page > 0 && collections?.length === 0}>
+                            <IconButton size="large" onClick={forwardPage} disabled={collections?.length < 7}>
                                 <ArrowForwardIosIcon />
                             </IconButton>
                         </div>

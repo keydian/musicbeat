@@ -12,7 +12,7 @@ function MyCollections(Props: FullProps) {
     const [username, setUsername] = useState<string>('')
 
     useEffect(() => {
-        if(usernamePath && (username === undefined || username.trim() === '' || username !== usernamePath)) {
+        if (usernamePath && (username === undefined || username.trim() === '' || username !== usernamePath)) {
             setUsername(usernamePath)
         }
     }, [username, usernamePath])
@@ -21,14 +21,9 @@ function MyCollections(Props: FullProps) {
         <div className="MyCollectionsWrapper">
             {
                 username && (
-                    <>
-                        <div className="MyColTitleWrapper">
-                            <Typography variant="h4">{username} Collections</Typography>
-                        </div>
-                        <div className="CollectionsDisplayWrapper">
-                            <MyCollectionsDisplay fProps={Props} targetUser={username} />
-                        </div>
-                    </>
+                    <div className="CollectionsDisplayWrapper">
+                        <MyCollectionsDisplay fProps={Props} targetUser={username} />
+                    </div>
                 )
             }
         </div>
